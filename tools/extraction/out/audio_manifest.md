@@ -1,9 +1,9 @@
 # Audio Manifest — Primogo (bancos FMOD, Fase 0)
 
-18 samples extraídos dos headers FSB5 (`Assets/StreamingAssets/*.bank`), todos **48kHz
-estéreo Vorbis**. Nomes vindos da name table do FSB5. Metadados via `python-fsb5` (sem
-precisar da lib nativa). Os **bytes de áudio** exigem `vgmstream` ou libvorbis (ver
-`extract_audio.py`).
+18 samples nos headers FSB5 (`Assets/StreamingAssets/*.bank`), todos **48kHz estéreo
+Vorbis**. Nomes vindos da name table do FSB5. **BYTES EXTRAÍDOS** (`vgmstream-cli` FSB5→WAV
++ `ffmpeg` WAV→OGG q6): **14 `.ogg` únicos** em `assets/audio/` (18 − 4 duplicatas de
+`ambiencia_passaros`/`stinger-*` dedupadas). Durações conferidas contra o manifesto.
 
 ## Vocabulário → eventos do `audio_bus` (BR-055, Tarefa 08)
 
