@@ -71,6 +71,7 @@ func generate_frozen() -> Array:
 			"y": int(e["y"]),
 			"true_value": true_value,
 			"displayed_value": displayed_value,
+			"primo": chain[k],  # fator primo do tile: fallback do merge quando true % jogador != 0 (BR-001)
 		})
 	return out
 
