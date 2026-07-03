@@ -1,7 +1,10 @@
-; Engine configuration file — Primogo (Godot 4)
-; Reconstrução a partir de _reversa_sdd/migration/ (Tarefa 01 do reconstruction-plan).
-; Paradigma: nós + sinais + núcleo de domínio puro. Topologia: feature-based.
-; Renderer "GL Compatibility" — alvo Android primário + web secundário (orçamento zero, sem .NET).
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 
@@ -9,34 +12,25 @@ config_version=5
 
 config/name="Primogo"
 config/description="Puzzle educacional de números primos. Reconstrução Godot 4 a partir das specs Reversa."
+run/main_scene="res://features/main_menu/splash.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://assets/icon.svg"
-run/main_scene="res://features/main_menu/splash.tscn"  ; Tarefa 13 — splash é a cena inicial (BR-039)
 
 [autoload]
 
-; Três singletons explícitos (substituem statics/DontDestroyOnLoad do legado).
-; Stubs criados na Tarefa 01; implementados nas Tarefas 07/08/09.
 ProgressionStore="*res://autoload/progression_store.gd"
 AudioBus="*res://autoload/audio_bus.gd"
 SceneRouter="*res://autoload/scene_router.gd"
 
-[audio]
-
-; Tarefa 08 — buses Music/Effects do audio_bus (AD-07). O autoload também os cria
-; em runtime se ausentes (auto-heal), mas o layout deixa-os visíveis no editor.
-buses/default_bus_layout="res://default_bus_layout.tres"
-
 [display]
 
-; Portrait — jogo mobile.
 window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
 window/handheld/orientation=1
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
