@@ -29,6 +29,17 @@ keytool -genkeypair -v \
 # Guardar storepass/keypass fora do repo (gerenciador de senhas).
 ```
 
+## Ambiente detectado nesta máquina (2026-07-03)
+
+- **Android SDK:** `C:\Android\android-sdk` — já tem `platforms;android-35`, `build-tools;35.0.0` (com `apksigner`), `platform-tools` e licenças aceitas. ✅
+- **JDK 17:** `C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot` ✅
+- **Falta:** `cmdline-tools;latest` no SDK (só existe o pacote antigo `tools`), os **export templates 4.7-stable** do Godot (pasta `%APPDATA%\Godot\export_templates` vazia), o **build template** no projeto (`android/`), apontar o Godot para SDK/JDK e criar o **keystore de release**.
+
+```powershell
+# instalar cmdline-tools (o Godot 4 valida o SDK por esta pasta)
+& "C:\Android\android-sdk\tools\bin\sdkmanager.bat" "cmdline-tools;latest"
+```
+
 ## Export Android (Godot 4.7)
 
 1. **Editor → Project → Export → Add… → Android.** Requer: Android Build Templates instalados (`Project → Install Android Build Template`), Android SDK + JDK configurados em `Editor Settings → Export → Android`.
