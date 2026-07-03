@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Rewards" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/rewards.gd" id="1_peuyw"]
+
+[resource]
+script = ExtResource("1_peuyw")
