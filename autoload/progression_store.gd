@@ -120,6 +120,17 @@ func mark_tutorial_done(which: String) -> Array:
 	return _run(progress.mark_tutorial_done(which))
 
 
+## Cheat de desenvolvimento (AD-06/BR-029, L-11): desbloqueia tudo na SESSÃO, sem
+## persistir. Inerte em produção POR CONSTRUÇÃO — `OS.is_debug_build()` é false no
+## build de release, então nada acontece. É o item "cheat inerte" do gate de cutover.
+func dev_unlock_all(stages: int = 10) -> Array:
+	if not OS.is_debug_build():
+		return []
+	var events := progress.unlock_all_session(stages)
+	_emit(events)  # sem save() — cheat de sessão não persiste (BR-029)
+	return events
+
+
 # ------------------------------------------------------------------ consultas
 
 func energy() -> int:

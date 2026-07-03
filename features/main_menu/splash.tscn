@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://csplash13a"]
+
+[ext_resource type="Script" path="res://features/main_menu/splash.gd" id="1_splash"]
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+script = ExtResource("1_splash")

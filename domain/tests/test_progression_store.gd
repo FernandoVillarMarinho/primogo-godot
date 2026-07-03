@@ -80,3 +80,16 @@ func test_atomic_save_leaves_no_tmp() -> void:
 	s.save()
 	assert_false(FileAccess.file_exists(TMP + ".tmp"), "o tmp é renomeado, não sobra")
 	assert_true(FileAccess.file_exists(TMP))
+
+
+# Tarefa 15 — cheat de desenvolvimento guardado (AD-06/BR-029): item do gate de cutover.
+func test_dev_cheat_guarded_and_non_persistent() -> void:
+	var s := _fresh_store()
+	var events: Array = s.dev_unlock_all(3)
+	if OS.is_debug_build():
+		# Em debug (ambiente de teste), o cheat funciona mas NÃO persiste (cheat de sessão).
+		assert_eq(events[0]["type"], "session_unlocked", "debug: desbloqueia a sessão")
+		assert_false(FileAccess.file_exists(TMP), "cheat não persiste (nada gravado)")
+	else:
+		# Em release, é no-op por construção (inerte em produção, L-11).
+		assert_true(events.is_empty(), "release: cheat inerte")

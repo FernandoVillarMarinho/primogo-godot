@@ -1,0 +1,9 @@
+; Template do social atrás de configuração (AD-08). Copie para `config/social.cfg`
+; (gitignored) e preencha as URLs. Botões ocultos enquanto a URL está vazia (BR-046).
+; like_url  = página do Facebook do jogo (extraível de LikeScript.cs no legado).
+; share_url = perfil no Instagram — destino aprovado (L-07), URL PENDENTE (G-02/COD-005).
+; Sem este arquivo, o app roda normalmente com os botões sociais ocultos.
+[social]
+
+like_url=""
+share_url=""
