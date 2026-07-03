@@ -1,0 +1,30 @@
+# Godot 4 — arquivos gerados
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# GUT (addon de testes) — instalado à parte / pelo CI, nunca versionado
+addons/gut/
+
+# Executáveis do Godot (ficam no diretório pai, mas por segurança)
+Godot_v*/
+Godot_v*.exe
+Godot_v*.zip
+
+# Builds
+*.apk
+*.aab
+build/
+exports/
+
+# Segredos / assinatura (nunca versionar keystore ou config social com URLs privadas)
+*.keystore
+config/social.cfg
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

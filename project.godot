@@ -1,0 +1,36 @@
+; Engine configuration file — Primogo (Godot 4)
+; Reconstrução a partir de _reversa_sdd/migration/ (Tarefa 01 do reconstruction-plan).
+; Paradigma: nós + sinais + núcleo de domínio puro. Topologia: feature-based.
+; Renderer "GL Compatibility" — alvo Android primário + web secundário (orçamento zero, sem .NET).
+
+config_version=5
+
+[application]
+
+config/name="Primogo"
+config/description="Puzzle educacional de números primos. Reconstrução Godot 4 a partir das specs Reversa."
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://assets/icon.svg"
+; run/main_scene será definido na Tarefa 13 (features/main_menu). Ausente por ora — testes de domínio rodam headless.
+
+[autoload]
+
+; Três singletons explícitos (substituem statics/DontDestroyOnLoad do legado).
+; Stubs criados na Tarefa 01; implementados nas Tarefas 07/08/09.
+ProgressionStore="*res://autoload/progression_store.gd"
+AudioBus="*res://autoload/audio_bus.gd"
+SceneRouter="*res://autoload/scene_router.gd"
+
+[display]
+
+; Portrait — jogo mobile.
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

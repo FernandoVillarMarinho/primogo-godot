@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  domain-tests:
+    name: Domínio (GUT headless)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Godot 4
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.0
+          use-dotnet: false
+
+      - name: Instalar GUT
+        run: |
+          git clone --depth 1 --branch v9.7.0 https://github.com/bitwes/Gut.git /tmp/gut
+          mkdir -p addons
+          cp -r /tmp/gut/addons/gut addons/gut
+
+      - name: Importar assets do projeto (headless)
+        run: godot --headless --path . --import || true
+
+      - name: Rodar suíte de domínio
+        run: godot --headless --path . -s addons/gut/gut_cmdln.gd -gdir=res://domain/tests -ginclude_subdirs -gexit
