@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_baboy"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_ysv1x"]
+
+[sub_resource type="Resource" id="Resource_dqy51"]
+script = ExtResource("1_baboy")
+x = 2
+y = 2
+primo = 2
+
+[sub_resource type="Resource" id="Resource_jc3hp"]
+script = ExtResource("1_baboy")
+primo = 13
+
+[sub_resource type="Resource" id="Resource_rqtpx"]
+script = ExtResource("1_baboy")
+x = 1
+y = 3
+primo = 5
+
+[sub_resource type="Resource" id="Resource_g31qu"]
+script = ExtResource("1_baboy")
+x = 3
+primo = 3
+
+[sub_resource type="Resource" id="Resource_8abmu"]
+script = ExtResource("1_baboy")
+x = 4
+y = 4
+primo = 3
+
+[resource]
+script = ExtResource("2_ysv1x")
+stage = 2
+level = 2
+grid_rows = 5
+grid_cols = 5
+r = PackedFloat32Array(1, 0.307692, 1, 1)
+elements = Array[ExtResource("1_baboy")]([SubResource("Resource_dqy51"), SubResource("Resource_jc3hp"), SubResource("Resource_rqtpx"), SubResource("Resource_g31qu"), SubResource("Resource_8abmu")])

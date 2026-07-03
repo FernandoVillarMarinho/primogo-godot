@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_j4sj4"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_i02ud"]
+
+[sub_resource type="Resource" id="Resource_prf8e"]
+script = ExtResource("1_j4sj4")
+y = 6
+primo = 47
+
+[sub_resource type="Resource" id="Resource_um035"]
+script = ExtResource("1_j4sj4")
+x = 2
+y = 1
+primo = 5
+
+[sub_resource type="Resource" id="Resource_4offi"]
+script = ExtResource("1_j4sj4")
+x = 2
+y = 5
+primo = 17
+
+[sub_resource type="Resource" id="Resource_lhal0"]
+script = ExtResource("1_j4sj4")
+x = 3
+y = 5
+primo = 1
+
+[sub_resource type="Resource" id="Resource_v8lli"]
+script = ExtResource("1_j4sj4")
+x = 3
+y = 1
+primo = 59
+
+[sub_resource type="Resource" id="Resource_x7irv"]
+script = ExtResource("1_j4sj4")
+x = 4
+y = 1
+primo = 1
+
+[sub_resource type="Resource" id="Resource_46a48"]
+script = ExtResource("1_j4sj4")
+x = 5
+y = 1
+primo = 61
+
+[sub_resource type="Resource" id="Resource_btnpy"]
+script = ExtResource("1_j4sj4")
+x = 5
+y = 2
+primo = 67
+
+[sub_resource type="Resource" id="Resource_otrlh"]
+script = ExtResource("1_j4sj4")
+x = 5
+y = 5
+primo = 29
+
+[sub_resource type="Resource" id="Resource_aitss"]
+script = ExtResource("1_j4sj4")
+x = 1
+y = 1
+primo = 47
+
+[sub_resource type="Resource" id="Resource_uwd1q"]
+script = ExtResource("1_j4sj4")
+x = 4
+y = 5
+primo = 83
+
+[sub_resource type="Resource" id="Resource_t80yx"]
+script = ExtResource("1_j4sj4")
+x = 1
+y = 5
+primo = 1
+
+[sub_resource type="Resource" id="Resource_lv100"]
+script = ExtResource("1_j4sj4")
+x = 1
+y = 4
+primo = 59
+
+[resource]
+script = ExtResource("2_i02ud")
+stage = 9
+level = 4
+grid_rows = 7
+grid_cols = 7
+r = PackedFloat32Array(1, 4, 1, 3, 1, 1, 0.0120482, 0.0149254, 0.0344828, 0.0212766, 0.0163934, 1)
+elements = Array[ExtResource("1_j4sj4")]([SubResource("Resource_prf8e"), SubResource("Resource_um035"), SubResource("Resource_4offi"), SubResource("Resource_lhal0"), SubResource("Resource_v8lli"), SubResource("Resource_x7irv"), SubResource("Resource_46a48"), SubResource("Resource_btnpy"), SubResource("Resource_otrlh"), SubResource("Resource_aitss"), SubResource("Resource_uwd1q"), SubResource("Resource_t80yx"), SubResource("Resource_lv100")])

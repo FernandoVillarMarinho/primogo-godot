@@ -1,0 +1,87 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_js2yr"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_wr46p"]
+
+[sub_resource type="Resource" id="Resource_hoc81"]
+script = ExtResource("1_js2yr")
+x = 3
+y = 3
+primo = 43
+
+[sub_resource type="Resource" id="Resource_ttwj3"]
+script = ExtResource("1_js2yr")
+x = 5
+primo = 5
+
+[sub_resource type="Resource" id="Resource_1b4kn"]
+script = ExtResource("1_js2yr")
+x = 4
+y = 4
+primo = 41
+
+[sub_resource type="Resource" id="Resource_us1lj"]
+script = ExtResource("1_js2yr")
+x = 3
+primo = 2
+
+[sub_resource type="Resource" id="Resource_in747"]
+script = ExtResource("1_js2yr")
+x = 3
+y = 5
+primo = 53
+
+[sub_resource type="Resource" id="Resource_foiqf"]
+script = ExtResource("1_js2yr")
+x = 6
+y = 5
+primo = 2
+
+[sub_resource type="Resource" id="Resource_7urcu"]
+script = ExtResource("1_js2yr")
+y = 6
+primo = 43
+
+[sub_resource type="Resource" id="Resource_1aowc"]
+script = ExtResource("1_js2yr")
+x = 1
+primo = 5
+
+[sub_resource type="Resource" id="Resource_10iti"]
+script = ExtResource("1_js2yr")
+x = 1
+y = 3
+primo = 43
+
+[sub_resource type="Resource" id="Resource_sysxl"]
+script = ExtResource("1_js2yr")
+x = 6
+y = 1
+primo = 57
+
+[sub_resource type="Resource" id="Resource_71kxo"]
+script = ExtResource("1_js2yr")
+x = 2
+y = 2
+primo = 5
+
+[sub_resource type="Resource" id="Resource_214gq"]
+script = ExtResource("1_js2yr")
+x = 6
+y = 3
+primo = 5
+
+[sub_resource type="Resource" id="Resource_h34kp"]
+script = ExtResource("1_js2yr")
+x = 1
+y = 5
+primo = 2
+
+[resource]
+script = ExtResource("2_wr46p")
+stage = 8
+level = 11
+grid_rows = 7
+grid_cols = 7
+r = PackedFloat32Array(1, 1, 5, 1, 5, 0.5, 0.0930233, 0.4, 0.0465116, 0.298246, 0.8, 0.2)
+elements = Array[ExtResource("1_js2yr")]([SubResource("Resource_hoc81"), SubResource("Resource_ttwj3"), SubResource("Resource_1b4kn"), SubResource("Resource_us1lj"), SubResource("Resource_in747"), SubResource("Resource_foiqf"), SubResource("Resource_7urcu"), SubResource("Resource_1aowc"), SubResource("Resource_10iti"), SubResource("Resource_sysxl"), SubResource("Resource_71kxo"), SubResource("Resource_214gq"), SubResource("Resource_h34kp")])

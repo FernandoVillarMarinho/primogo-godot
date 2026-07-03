@@ -1,0 +1,97 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_anqbi"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_7n3b4"]
+
+[sub_resource type="Resource" id="Resource_peeya"]
+script = ExtResource("1_anqbi")
+x = 3
+y = 2
+primo = 97
+
+[sub_resource type="Resource" id="Resource_jwnbn"]
+script = ExtResource("1_anqbi")
+x = 2
+y = 2
+primo = 3
+
+[sub_resource type="Resource" id="Resource_u5w0r"]
+script = ExtResource("1_anqbi")
+x = 4
+y = 2
+primo = 73
+
+[sub_resource type="Resource" id="Resource_qcpdc"]
+script = ExtResource("1_anqbi")
+x = 4
+y = 4
+primo = 13
+
+[sub_resource type="Resource" id="Resource_yxp80"]
+script = ExtResource("1_anqbi")
+y = 1
+primo = 31
+
+[sub_resource type="Resource" id="Resource_7m248"]
+script = ExtResource("1_anqbi")
+x = 3
+primo = 17
+
+[sub_resource type="Resource" id="Resource_p785a"]
+script = ExtResource("1_anqbi")
+x = 6
+y = 5
+primo = 1
+
+[sub_resource type="Resource" id="Resource_7rs64"]
+script = ExtResource("1_anqbi")
+x = 1
+primo = 107
+
+[sub_resource type="Resource" id="Resource_3jq6k"]
+script = ExtResource("1_anqbi")
+x = 6
+primo = 5
+
+[sub_resource type="Resource" id="Resource_i3b1v"]
+script = ExtResource("1_anqbi")
+x = 3
+y = 3
+primo = 61
+
+[sub_resource type="Resource" id="Resource_dljqk"]
+script = ExtResource("1_anqbi")
+x = 4
+y = 3
+primo = 1
+
+[sub_resource type="Resource" id="Resource_x15nr"]
+script = ExtResource("1_anqbi")
+y = 4
+primo = 61
+
+[sub_resource type="Resource" id="Resource_67312"]
+script = ExtResource("1_anqbi")
+x = 3
+y = 4
+primo = 73
+
+[sub_resource type="Resource" id="Resource_u7kq5"]
+script = ExtResource("1_anqbi")
+y = 6
+primo = 89
+
+[sub_resource type="Resource" id="Resource_u4mpa"]
+script = ExtResource("1_anqbi")
+x = 2
+y = 6
+primo = 97
+
+[resource]
+script = ExtResource("2_7n3b4")
+stage = 9
+level = 12
+grid_rows = 7
+grid_cols = 7
+r = PackedFloat32Array(1, 0.333333, 1, 1, 1, 3, 1, 1, 1, 1, 1, 0.0163934, 0.0136986, 0.011236)
+elements = Array[ExtResource("1_anqbi")]([SubResource("Resource_peeya"), SubResource("Resource_jwnbn"), SubResource("Resource_u5w0r"), SubResource("Resource_qcpdc"), SubResource("Resource_yxp80"), SubResource("Resource_7m248"), SubResource("Resource_p785a"), SubResource("Resource_7rs64"), SubResource("Resource_3jq6k"), SubResource("Resource_i3b1v"), SubResource("Resource_dljqk"), SubResource("Resource_x15nr"), SubResource("Resource_67312"), SubResource("Resource_u7kq5"), SubResource("Resource_u4mpa")])

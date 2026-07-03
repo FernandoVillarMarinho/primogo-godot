@@ -50,16 +50,18 @@ def parse(text: str) -> dict:
     oon = _scalar(r"onlyOneNumber (\d+) \(UInt8\)", text)
     data["rows"] = int(rows) if rows else None
     data["cols"] = int(cols) if cols else None
-    data["only_one_number"] = (int(oon) != 0) if oon is not None else None
+    # onlyOneNumber ausente (versão antiga do LevelManager) → default false
+    data["only_one_number"] = (int(oon) != 0) if oon is not None else False
 
-    # r (disfarce): coletar floats entre "r  (vector)" e o próximo campo ("vars")
+    # r (disfarce): coletar valores (float OU int — versões antigas usam int) entre
+    # "r  (vector)" e o PRÓXIMO campo vetor/elemento (algumas cenas têm um campo `s` no meio).
     for i, ln in enumerate(lines):
         if re.match(r"\s*r\s+\(vector\)\s*$", ln):
             vals = []
             for j in range(i + 1, len(lines)):
-                if re.search(r"\bvars\s+\(vector\)|\(Element\)|^ID:", lines[j]):
+                if re.search(r"\(vector\)|\(Element\)", lines[j]):
                     break
-                dm = re.search(r"data \(float\)[^:]*:\s*(.*)$", lines[j])
+                dm = re.search(r"data \((?:float|int)\)[^:]*:\s*(.*)$", lines[j])
                 if dm:
                     vals += [float(x) for x in dm.group(1).split()]
             data["r"] = vals

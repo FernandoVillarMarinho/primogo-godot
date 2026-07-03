@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_xealw"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_gyn0f"]
+
+[sub_resource type="Resource" id="Resource_sg8nt"]
+script = ExtResource("1_xealw")
+x = 2
+y = 2
+primo = 29
+
+[sub_resource type="Resource" id="Resource_rosxy"]
+script = ExtResource("1_xealw")
+x = 2
+primo = 2
+
+[sub_resource type="Resource" id="Resource_75x40"]
+script = ExtResource("1_xealw")
+x = 1
+y = 4
+primo = 5
+
+[sub_resource type="Resource" id="Resource_i02qx"]
+script = ExtResource("1_xealw")
+y = 1
+primo = 2
+
+[sub_resource type="Resource" id="Resource_yfidp"]
+script = ExtResource("1_xealw")
+x = 3
+y = 2
+primo = 37
+
+[sub_resource type="Resource" id="Resource_3s6xs"]
+script = ExtResource("1_xealw")
+x = 3
+y = 3
+primo = 5
+
+[sub_resource type="Resource" id="Resource_l6bs6"]
+script = ExtResource("1_xealw")
+y = 2
+primo = 37
+
+[resource]
+script = ExtResource("2_gyn0f")
+stage = 5
+level = 2
+grid_rows = 5
+grid_cols = 5
+r = PackedFloat32Array(3, 5, 8, 1, 1, 1.4)
+elements = Array[ExtResource("1_xealw")]([SubResource("Resource_sg8nt"), SubResource("Resource_rosxy"), SubResource("Resource_75x40"), SubResource("Resource_i02qx"), SubResource("Resource_yfidp"), SubResource("Resource_3s6xs"), SubResource("Resource_l6bs6")])

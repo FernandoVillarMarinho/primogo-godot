@@ -1,0 +1,93 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_yeowr"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_tq6x1"]
+
+[sub_resource type="Resource" id="Resource_kjdts"]
+script = ExtResource("1_yeowr")
+x = 4
+y = 3
+primo = 61
+
+[sub_resource type="Resource" id="Resource_6dlac"]
+script = ExtResource("1_yeowr")
+x = 7
+y = 5
+primo = 3
+
+[sub_resource type="Resource" id="Resource_eve67"]
+script = ExtResource("1_yeowr")
+x = 1
+y = 1
+primo = 93
+
+[sub_resource type="Resource" id="Resource_c1s2i"]
+script = ExtResource("1_yeowr")
+x = 3
+y = 2
+primo = 2
+
+[sub_resource type="Resource" id="Resource_mm1ns"]
+script = ExtResource("1_yeowr")
+x = 3
+y = 4
+primo = 5
+
+[sub_resource type="Resource" id="Resource_616h6"]
+script = ExtResource("1_yeowr")
+x = 4
+y = 5
+primo = 5
+
+[sub_resource type="Resource" id="Resource_8nn6a"]
+script = ExtResource("1_yeowr")
+y = 5
+primo = 61
+
+[sub_resource type="Resource" id="Resource_lftx1"]
+script = ExtResource("1_yeowr")
+x = 4
+y = 1
+primo = 2
+
+[sub_resource type="Resource" id="Resource_f03xe"]
+script = ExtResource("1_yeowr")
+y = 1
+primo = 93
+
+[sub_resource type="Resource" id="Resource_bxsg3"]
+script = ExtResource("1_yeowr")
+primo = 5
+
+[sub_resource type="Resource" id="Resource_b5sla"]
+script = ExtResource("1_yeowr")
+x = 6
+y = 5
+primo = 5
+
+[sub_resource type="Resource" id="Resource_8thbe"]
+script = ExtResource("1_yeowr")
+x = 1
+y = 5
+primo = 93
+
+[sub_resource type="Resource" id="Resource_43nl3"]
+script = ExtResource("1_yeowr")
+x = 7
+y = 1
+primo = 61
+
+[sub_resource type="Resource" id="Resource_gpl3k"]
+script = ExtResource("1_yeowr")
+x = 6
+y = 1
+primo = 5
+
+[resource]
+script = ExtResource("2_tq6x1")
+stage = 10
+level = 9
+grid_rows = 7
+grid_cols = 8
+r = PackedFloat32Array(1, 1, 3, 1, 1, 1, 1, 1, 1, 17, 0.2, 0.0107527, 1)
+elements = Array[ExtResource("1_yeowr")]([SubResource("Resource_kjdts"), SubResource("Resource_6dlac"), SubResource("Resource_eve67"), SubResource("Resource_c1s2i"), SubResource("Resource_mm1ns"), SubResource("Resource_616h6"), SubResource("Resource_8nn6a"), SubResource("Resource_lftx1"), SubResource("Resource_f03xe"), SubResource("Resource_bxsg3"), SubResource("Resource_b5sla"), SubResource("Resource_8thbe"), SubResource("Resource_43nl3"), SubResource("Resource_gpl3k")])

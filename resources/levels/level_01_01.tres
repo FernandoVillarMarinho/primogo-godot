@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_m57o2"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_3jthd"]
+
+[sub_resource type="Resource" id="Resource_us74w"]
+script = ExtResource("1_m57o2")
+x = 2
+y = 2
+primo = 2
+
+[sub_resource type="Resource" id="Resource_ymkc6"]
+script = ExtResource("1_m57o2")
+x = 3
+primo = 2
+
+[sub_resource type="Resource" id="Resource_iwmm6"]
+script = ExtResource("1_m57o2")
+x = 1
+y = 3
+primo = 11
+
+[resource]
+script = ExtResource("2_3jthd")
+stage = 1
+level = 1
+grid_rows = 5
+grid_cols = 5
+r = PackedFloat32Array(2, 2, 1)
+elements = Array[ExtResource("1_m57o2")]([SubResource("Resource_us74w"), SubResource("Resource_ymkc6"), SubResource("Resource_iwmm6")])

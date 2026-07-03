@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_yhlwi"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_tlix0"]
+
+[sub_resource type="Resource" id="Resource_73sar"]
+script = ExtResource("1_yhlwi")
+x = 2
+y = 2
+primo = 17
+
+[sub_resource type="Resource" id="Resource_uosgs"]
+script = ExtResource("1_yhlwi")
+y = 2
+primo = 5
+
+[sub_resource type="Resource" id="Resource_k2ldo"]
+script = ExtResource("1_yhlwi")
+x = 4
+y = 1
+primo = 2
+
+[sub_resource type="Resource" id="Resource_7hguu"]
+script = ExtResource("1_yhlwi")
+x = 4
+y = 4
+primo = 7
+
+[sub_resource type="Resource" id="Resource_yudho"]
+script = ExtResource("1_yhlwi")
+x = 1
+y = 2
+primo = 3
+
+[resource]
+script = ExtResource("2_tlix0")
+stage = 2
+level = 10
+grid_rows = 5
+grid_cols = 5
+r = PackedFloat32Array(1, 1, 2.5, 0.285714)
+elements = Array[ExtResource("1_yhlwi")]([SubResource("Resource_73sar"), SubResource("Resource_uosgs"), SubResource("Resource_k2ldo"), SubResource("Resource_7hguu"), SubResource("Resource_yudho")])

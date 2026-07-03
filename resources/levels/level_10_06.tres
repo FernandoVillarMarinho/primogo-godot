@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_m17vu"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_yg16m"]
+
+[sub_resource type="Resource" id="Resource_muaqb"]
+script = ExtResource("1_m17vu")
+x = 3
+y = 2
+primo = 61
+
+[sub_resource type="Resource" id="Resource_ymd2b"]
+script = ExtResource("1_m17vu")
+x = 3
+y = 5
+primo = 3
+
+[sub_resource type="Resource" id="Resource_3i0b4"]
+script = ExtResource("1_m17vu")
+x = 3
+y = 6
+primo = 93
+
+[sub_resource type="Resource" id="Resource_qy0mk"]
+script = ExtResource("1_m17vu")
+x = 3
+y = 1
+primo = 2
+
+[sub_resource type="Resource" id="Resource_4rpwk"]
+script = ExtResource("1_m17vu")
+x = 4
+y = 1
+primo = 5
+
+[sub_resource type="Resource" id="Resource_h3hy2"]
+script = ExtResource("1_m17vu")
+x = 5
+y = 2
+primo = 47
+
+[sub_resource type="Resource" id="Resource_1nph7"]
+script = ExtResource("1_m17vu")
+x = 6
+y = 1
+primo = 3
+
+[sub_resource type="Resource" id="Resource_w2xk4"]
+script = ExtResource("1_m17vu")
+x = 2
+y = 2
+primo = 113
+
+[sub_resource type="Resource" id="Resource_j0uws"]
+script = ExtResource("1_m17vu")
+x = 6
+y = 3
+primo = 1
+
+[sub_resource type="Resource" id="Resource_1bn0o"]
+script = ExtResource("1_m17vu")
+x = 1
+y = 3
+primo = 43
+
+[sub_resource type="Resource" id="Resource_a84rh"]
+script = ExtResource("1_m17vu")
+x = 7
+y = 5
+primo = 2
+
+[sub_resource type="Resource" id="Resource_u3uqi"]
+script = ExtResource("1_m17vu")
+y = 5
+primo = 2
+
+[sub_resource type="Resource" id="Resource_p1m3e"]
+script = ExtResource("1_m17vu")
+x = 4
+y = 6
+primo = 2
+
+[sub_resource type="Resource" id="Resource_be62g"]
+script = ExtResource("1_m17vu")
+x = 4
+y = 5
+primo = 61
+
+[sub_resource type="Resource" id="Resource_r0x07"]
+script = ExtResource("1_m17vu")
+x = 1
+y = 1
+primo = 1
+
+[resource]
+script = ExtResource("2_yg16m")
+stage = 10
+level = 6
+grid_rows = 7
+grid_cols = 8
+r = PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 2.62791, 1, 117, 0.5, 0.0166667)
+elements = Array[ExtResource("1_m17vu")]([SubResource("Resource_muaqb"), SubResource("Resource_ymd2b"), SubResource("Resource_3i0b4"), SubResource("Resource_qy0mk"), SubResource("Resource_4rpwk"), SubResource("Resource_h3hy2"), SubResource("Resource_1nph7"), SubResource("Resource_w2xk4"), SubResource("Resource_j0uws"), SubResource("Resource_1bn0o"), SubResource("Resource_a84rh"), SubResource("Resource_u3uqi"), SubResource("Resource_p1m3e"), SubResource("Resource_be62g"), SubResource("Resource_r0x07")])

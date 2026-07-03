@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_avj14"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_st1kq"]
+
+[sub_resource type="Resource" id="Resource_ucrd3"]
+script = ExtResource("1_avj14")
+x = 7
+y = 5
+primo = 3
+
+[sub_resource type="Resource" id="Resource_n0jni"]
+script = ExtResource("1_avj14")
+x = 1
+primo = 7
+
+[sub_resource type="Resource" id="Resource_mr1wq"]
+script = ExtResource("1_avj14")
+x = 3
+y = 6
+primo = 47
+
+[sub_resource type="Resource" id="Resource_agq4i"]
+script = ExtResource("1_avj14")
+x = 6
+y = 2
+primo = 11
+
+[sub_resource type="Resource" id="Resource_w3bdv"]
+script = ExtResource("1_avj14")
+primo = 3
+
+[sub_resource type="Resource" id="Resource_ugpvp"]
+script = ExtResource("1_avj14")
+y = 4
+primo = 1
+
+[sub_resource type="Resource" id="Resource_axnpu"]
+script = ExtResource("1_avj14")
+x = 1
+y = 5
+primo = 37
+
+[sub_resource type="Resource" id="Resource_6bvik"]
+script = ExtResource("1_avj14")
+x = 3
+primo = 3
+
+[sub_resource type="Resource" id="Resource_o328g"]
+script = ExtResource("1_avj14")
+x = 1
+y = 2
+primo = 37
+
+[sub_resource type="Resource" id="Resource_mceng"]
+script = ExtResource("1_avj14")
+y = 3
+primo = 3
+
+[sub_resource type="Resource" id="Resource_p5efk"]
+script = ExtResource("1_avj14")
+x = 4
+y = 3
+primo = 11
+
+[sub_resource type="Resource" id="Resource_2fbmd"]
+script = ExtResource("1_avj14")
+x = 5
+y = 4
+primo = 37
+
+[resource]
+script = ExtResource("2_st1kq")
+stage = 10
+level = 8
+grid_rows = 7
+grid_cols = 8
+r = PackedFloat32Array(2, 0.142857, 1, 1, 14.6667, 1, 1, 2, 3, 1, 0.636364)
+elements = Array[ExtResource("1_avj14")]([SubResource("Resource_ucrd3"), SubResource("Resource_n0jni"), SubResource("Resource_mr1wq"), SubResource("Resource_agq4i"), SubResource("Resource_w3bdv"), SubResource("Resource_ugpvp"), SubResource("Resource_axnpu"), SubResource("Resource_6bvik"), SubResource("Resource_o328g"), SubResource("Resource_mceng"), SubResource("Resource_p5efk"), SubResource("Resource_2fbmd")])

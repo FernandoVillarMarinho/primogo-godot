@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3]
+
+[ext_resource type="Script" path="res://resources/schema/level_element.gd" id="1_1ajq0"]
+[ext_resource type="Script" path="res://resources/schema/level_resource.gd" id="2_rhumv"]
+
+[sub_resource type="Resource" id="Resource_q5xbb"]
+script = ExtResource("1_1ajq0")
+x = 3
+y = 3
+primo = 2
+
+[sub_resource type="Resource" id="Resource_d8nqx"]
+script = ExtResource("1_1ajq0")
+x = 3
+y = 6
+primo = 41
+
+[sub_resource type="Resource" id="Resource_0wkj7"]
+script = ExtResource("1_1ajq0")
+x = 6
+y = 4
+primo = 5
+
+[sub_resource type="Resource" id="Resource_dn6n7"]
+script = ExtResource("1_1ajq0")
+x = 6
+y = 2
+primo = 19
+
+[sub_resource type="Resource" id="Resource_2hupe"]
+script = ExtResource("1_1ajq0")
+x = 4
+y = 1
+primo = 11
+
+[sub_resource type="Resource" id="Resource_pbrlw"]
+script = ExtResource("1_1ajq0")
+x = 3
+primo = 13
+
+[sub_resource type="Resource" id="Resource_ffpjx"]
+script = ExtResource("1_1ajq0")
+x = 4
+y = 5
+primo = 17
+
+[sub_resource type="Resource" id="Resource_bwm6d"]
+script = ExtResource("1_1ajq0")
+y = 2
+primo = 7
+
+[sub_resource type="Resource" id="Resource_s5lk6"]
+script = ExtResource("1_1ajq0")
+x = 2
+y = 1
+primo = 23
+
+[sub_resource type="Resource" id="Resource_0077y"]
+script = ExtResource("1_1ajq0")
+x = 2
+y = 5
+primo = 2
+
+[sub_resource type="Resource" id="Resource_wt2h8"]
+script = ExtResource("1_1ajq0")
+y = 4
+primo = 41
+
+[resource]
+script = ExtResource("2_rhumv")
+stage = 9
+level = 7
+grid_rows = 7
+grid_cols = 7
+r = PackedFloat32Array(3, 3, 3, 3, 3, 3, 3, 3, 0.0434783, 0.5)
+elements = Array[ExtResource("1_1ajq0")]([SubResource("Resource_q5xbb"), SubResource("Resource_d8nqx"), SubResource("Resource_0wkj7"), SubResource("Resource_dn6n7"), SubResource("Resource_2hupe"), SubResource("Resource_pbrlw"), SubResource("Resource_ffpjx"), SubResource("Resource_bwm6d"), SubResource("Resource_s5lk6"), SubResource("Resource_0077y"), SubResource("Resource_wt2h8")])
