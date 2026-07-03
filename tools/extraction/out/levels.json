@@ -1,0 +1,7387 @@
+[
+ {
+  "file": "Level_01_00",
+  "stage": 1,
+  "level": 0,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.6,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_01_01",
+  "stage": 1,
+  "level": 1,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   2.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 11
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_01_02",
+  "stage": 1,
+  "level": 2,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 7
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_01_03",
+  "stage": 1,
+  "level": 3,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   4.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 7
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_01_04",
+  "stage": 1,
+  "level": 4,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   5.5,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_01_05",
+  "stage": 1,
+  "level": 5,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.666667,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 7
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_01_06",
+  "stage": 1,
+  "level": 6,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.6,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 11
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_01_07",
+  "stage": 1,
+  "level": 7,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.5,
+   1.4
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 9
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_01_08",
+  "stage": 1,
+  "level": 8,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   0.666667
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_01_09",
+  "stage": 1,
+  "level": 9,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.66667,
+   2.5
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 7
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_01_10",
+  "stage": 1,
+  "level": 10,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.5,
+   0.857143
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 5
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_01_11",
+  "stage": 1,
+  "level": 11,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   17.0,
+   17.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 11
+   }
+  ],
+  "player_value": 17
+ },
+ {
+  "file": "Level_01_12",
+  "stage": 1,
+  "level": 12,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   13.0,
+   8.66667
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_02_00",
+  "stage": 2,
+  "level": 0,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 3
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_02_01",
+  "stage": 2,
+  "level": 1,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 2
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_02_02",
+  "stage": 2,
+  "level": 2,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.307692,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 3
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_02_03",
+  "stage": 2,
+  "level": 3,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": null,
+  "r": [],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 1
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_02_04",
+  "stage": 2,
+  "level": 4,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_02_05",
+  "stage": 2,
+  "level": 5,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.5,
+   0.4
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_02_06",
+  "stage": 2,
+  "level": 6,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.66667,
+   0.545455,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 1
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_02_07",
+  "stage": 2,
+  "level": 7,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_02_08",
+  "stage": 2,
+  "level": 8,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_02_09",
+  "stage": 2,
+  "level": 9,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": null,
+  "r": [],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_02_10",
+  "stage": 2,
+  "level": 10,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": null,
+  "r": [
+   1.0,
+   1.0,
+   2.5,
+   0.285714
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 3
+   }
+  ],
+  "player_value": 17
+ },
+ {
+  "file": "Level_02_11",
+  "stage": 2,
+  "level": 11,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": null,
+  "r": [],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_02_12",
+  "stage": 2,
+  "level": 12,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": null,
+  "r": [],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 3
+   }
+  ],
+  "player_value": 17
+ },
+ {
+  "file": "Level_03_01",
+  "stage": 3,
+  "level": 1,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 43
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 23
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_03_02",
+  "stage": 3,
+  "level": 2,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   5.0,
+   7.0,
+   1.0,
+   2.0,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 19
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_03_03",
+  "stage": 3,
+  "level": 3,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.73913
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 29
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 31
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_03_04",
+  "stage": 3,
+  "level": 4,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 43
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_03_05",
+  "stage": 3,
+  "level": 5,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 41
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 41
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_03_06",
+  "stage": 3,
+  "level": 6,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   5.0,
+   1.0,
+   1.0,
+   3.0,
+   5.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 19
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_03_07",
+  "stage": 3,
+  "level": 7,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   2.0,
+   1.0,
+   2.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 3
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_03_08",
+  "stage": 3,
+  "level": 8,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   7.0,
+   3.0,
+   1.0,
+   7.0,
+   7.0,
+   1.5
+  ],
+  "elements": [
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 13
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_03_09",
+  "stage": 3,
+  "level": 9,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   7.0,
+   2.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 17
+   }
+  ],
+  "player_value": 17
+ },
+ {
+  "file": "Level_03_10",
+  "stage": 3,
+  "level": 10,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   3.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 41
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 29
+   }
+  ],
+  "player_value": 41
+ },
+ {
+  "file": "Level_03_11",
+  "stage": 3,
+  "level": 11,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 39
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 43
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 23
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_03_12",
+  "stage": 3,
+  "level": 12,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   5.0,
+   1.0,
+   1.0,
+   13.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 43
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 43
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_04_01",
+  "stage": 4,
+  "level": 1,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   11.0,
+   1.0,
+   13.0,
+   1.0,
+   11.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 5
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_04_02",
+  "stage": 4,
+  "level": 2,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   5.0,
+   7.0,
+   1.0,
+   2.0,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 11
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_04_03",
+  "stage": 4,
+  "level": 3,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   3.4
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_04_04",
+  "stage": 4,
+  "level": 4,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 43
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_04_05",
+  "stage": 4,
+  "level": 5,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   7.0,
+   1.0,
+   13.0,
+   3.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 31
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 29
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_04_06",
+  "stage": 4,
+  "level": 6,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   4.0,
+   1.0,
+   5.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 41
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 41
+   }
+  ],
+  "player_value": 41
+ },
+ {
+  "file": "Level_04_07",
+  "stage": 4,
+  "level": 7,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_04_08",
+  "stage": 4,
+  "level": 8,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   3.0,
+   1.0,
+   3.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 11
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_04_09",
+  "stage": 4,
+  "level": 9,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   13.0,
+   7.0,
+   1.0,
+   11.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_04_10",
+  "stage": 4,
+  "level": 10,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 43
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 23
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_04_11",
+  "stage": 4,
+  "level": 11,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 37
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 43
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 23
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_04_12",
+  "stage": 4,
+  "level": 12,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 39
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 23
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_05_01",
+  "stage": 5,
+  "level": 1,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   1.0,
+   3.0,
+   1.0,
+   11.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 5
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_05_02",
+  "stage": 5,
+  "level": 2,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   5.0,
+   8.0,
+   1.0,
+   1.0,
+   1.4
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 37
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_05_03",
+  "stage": 5,
+  "level": 3,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   24.5
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_05_04",
+  "stage": 5,
+  "level": 4,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 43
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_05_05",
+  "stage": 5,
+  "level": 5,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   1.0,
+   1.0,
+   1.0,
+   13.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 3
+   }
+  ],
+  "player_value": 41
+ },
+ {
+  "file": "Level_05_06",
+  "stage": 5,
+  "level": 6,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   4.0,
+   1.0,
+   3.0,
+   9.0,
+   9.0
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 5
+   }
+  ],
+  "player_value": 37
+ },
+ {
+  "file": "Level_05_07",
+  "stage": 5,
+  "level": 7,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   4.0,
+   13.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 31
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 11
+   }
+  ],
+  "player_value": 37
+ },
+ {
+  "file": "Level_05_08",
+  "stage": 5,
+  "level": 8,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   13.0,
+   1.0,
+   3.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 19
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_05_09",
+  "stage": 5,
+  "level": 9,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   2.0,
+   1.0,
+   3.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 37
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_05_10",
+  "stage": 5,
+  "level": 10,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   1.0,
+   3.0,
+   1.0,
+   0.6,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 23
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 41
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 47
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_05_11",
+  "stage": 5,
+  "level": 11,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 41
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 41
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 23
+   }
+  ],
+  "player_value": 41
+ },
+ {
+  "file": "Level_05_12",
+  "stage": 5,
+  "level": 12,
+  "rows": 5,
+  "cols": 5,
+  "only_one_number": false,
+  "r": [
+   8.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   3.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_06_01",
+  "stage": 6,
+  "level": 1,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   2.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 11
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_06_02",
+  "stage": 6,
+  "level": 2,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   2.0,
+   1.0,
+   7.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 1
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_06_03",
+  "stage": 6,
+  "level": 3,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 5
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_06_04",
+  "stage": 6,
+  "level": 4,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 5
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_06_05",
+  "stage": 6,
+  "level": 5,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   2.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 5
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_06_06",
+  "stage": 6,
+  "level": 6,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 23
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_06_07",
+  "stage": 6,
+  "level": 7,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   12.5
+  ],
+  "elements": [
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 5
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_06_08",
+  "stage": 6,
+  "level": 8,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   2.0,
+   1.0,
+   3.0,
+   2.2
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 11
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_06_09",
+  "stage": 6,
+  "level": 9,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   2.0,
+   1.0,
+   2.0,
+   10.6667
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 2
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_06_10",
+  "stage": 6,
+  "level": 10,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   31.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 29
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 5,
+    "primo": 31
+   }
+  ],
+  "player_value": 17
+ },
+ {
+  "file": "Level_06_11",
+  "stage": 6,
+  "level": 11,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   2.0,
+   2.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 23
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_06_12",
+  "stage": 6,
+  "level": 12,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   2.0,
+   7.0,
+   2.0,
+   1.0,
+   3.47059,
+   0.0909091
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 6,
+    "primo": 3
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_07_01",
+  "stage": 7,
+  "level": 1,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   4.0,
+   1.0,
+   1.0,
+   2.0,
+   2.0,
+   7.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 13
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_07_02",
+  "stage": 7,
+  "level": 2,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   5.0,
+   2.0,
+   2.0,
+   1.0,
+   6.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 5
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 13
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_07_03",
+  "stage": 7,
+  "level": 3,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   5.0,
+   4.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 41
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 2
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_07_04",
+  "stage": 7,
+  "level": 4,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   5.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 5
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_07_05",
+  "stage": 7,
+  "level": 5,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   51.0,
+   2.0,
+   1.0,
+   1.0,
+   1.0,
+   18.0,
+   3.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 47
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 6,
+    "primo": 19
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_07_06",
+  "stage": 7,
+  "level": 6,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   1.0,
+   1.0,
+   8.0,
+   14.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_07_07",
+  "stage": 7,
+  "level": 7,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   5.0,
+   1.0,
+   9.0,
+   2.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 43
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 17
+   }
+  ],
+  "player_value": 43
+ },
+ {
+  "file": "Level_07_08",
+  "stage": 7,
+  "level": 8,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   3.0,
+   1.0,
+   2.0,
+   2.0,
+   2.0,
+   6.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 6,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 5
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_07_09",
+  "stage": 7,
+  "level": 9,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   5.0,
+   15.0,
+   2.0,
+   2.0,
+   37.0,
+   7.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 43
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 17
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_07_10",
+  "stage": 7,
+  "level": 10,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   3.0,
+   11.0,
+   1.0,
+   25.0,
+   9.0
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 37
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 7
+   }
+  ],
+  "player_value": 37
+ },
+ {
+  "file": "Level_07_11",
+  "stage": 7,
+  "level": 11,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   2.0,
+   9.0,
+   3.0,
+   2.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 11
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_07_12",
+  "stage": 7,
+  "level": 12,
+  "rows": 7,
+  "cols": 6,
+  "only_one_number": false,
+  "r": [
+   27.0,
+   7.0,
+   2.0,
+   2.0,
+   7.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 43
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_08_01",
+  "stage": 8,
+  "level": 1,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0769231,
+   0.5,
+   0.428571,
+   0.0769231,
+   0.333333,
+   0.027027,
+   0.0526316,
+   0.2
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 37
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 41
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_08_02",
+  "stage": 8,
+  "level": 2,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0588235,
+   0.117647,
+   1.0,
+   1.0,
+   0.0243902,
+   1.0,
+   0.117647
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 17
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 41
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 17
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 41
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 19
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 17
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 11
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_08_03",
+  "stage": 8,
+  "level": 3,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0243902,
+   0.0243902,
+   0.0243902,
+   0.0588235,
+   0.0588235,
+   0.5,
+   0.142857,
+   0.0434783,
+   0.0344828,
+   0.0344828
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 29
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 29
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 37
+   },
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 41
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 41
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 17
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 29
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 29
+   }
+  ],
+  "player_value": 29
+ },
+ {
+  "file": "Level_08_04",
+  "stage": 8,
+  "level": 4,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0434783,
+   0.0588235,
+   0.333333,
+   0.0434783
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 53
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 23
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 41
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_08_05",
+  "stage": 8,
+  "level": 5,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.105263
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 31
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 2
+   }
+  ],
+  "player_value": 41
+ },
+ {
+  "file": "Level_08_06",
+  "stage": 8,
+  "level": 6,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   12.0,
+   1.0,
+   1.0,
+   0.2,
+   0.142857
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 13
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_08_07",
+  "stage": 8,
+  "level": 7,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   0.0434783,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 41
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 41
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_08_08",
+  "stage": 8,
+  "level": 8,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   2.0,
+   2.0,
+   1.0,
+   0.0909091,
+   2.0,
+   2.0,
+   2.0,
+   3.0,
+   0.333333
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 37
+   }
+  ],
+  "player_value": 37
+ },
+ {
+  "file": "Level_08_09",
+  "stage": 8,
+  "level": 9,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   25.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0434783,
+   1.0,
+   0.0212766,
+   0.0434783
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 31
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 47
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 3
+   }
+  ],
+  "player_value": 23
+ },
+ {
+  "file": "Level_08_10",
+  "stage": 8,
+  "level": 10,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   16.0,
+   25.0,
+   1.0,
+   2.0,
+   19.0,
+   7.0,
+   49.0,
+   32.0,
+   8.0,
+   0.2,
+   0.142857,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 1
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 5
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_08_11",
+  "stage": 8,
+  "level": 11,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   5.0,
+   1.0,
+   5.0,
+   0.5,
+   0.0930233,
+   0.4,
+   0.0465116,
+   0.298246,
+   0.8,
+   0.2
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 53
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 43
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 57
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 2
+   }
+  ],
+  "player_value": 43
+ },
+ {
+  "file": "Level_08_12",
+  "stage": 8,
+  "level": 12,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   13.0,
+   19.0,
+   2.0,
+   23.0,
+   8.0,
+   19.0,
+   0.333333,
+   27.0,
+   21.3333,
+   0.333333
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 6,
+    "primo": 3
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_09_01",
+  "stage": 9,
+  "level": 1,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   4.0,
+   4.0,
+   1.0,
+   1.71429,
+   1.0,
+   5.2,
+   5.28571,
+   1.0,
+   2.0,
+   0.027027,
+   3.36364,
+   0.0909091,
+   0.0526316
+  ],
+  "elements": [
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 37
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 37
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 37
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 19
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 19
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_09_02",
+  "stage": 9,
+  "level": 2,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0,
+   3.0,
+   2.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 43
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 17
+   }
+  ],
+  "player_value": 43
+ },
+ {
+  "file": "Level_09_03",
+  "stage": 9,
+  "level": 3,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   3.0,
+   1.0,
+   2.0,
+   3.0,
+   1.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   }
+  ],
+  "player_value": 5
+ },
+ {
+  "file": "Level_09_04",
+  "stage": 9,
+  "level": 4,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   4.0,
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   0.0120482,
+   0.0149254,
+   0.0344828,
+   0.0212766,
+   0.0163934,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 47
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 1
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 59
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 61
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 67
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 29
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 47
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 83
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 1
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 59
+   }
+  ],
+  "player_value": 47
+ },
+ {
+  "file": "Level_09_05",
+  "stage": 9,
+  "level": 5,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   4.42857,
+   71.0,
+   61.0,
+   17.0,
+   189.0,
+   21.0,
+   13.0,
+   0.142857
+  ],
+  "elements": [
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 47
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 1
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   }
+  ],
+  "player_value": 47
+ },
+ {
+  "file": "Level_09_06",
+  "stage": 9,
+  "level": 6,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   5.0,
+   1.0,
+   3.0,
+   23.0,
+   1.0,
+   1.4
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 59
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 7
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 1
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 97
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 113
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 1
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 7
+   }
+  ],
+  "player_value": 59
+ },
+ {
+  "file": "Level_09_07",
+  "stage": 9,
+  "level": 7,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   3.0,
+   0.0434783,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 41
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 17
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 41
+   }
+  ],
+  "player_value": 2
+ },
+ {
+  "file": "Level_09_08",
+  "stage": 9,
+  "level": 8,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   2.0,
+   2.0,
+   1.0,
+   0.0909091,
+   2.0,
+   2.0,
+   2.0,
+   3.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 11
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 3
+   }
+  ],
+  "player_value": 37
+ },
+ {
+  "file": "Level_09_09",
+  "stage": 9,
+  "level": 9,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   11.0,
+   0.142857,
+   1.0,
+   0.0434783,
+   0.0243902,
+   7.0,
+   1.0,
+   0.00884956,
+   0.00970874,
+   0.142857,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 13
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 23
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 53
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 1
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 113
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 103
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 1
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 3
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_09_10",
+  "stage": 9,
+  "level": 10,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.0588235,
+   0.2,
+   0.5,
+   1.0,
+   17.0,
+   1.0,
+   0.0041841,
+   1.0,
+   0.2,
+   1.0,
+   0.2
+  ],
+  "elements": [
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 17
+   },
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 29
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 1
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 239
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 151
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 5,
+    "y": 5,
+    "primo": 29
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_09_11",
+  "stage": 9,
+  "level": 11,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.0526316,
+   0.0126582,
+   0.00558659,
+   0.473684,
+   1.0,
+   1.0,
+   0.0125523,
+   2.33333,
+   4.71429,
+   3.66667,
+   0.011236
+  ],
+  "elements": [
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 79
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 179
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 29
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 1
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 239
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 89
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_09_12",
+  "stage": 9,
+  "level": 12,
+  "rows": 7,
+  "cols": 7,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   0.333333,
+   1.0,
+   1.0,
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0163934,
+   0.0136986,
+   0.011236
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 97
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 73
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 31
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 17
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 1
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 107
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 61
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 1
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 61
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 73
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 89
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 97
+   }
+  ],
+  "player_value": 97
+ },
+ {
+  "file": "Level_10_01",
+  "stage": 10,
+  "level": 1,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   1.0,
+   1.0,
+   1.0,
+   4.0,
+   13.0,
+   17.0,
+   2.0
+  ],
+  "elements": [
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 19
+   },
+   {
+    "x": 7,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 13
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 47
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 13
+   }
+  ],
+  "player_value": 19
+ },
+ {
+  "file": "Level_10_02",
+  "stage": 10,
+  "level": 2,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.0,
+   3.0,
+   2.0,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 1,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 43
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 7,
+    "y": 4,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 13
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 17
+   }
+  ],
+  "player_value": 43
+ },
+ {
+  "file": "Level_10_03",
+  "stage": 10,
+  "level": 3,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   19.5714,
+   71.0,
+   153.0,
+   5.0,
+   8.0,
+   234.5,
+   24.0,
+   10.053,
+   10.0,
+   7.0,
+   28.0,
+   17.0,
+   44.0
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 7
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 7
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 2
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 61
+   },
+   {
+    "x": 5,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 0,
+    "primo": 19
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 5
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 2
+   }
+  ],
+  "player_value": 7
+ },
+ {
+  "file": "Level_10_04",
+  "stage": 10,
+  "level": 4,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   0.0909091,
+   0.0322581,
+   0.0244,
+   0.0163934,
+   0.0140845,
+   0.00990099,
+   0.00763359,
+   0.00662252,
+   0.00552486,
+   0.00473934,
+   0.0909091,
+   0.0705394,
+   99.0,
+   97.0,
+   77.0
+  ],
+  "elements": [
+   {
+    "x": 5,
+    "y": 0,
+    "primo": 11
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 31
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 41
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 61
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 71
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 101
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 131
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 151
+   },
+   {
+    "x": 7,
+    "y": 0,
+    "primo": 181
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 211
+   },
+   {
+    "x": 2,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "primo": 241
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 7,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 7,
+    "y": 6,
+    "primo": 1
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 3
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_10_05",
+  "stage": 10,
+  "level": 5,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   0.0769231,
+   0.0434783,
+   0.0232558,
+   0.0188679,
+   0.0136986,
+   0.0120482,
+   0.0107527,
+   0.00970874,
+   0.628319,
+   47.6667,
+   23.0,
+   3.90909,
+   0.0909091,
+   0.00578035
+  ],
+  "elements": [
+   {
+    "x": 6,
+    "y": 6,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 23
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 53
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 73
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 83
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 93
+   },
+   {
+    "x": 7,
+    "y": 5,
+    "primo": 103
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 113
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 1
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 11
+   },
+   {
+    "x": 7,
+    "y": 1,
+    "primo": 173
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 13
+   }
+  ],
+  "player_value": 13
+ },
+ {
+  "file": "Level_10_06",
+  "stage": 10,
+  "level": 6,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   2.62791,
+   1.0,
+   117.0,
+   0.5,
+   0.0166667
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 61
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 93
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 47
+   },
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 113
+   },
+   {
+    "x": 6,
+    "y": 3,
+    "primo": 1
+   },
+   {
+    "x": 1,
+    "y": 3,
+    "primo": 43
+   },
+   {
+    "x": 7,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 61
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 1
+   }
+  ],
+  "player_value": 61
+ },
+ {
+  "file": "Level_10_07",
+  "stage": 10,
+  "level": 7,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   2.0,
+   2.0,
+   2.0,
+   2.0,
+   2.0,
+   2.0,
+   1.0,
+   2.0,
+   0.00884956,
+   2.0,
+   2.0,
+   117.0
+  ],
+  "elements": [
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 93
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 3,
+    "y": 3,
+    "primo": 47
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 103
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 113
+   },
+   {
+    "x": 7,
+    "y": 0,
+    "primo": 113
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 7,
+    "y": 6,
+    "primo": 2
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 2
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_10_08",
+  "stage": 10,
+  "level": 8,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   2.0,
+   0.142857,
+   1.0,
+   1.0,
+   14.6667,
+   1.0,
+   1.0,
+   2.0,
+   3.0,
+   1.0,
+   0.636364
+  ],
+  "elements": [
+   {
+    "x": 7,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 6,
+    "primo": 47
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 11
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 1
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 0,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 37
+   },
+   {
+    "x": 0,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 11
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 37
+   }
+  ],
+  "player_value": 3
+ },
+ {
+  "file": "Level_10_09",
+  "stage": 10,
+  "level": 9,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   17.0,
+   0.2,
+   0.0107527,
+   1.0
+  ],
+  "elements": [
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 61
+   },
+   {
+    "x": 7,
+    "y": 5,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 1,
+    "primo": 93
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 2
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 0,
+    "y": 5,
+    "primo": 61
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 2
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 93
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 5
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 93
+   },
+   {
+    "x": 7,
+    "y": 1,
+    "primo": 61
+   },
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 5
+   }
+  ],
+  "player_value": 61
+ },
+ {
+  "file": "Level_10_10",
+  "stage": 10,
+  "level": 10,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   2.0,
+   5.0,
+   1.0,
+   6.0,
+   2.0,
+   1.0,
+   1.0,
+   2.0,
+   5.0,
+   8.0,
+   22.0
+  ],
+  "elements": [
+   {
+    "x": 6,
+    "y": 1,
+    "primo": 11
+   },
+   {
+    "x": 6,
+    "y": 4,
+    "primo": 41
+   },
+   {
+    "x": 3,
+    "y": 1,
+    "primo": 5
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 19
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 23
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 3,
+    "primo": 71
+   },
+   {
+    "x": 2,
+    "y": 0,
+    "primo": 7
+   },
+   {
+    "x": 7,
+    "y": 5,
+    "primo": 67
+   },
+   {
+    "x": 2,
+    "y": 3,
+    "primo": 3
+   },
+   {
+    "x": 5,
+    "y": 6,
+    "primo": 31
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 4,
+    "y": 5,
+    "primo": 11
+   }
+  ],
+  "player_value": 11
+ },
+ {
+  "file": "Level_10_11",
+  "stage": 10,
+  "level": 11,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.5
+  ],
+  "elements": [
+   {
+    "x": 7,
+    "y": 6,
+    "primo": 73
+   },
+   {
+    "x": 2,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 3,
+    "y": 2,
+    "primo": 13
+   },
+   {
+    "x": 4,
+    "y": 1,
+    "primo": 3
+   },
+   {
+    "x": 4,
+    "y": 2,
+    "primo": 59
+   },
+   {
+    "x": 5,
+    "y": 2,
+    "primo": 7
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 29
+   },
+   {
+    "x": 5,
+    "y": 4,
+    "primo": 17
+   },
+   {
+    "x": 4,
+    "y": 4,
+    "primo": 7
+   },
+   {
+    "x": 3,
+    "y": 5,
+    "primo": 37
+   },
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 2,
+    "y": 4,
+    "primo": 2
+   },
+   {
+    "x": 1,
+    "y": 4,
+    "primo": 73
+   }
+  ],
+  "player_value": 73
+ },
+ {
+  "file": "Level_10_12",
+  "stage": 10,
+  "level": 12,
+  "rows": 7,
+  "cols": 8,
+  "only_one_number": false,
+  "r": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   3.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.011236,
+   0.0163934,
+   0.010989
+  ],
+  "elements": [
+   {
+    "x": 3,
+    "y": 4,
+    "primo": 91
+   },
+   {
+    "x": 1,
+    "y": 2,
+    "primo": 3
+   },
+   {
+    "x": 1,
+    "y": 5,
+    "primo": 29
+   },
+   {
+    "x": 7,
+    "y": 6,
+    "primo": 13
+   },
+   {
+    "x": 0,
+    "y": 1,
+    "primo": 31
+   },
+   {
+    "x": 7,
+    "y": 1,
+    "primo": 17
+   },
+   {
+    "x": 6,
+    "y": 5,
+    "primo": 1
+   },
+   {
+    "x": 1,
+    "y": 0,
+    "primo": 107
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "primo": 5
+   },
+   {
+    "x": 6,
+    "y": 2,
+    "primo": 61
+   },
+   {
+    "x": 7,
+    "y": 4,
+    "primo": 1
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "primo": 89
+   },
+   {
+    "x": 0,
+    "y": 4,
+    "primo": 61
+   },
+   {
+    "x": 2,
+    "y": 6,
+    "primo": 91
+   },
+   {
+    "x": 4,
+    "y": 3,
+    "primo": 87
+   }
+  ],
+  "player_value": 91
+ }
+]
