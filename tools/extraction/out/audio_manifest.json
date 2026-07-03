@@ -1,0 +1,146 @@
+[
+ {
+  "bank": "Master Bank",
+  "name": "selecao_nivel",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 10138,
+  "dur_s": 0.21
+ },
+ {
+  "bank": "Master Bank",
+  "name": "gelo_derretendo",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 44251,
+  "dur_s": 0.92
+ },
+ {
+  "bank": "Master Bank",
+  "name": "gelo_nascendo",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 70553,
+  "dur_s": 1.47
+ },
+ {
+  "bank": "Master Bank",
+  "name": "click_ok",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 3946,
+  "dur_s": 0.08
+ },
+ {
+  "bank": "Master Bank",
+  "name": "stinger - vitoria",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 223196,
+  "dur_s": 4.65
+ },
+ {
+  "bank": "Master Bank",
+  "name": "stinger - derrota",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 333998,
+  "dur_s": 6.96
+ },
+ {
+  "bank": "Master Bank",
+  "name": "movimentacao",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 18789,
+  "dur_s": 0.39
+ },
+ {
+  "bank": "Master Bank",
+  "name": "ambiencia_passaros",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 1791265,
+  "dur_s": 37.32
+ },
+ {
+  "bank": "Master Bank",
+  "name": "click_back",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 1515,
+  "dur_s": 0.03
+ },
+ {
+  "bank": "Master Bank",
+  "name": "colisao_gelo",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 64591,
+  "dur_s": 1.35
+ },
+ {
+  "bank": "musicas",
+  "name": "menu - intro",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 349715,
+  "dur_s": 7.29
+ },
+ {
+  "bank": "musicas",
+  "name": "menu - intro sfx",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 351756,
+  "dur_s": 7.33
+ },
+ {
+  "bank": "musicas",
+  "name": "gameplay",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 4536000,
+  "dur_s": 94.5
+ },
+ {
+  "bank": "musicas",
+  "name": "menu - loop",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 3456000,
+  "dur_s": 72.0
+ },
+ {
+  "bank": "musicas",
+  "name": "ambiencia_passaros",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 1791265,
+  "dur_s": 37.32
+ },
+ {
+  "bank": "stingers",
+  "name": "stinger - vitoria",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 223196,
+  "dur_s": 4.65
+ },
+ {
+  "bank": "stingers",
+  "name": "stinger - derrota",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 333998,
+  "dur_s": 6.96
+ },
+ {
+  "bank": "stingers",
+  "name": "ambiencia_passaros",
+  "freq": 48000,
+  "channels": 2,
+  "samples": 1791265,
+  "dur_s": 37.32
+ }
+]
