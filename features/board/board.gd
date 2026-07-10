@@ -6,24 +6,56 @@ extends Node2D
 ## sonoro pelo AudioBus (BR-055), exibe o balão de 8 slots (BR-050) e o modal de fim de
 ## fase com fundo que CLAREIA (DEV-008) no padrão variante A (DEV-007).
 ##
-## VISUAL PLACEHOLDER: tiles são ColorRect + DigitRenderer até os sprites e o
-## `resources/layout/grid_calibration.tres` entrarem na validação visual contra os prints
-## (COD-007 tile-espelho do balão, COD-008 sprite do dragão, COD-001 durações). A lógica
-## (partida ponta a ponta, coreografia de eventos, gate de fim) já é completa.
+## SKIN ORIGINAL (T19/Fase 3): cenário por grade + tiles via `grid_calibration.tres`
+## (transcrito do GameManager legado); player = chama animada (fogo1..3, prefab Number),
+## congelado = gelo_numero, gelo puro = gelo (prefab Ice); efeitos one-shot: vapor no
+## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão = slots
+## box-numbers com o slot do valor em uso ELEVADO (tile-espelho, COD-007 →
+## BalloonController.SetPrimogoValue/ChangeNumber: ±0.25 un.); pausa real (S-07).
+## Restam 🟡 para validação visual: fine_offset da calibração e durações (COD-001).
 
 const LEVELS_DIR := "res://resources/levels/"
 const THRESHOLDS_PATH := "res://resources/balance/thresholds.tres"
+const CALIBRATION_PATH := "res://resources/balance/grid_calibration.tres"
 
-const TILE := 96.0
-const GAP := 8.0
 const STEP_TIME := 0.12   # ritmo do passo a passo (placeholder; duração canônica = COD-001)
+const EFFECT_FPS := 12.0  # anim_gelo/vapor one-shot (🟡 COD-001)
+const FLAME_FPS := 8.0    # chama do player (fogo1..3 em loop)
+const SLOT_RAISE := 18.0  # slot selecionado do balão elevado (0.25 un. ≈ 18 px @ escala do balão)
 
-# tokens de cor (design-system) — placeholders coerentes até o skin final
-const COL_EMPTY := Color("3c5a3c")
-const COL_TILE := Color("4e7a3e")
-const COL_PLAYER := Color("f39221")
-const COL_FROZEN := Color("7fb0d8")
-const COL_ICE := Color("bfe0f2")
+const TEX_FROZEN := preload("res://assets/images/iceandfire/gelo_numero.png")
+const TEX_ICE := preload("res://assets/images/iceandfire/gelo.png")
+const TEX_SLOT := preload("res://assets/images/gameplay/box-numbers.png")
+const TEX_PAUSE_BTN := preload("res://assets/images/gameplay/bt-pause.png")
+const TEX_PAUSE_BASE := preload("res://assets/images/gameplay/bt-pause-base.png")
+const TEX_RELOAD := preload("res://assets/images/gameplay/bt-reload.png")
+const TEX_WIN_BOX := preload("res://assets/images/endgame/box-endgame-parabens.png")
+const TEX_LOSE_BOX := preload("res://assets/images/endgame/endgame_lose.png")
+const TEX_BT_NEXT := preload("res://assets/images/endgame/bt-next.png")
+const TEX_BT_PLAYAGAIN := preload("res://assets/images/endgame/bt-playagain.png")
+const TEX_BT_TRYAGAIN := preload("res://assets/images/endgame/bt-tryagain.png")
+const TEX_STAR_ON := preload("res://assets/images/endgame/star.png")
+const TEX_STAR_OFF := preload("res://assets/images/endgame/star-off.png")
+const TEX_ENERGY := preload("res://assets/images/endgame/icon-energy.png")
+const TEX_LEVELSELECT_BTN := preload("res://assets/images/gameplay/pause-bt-selecaodefases.png")
+
+const FLAME_FRAMES: Array = [
+	preload("res://assets/images/iceandfire/fogo1.png"),
+	preload("res://assets/images/iceandfire/fogo2.png"),
+	preload("res://assets/images/iceandfire/fogo3.png"),
+]
+const ICE_ANIM_FRAMES: Array = [
+	preload("res://assets/images/iceandfire/anim_gelo01.png"),
+	preload("res://assets/images/iceandfire/anim_gelo02.png"),
+	preload("res://assets/images/iceandfire/anim_gelo03.png"),
+	preload("res://assets/images/iceandfire/anim_gelo04.png"),
+	preload("res://assets/images/iceandfire/anim_gelo05.png"),
+]
+const VAPOR_FRAMES: Array = [
+	preload("res://assets/images/iceandfire/vapor01.png"),
+	preload("res://assets/images/iceandfire/vapor02.png"),
+	preload("res://assets/images/iceandfire/vapor03.png"),
+]
 
 var stage: int = 1
 var level: int = 1
@@ -36,11 +68,16 @@ var _animating := false
 var _drag_start := Vector2.ZERO
 var _dragging := false
 
+var _calibration: GridCalibration
+var _layout: Dictionary = {}
+var _spacing := 96.0
 var _board_root: Node2D
-var _tiles: Dictionary = {}          # Vector2i → ColorRect
+var _bg: Sprite2D
+var _tiles: Dictionary = {}          # Vector2i → Node2D (raiz do tile na célula)
 var _budget_label: Label
 var _balloon: HBoxContainer
 var _modal: CanvasLayer
+var _pause: PauseOverlay
 var _tutorial: TutorialOverlay = null
 
 
@@ -55,11 +92,14 @@ func _ready() -> void:
 	adapter.value_collected.connect(_on_value_collected)
 	adapter.match_won.connect(_on_match_won)
 	adapter.match_lost.connect(_on_match_lost)
+	_build_background()
 	_build_hud()
 	_build_balloon()
+	_build_pause()
 	adapter.start(level_data, budget_max)
 	_maybe_attach_tutorial()
 	_render_grid()
+	_refresh_balloon()
 	AudioBus.play_music(AudioBus.MUSIC_GAMEPLAY)
 
 
@@ -91,12 +131,42 @@ func _load_level() -> void:
 	var tb := ResourceLoader.load(THRESHOLDS_PATH) as BalanceThresholds
 	thresholds = tb.for_level(stage, level) if tb != null else {"three_star": 0, "two_star": 0, "max": 10}
 	budget_max = int(thresholds.get("max", 10))  # orçamento = threshold máximo (BR-021)
+	_calibration = ResourceLoader.load(CALIBRATION_PATH) as GridCalibration
+
+
+## Cenário da grade (Scenery_Grid do legado) posicionado/escalado pela calibração.
+func _build_background() -> void:
+	var rows := level_data.rows
+	var cols := level_data.cols
+	_layout = _calibration.layout_for(rows, cols) if _calibration != null else {}
+	if _layout.is_empty():
+		# grade fora da tabela do legado: fallback neutro centrado (não deve ocorrer nas 122)
+		_layout = {"cell_px": 96.0, "bg_scale": 1.0, "bg_center": Vector2(360, 760),
+			"texture": "", "tile_scale": 1.0, "fine_offset": Vector2.ZERO}
+	_spacing = GridCalibration.spacing_of(_layout)
+	var tex_path := str(_layout.get("texture", ""))
+	if tex_path != "":
+		_bg = Sprite2D.new()
+		_bg.texture = load(tex_path)
+		_bg.position = _layout["bg_center"] + _layout.get("fine_offset", Vector2.ZERO)
+		var s := float(_layout["bg_scale"])
+		_bg.scale = Vector2(s, s)
+		add_child(_bg)
+
+
+## Centro da célula (x, y) em coordenadas de viewport (grade centrada no cenário).
+func _cell_center(x: int, y: int) -> Vector2:
+	var base: Vector2 = _layout["bg_center"] + _layout.get("fine_offset", Vector2.ZERO) \
+		- Vector2((level_data.cols - 1) / 2.0, (level_data.rows - 1) / 2.0) * _spacing
+	return base + Vector2(x, y) * _spacing
 
 
 # ------------------------------------------------------------------ input (swipe, BR-008)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _animating or adapter.status() != Match.Status.PLAYING:
+		return
+	if _pause != null and _pause.is_open():
 		return
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
 		if event.pressed:
@@ -117,25 +187,60 @@ func _on_move_resolved(events: Array) -> void:
 		_cue_for_event(e)
 		await get_tree().create_timer(STEP_TIME).timeout
 	_render_grid()  # sincroniza o visual com o estado final do domínio
+	_refresh_balloon()
 	_animating = false
 
 
-## Cada evento dispara seu som do vocabulário (BR-055). O redesenho do grid vem no fim.
+## Cada evento dispara seu som do vocabulário (BR-055) e o efeito visual one-shot
+## ancorado na célula do evento. O redesenho do grid vem no fim.
 func _cue_for_event(e: Dictionary) -> void:
 	match str(e["type"]):
-		"blocked": AudioBus.play_effect(AudioBus.SFX_COLLISION)          # colisão não divisível
-		"merged": AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)          # troca de primo
-		"value_swapped": AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)
-		"ice_spawned": AudioBus.play_effect(AudioBus.SFX_ICE_APPEAR)     # gelo surgindo
-		"snow_break": AudioBus.play_effect(AudioBus.SFX_ICE_MELT)        # gelo derretendo
+		"blocked":
+			AudioBus.play_effect(AudioBus.SFX_COLLISION)          # colisão não divisível
+		"merged":
+			AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)         # troca de primo
+			if e.has("at"):
+				_spawn_effect(VAPOR_FRAMES, e["at"], false)       # vapor do merge
+		"value_swapped":
+			AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)
+		"ice_spawned":
+			AudioBus.play_effect(AudioBus.SFX_ICE_APPEAR)         # gelo surgindo
+			for c in e.get("cells", []):
+				_spawn_effect(ICE_ANIM_FRAMES, c, false)
+		"snow_break":
+			AudioBus.play_effect(AudioBus.SFX_ICE_MELT)           # gelo derretendo
+			for c in e.get("melted", []):
+				_spawn_effect(ICE_ANIM_FRAMES, c, true)           # derreter = reverso
 
 
-# ------------------------------------------------------------------ render (placeholder)
+## AnimatedSprite2D one-shot na célula; libera-se ao terminar.
+func _spawn_effect(frame_textures: Array, cell: Variant, reverse: bool) -> void:
+	var pos := _cell_center(int(cell.x), int(cell.y))
+	var frames := SpriteFrames.new()
+	frames.add_animation("fx")
+	frames.set_animation_speed("fx", EFFECT_FPS)
+	frames.set_animation_loop("fx", false)
+	var ordered := frame_textures.duplicate()
+	if reverse:
+		ordered.reverse()
+	for t in ordered:
+		frames.add_frame("fx", t)
+	var sprite := AnimatedSprite2D.new()
+	sprite.sprite_frames = frames
+	sprite.position = pos
+	var tex: Texture2D = ordered[0]
+	var s := _spacing / maxf(float(tex.get_width()), float(tex.get_height()))
+	sprite.scale = Vector2(s, s)
+	add_child(sprite)
+	sprite.animation_finished.connect(sprite.queue_free)
+	sprite.play("fx")
+
+
+# ------------------------------------------------------------------ render (skin original)
 
 func _render_grid() -> void:
 	if _board_root == null:
 		_board_root = Node2D.new()
-		_board_root.position = Vector2(120, 300)
 		add_child(_board_root)
 	for child in _board_root.get_children():
 		child.queue_free()
@@ -144,29 +249,55 @@ func _render_grid() -> void:
 	for y in grid.rows:
 		for x in grid.cols:
 			var cell: Cell = grid.at(x, y)
-			var rect := ColorRect.new()
-			rect.size = Vector2(TILE, TILE)
-			rect.position = Vector2(x * (TILE + GAP), y * (TILE + GAP))
-			rect.color = _color_for(cell)
-			_board_root.add_child(rect)
-			if cell.kind == Cell.Kind.PLAYER or cell.kind == Cell.Kind.FROZEN:
-				var d := DigitRenderer.new()
-				# bitmap fonts originais (DEV-002): player = Fonts2/font, congelados = OrangeFont
-				d.font = GameFonts.PLAYER if cell.kind == Cell.Kind.PLAYER else GameFonts.TILE
-				d.box_size = Vector2(TILE, TILE)
-				rect.add_child(d)
-				d.set_anchors_preset(Control.PRESET_FULL_RECT)
-				d.set_value(cell.value)
-			_tiles[Vector2i(x, y)] = rect
+			if cell.kind == Cell.Kind.EMPTY:
+				continue  # célula vazia = o próprio cenário da grade
+			var root := Node2D.new()
+			root.position = _cell_center(x, y)
+			_board_root.add_child(root)
+			match cell.kind:
+				Cell.Kind.PLAYER:
+					root.add_child(_flame_sprite())
+					root.add_child(_digits(cell.value, GameFonts.PLAYER))
+				Cell.Kind.FROZEN:
+					root.add_child(_tile_sprite(TEX_FROZEN))
+					root.add_child(_digits(cell.value, GameFonts.TILE))
+				Cell.Kind.ICE:
+					root.add_child(_tile_sprite(TEX_ICE))
+			_tiles[Vector2i(x, y)] = root
 
 
-func _color_for(cell: Cell) -> Color:
-	match cell.kind:
-		Cell.Kind.PLAYER: return COL_PLAYER
-		Cell.Kind.FROZEN: return COL_FROZEN
-		Cell.Kind.ICE: return COL_ICE
-		Cell.Kind.EMPTY: return COL_EMPTY
-		_: return Color.TRANSPARENT
+func _tile_sprite(tex: Texture2D) -> Sprite2D:
+	var sprite := Sprite2D.new()
+	sprite.texture = tex
+	var s := _spacing / maxf(float(tex.get_width()), float(tex.get_height()))
+	sprite.scale = Vector2(s, s)
+	return sprite
+
+
+## Chama animada do player (prefab Number do legado: fogo1..3 + fogo2.controller).
+func _flame_sprite() -> AnimatedSprite2D:
+	var frames := SpriteFrames.new()
+	frames.add_animation("burn")
+	frames.set_animation_speed("burn", FLAME_FPS)
+	frames.set_animation_loop("burn", true)
+	for t in FLAME_FRAMES:
+		frames.add_frame("burn", t)
+	var sprite := AnimatedSprite2D.new()
+	sprite.sprite_frames = frames
+	var tex: Texture2D = FLAME_FRAMES[0]
+	var s := _spacing / maxf(float(tex.get_width()), float(tex.get_height())) * 1.15
+	sprite.scale = Vector2(s, s)
+	sprite.play("burn")
+	return sprite
+
+
+func _digits(value: int, font: Font) -> DigitRenderer:
+	var d := DigitRenderer.new()
+	d.font = font
+	d.box_size = Vector2(_spacing, _spacing)
+	d.position = Vector2(-_spacing / 2.0, -_spacing / 2.0)
+	d.set_value(value)
+	return d
 
 
 # ------------------------------------------------------------------ HUD e balão
@@ -174,41 +305,100 @@ func _color_for(cell: Cell) -> Color:
 func _build_hud() -> void:
 	var hud := CanvasLayer.new()
 	add_child(hud)
+
+	var badge := TextureRect.new()   # caixa de movimentos (box-numbers, S-06)
+	badge.texture = TEX_SLOT
+	badge.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	badge.position = Vector2(24, 20)
+	badge.custom_minimum_size = Vector2(160, 72)
+	hud.add_child(badge)
 	_budget_label = Label.new()
-	_budget_label.position = Vector2(24, 24)
-	_budget_label.add_theme_font_size_override("font_size", 40)
+	_budget_label.position = Vector2(44, 32)
+	_budget_label.add_theme_font_override("font", GameFonts.NUMBERS)
+	_budget_label.add_theme_font_size_override("font_size", 36)
 	hud.add_child(_budget_label)
 	_update_budget(budget_max)
-	var pause_btn := Button.new()
-	pause_btn.text = "PAUSE"
-	pause_btn.position = Vector2(560, 24)
+
+	var pause_base := TextureRect.new()
+	pause_base.texture = TEX_PAUSE_BASE
+	pause_base.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	pause_base.position = Vector2(600, 12)
+	hud.add_child(pause_base)
+	var pause_btn := TextureButton.new()
+	pause_btn.texture_normal = TEX_PAUSE_BTN
+	pause_btn.position = Vector2(622, 30)
 	pause_btn.pressed.connect(_on_pause)
 	hud.add_child(pause_btn)
+
+	var reload_btn := TextureButton.new()
+	reload_btn.texture_normal = TEX_RELOAD
+	reload_btn.position = Vector2(520, 30)
+	reload_btn.pressed.connect(_on_retry)
+	hud.add_child(reload_btn)
 
 
 func _build_balloon() -> void:
 	var layer := CanvasLayer.new()
 	add_child(layer)
 	_balloon = HBoxContainer.new()
-	_balloon.position = Vector2(40, 1160)
-	_balloon.add_theme_constant_override("separation", 8)
+	var pos: Vector2 = _calibration.balloon_for(level_data.rows, level_data.cols) \
+		if _calibration != null else GridCalibration.DEFAULT_BALLOON
+	_balloon.position = pos - Vector2(320, 40)  # HBox ancorada pelo canto; centro no ponto calibrado
+	_balloon.add_theme_constant_override("separation", 6)
 	layer.add_child(_balloon)
 
 
+## Balão de 8 slots (BR-050): o 1º slot espelha o valor EM USO do player, elevado
+## (tile-espelho — COD-007/AMB-201 resolvida: BalloonController.SetPrimogoValue eleva o
+## slot selecionado +0.25 un. e ChangeNumber troca a elevação junto com a troca de valor).
+## Os demais slots são os valores coletados, clicáveis para a troca (BR-012/013).
 func _refresh_balloon() -> void:
+	if _balloon == null:
+		return
 	for child in _balloon.get_children():
 		child.queue_free()
+	var current := _player_value()
+	_balloon.add_child(_balloon_slot(current, true, false))
 	for value in adapter.match_game.collection.values():   # ≤ 8 slots, ≤ 2 dígitos (BR-050)
-		var slot := Button.new()
-		slot.custom_minimum_size = Vector2(72, 72)
-		slot.text = str(value)
-		slot.add_theme_font_override("font", GameFonts.TILE)  # balão usa OrangeFont (legado)
+		_balloon.add_child(_balloon_slot(int(value), false, true))
+
+
+func _balloon_slot(value: int, raised: bool, clickable: bool) -> Control:
+	var holder := Control.new()
+	holder.custom_minimum_size = Vector2(76, 76 + SLOT_RAISE)
+	var slot := TextureButton.new()
+	slot.texture_normal = TEX_SLOT
+	slot.ignore_texture_size = true
+	slot.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	slot.size = Vector2(76, 76)
+	slot.position = Vector2(0, 0 if raised else SLOT_RAISE)
+	slot.disabled = not clickable
+	if clickable:
 		slot.pressed.connect(_on_slot_pressed.bind(value))
-		_balloon.add_child(slot)
+	holder.add_child(slot)
+	var d := DigitRenderer.new()
+	d.font = GameFonts.TILE   # balão usa OrangeFont (BalloonController.allSprites)
+	d.box_size = Vector2(60, 60)
+	d.position = Vector2(8, (0 if raised else SLOT_RAISE) + 8)
+	d.set_value(value)
+	holder.add_child(d)
+	return holder
+
+
+func _player_value() -> int:
+	var grid: Grid = adapter.match_game.grid
+	for y in grid.rows:
+		for x in grid.cols:
+			var cell: Cell = grid.at(x, y)
+			if cell.kind == Cell.Kind.PLAYER:
+				return cell.value
+	return 0
 
 
 func _on_slot_pressed(value: int) -> void:
 	if _animating or adapter.status() != Match.Status.PLAYING:
+		return
+	if _pause != null and _pause.is_open():
 		return
 	if _tutorial != null and not _tutorial.balloon_clickable():
 		return  # no tutorial, o balão só responde no passo do balão (BR-049)
@@ -250,9 +440,9 @@ func _on_match_lost(_reason: String) -> void:
 
 # ------------------------------------------------------------------ fim de fase (S-08/S-09)
 
-## Modal padronizado variante A (DEV-007) sobre o board CLAREADO (DEV-008). Coreografia
-## de entrada (fundo clareia → card sobe → estrelas → dragão) especificada; durações
-## exatas (COD-001) e sprites (COD-008 dragão) entram na validação visual.
+## Modal padronizado variante A (DEV-007) sobre o board CLAREADO (DEV-008), com a arte
+## original (box-endgame-parabens/endgame_lose, bt-next/playagain/tryagain, estrelas,
+## icon-energy). Dragão animado da coreografia (COD-008) entra na T20. Durações = COD-001.
 func _show_endgame(won: bool, stars: int) -> void:
 	AudioBus.play_stinger(AudioBus.STINGER_WIN if won else AudioBus.STINGER_LOSE)
 	_modal = CanvasLayer.new()
@@ -262,33 +452,62 @@ func _show_endgame(won: bool, stars: int) -> void:
 	lighten.set_anchors_preset(Control.PRESET_FULL_RECT)
 	lighten.mouse_filter = Control.MOUSE_FILTER_STOP
 	_modal.add_child(lighten)
+
+	var card := TextureRect.new()    # a arte já traz o título ("PARABÉNS!" / derrota)
+	card.texture = TEX_WIN_BOX if won else TEX_LOSE_BOX
+	card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	card.set_anchors_preset(Control.PRESET_CENTER)
+	card.custom_minimum_size = Vector2(600, 760)
+	_modal.add_child(card)
+
 	var box := VBoxContainer.new()
 	box.set_anchors_preset(Control.PRESET_CENTER)
-	box.add_theme_constant_override("separation", 16)
+	box.add_theme_constant_override("separation", 14)
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
 	_modal.add_child(box)
-	box.add_child(_title_label("PARABÉNS!" if won else "FIM DE JOGO"))
+
 	if won:
-		box.add_child(_title_label("%d★" % stars))
-		var reward: int = ProgressionStore.energy()
-		box.add_child(_title_label("⚡ %d" % reward))
-		box.add_child(_modal_button("PRÓXIMO", _on_next))
-		box.add_child(_modal_button("JOGAR DE NOVO", _on_retry))
+		box.add_child(_stars_row(stars))
+		box.add_child(_reward_row(ProgressionStore.energy()))
+		box.add_child(_endgame_button(TEX_BT_NEXT, _on_next))
+		box.add_child(_endgame_button(TEX_BT_PLAYAGAIN, _on_retry))
 	else:
-		box.add_child(_modal_button("TENTAR DE NOVO", _on_retry))
-	box.add_child(_modal_button("SELEÇÃO DE FASES", _on_level_select))
+		box.add_child(_endgame_button(TEX_BT_TRYAGAIN, _on_retry))
+	box.add_child(_endgame_button(TEX_LEVELSELECT_BTN, _on_level_select))
 
 
-func _title_label(text: String) -> Label:
+func _stars_row(stars: int) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 10)
+	for i in 3:
+		var star := TextureRect.new()
+		star.texture = TEX_STAR_ON if i < stars else TEX_STAR_OFF
+		star.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		row.add_child(star)
+	return row
+
+
+## "⚡ {{reward}}" da variante A (DEV-007): ícone de energia original + dígitos.
+func _reward_row(energy: int) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 8)
+	var icon := TextureRect.new()
+	icon.texture = TEX_ENERGY
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	row.add_child(icon)
 	var l := Label.new()
-	l.text = text
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.add_theme_font_size_override("font_size", 48)
-	return l
+	l.text = str(energy)
+	l.add_theme_font_override("font", GameFonts.NUMBERS)
+	l.add_theme_font_size_override("font_size", 40)
+	row.add_child(l)
+	return row
 
 
-func _modal_button(text: String, cb: Callable) -> Button:
-	var b := Button.new()
-	b.text = text
+func _endgame_button(tex: Texture2D, cb: Callable) -> TextureButton:
+	var b := TextureButton.new()
+	b.texture_normal = tex
 	b.pressed.connect(cb)
 	return b
 
@@ -316,5 +535,12 @@ func _goto_board(s: int, l: int) -> void:
 		SceneRouter.Context.BOARD, {"stage": s, "level": l})
 
 
+func _build_pause() -> void:
+	_pause = PauseOverlay.new()
+	add_child(_pause)
+	_pause.level_select_requested.connect(_on_level_select)
+	_pause.quit_requested.connect(func() -> void: SceneRouter.go_back())
+
+
 func _on_pause() -> void:
-	SceneRouter.go_back()  # placeholder; pause_overlay (S-07) é da T13/refino
+	_pause.open()   # modal de pausa real (S-07)
