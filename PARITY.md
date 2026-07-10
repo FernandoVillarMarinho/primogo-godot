@@ -9,7 +9,21 @@
 
 - `domain/tests/parity/test_parity.gd` — PAR-01..06, PAR-08 (domínio puro).
 - `domain/tests/parity/test_parity_shell.gd` — PAR-07 (autoloads scene_router/audio_bus/progression_store).
-- **133/133 testes GUT verdes** na suíte total; toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+- **140/140 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+
+## Integração visual (Fase 3, 2026-07-10 — arte-fonte original `ImagensPrimogo`)
+
+O jogo **não usa mais placeholders**: T17 importou os 157 assets originais; T18 ligou as
+4 bitmap fonts convertidas dos `.fnt` do legado (métricas exatas); T19 aplicou cenário por
+grade + `grid_calibration.tres` (transcrita do `GameManager`), chama do player, gelo,
+efeitos one-shot (vapor/anim_gelo) e a pausa real; T20 montou splash/menu/opções/créditos/
+seleção/fim-de-fase/tutorial com a arte original. Resolvidos nesta fase: **COD-002**
+(créditos, geração "New"), **COD-007/AMB-201** (tile-espelho = slot selecionado do balão
+elevado +0,25 un., conforme `BalloonController.SetPrimogoValue`/`ChangeNumber`),
+**COD-008/AMB-202** (dragão = set laranja `primogo/dragao_anim01..08`). APK debug com o
+visual novo: **43,5 MB**, export limpo. Restam 🟡 de ajuste fino (owner Villar, contra os
+prints): `fine_offset` da calibração por grade, posições/escalas de HUD/balão/dragão/mão,
+durações canônicas (COD-001).
 
 ## Cobertura por fluxo
 
@@ -44,7 +58,7 @@ DEV-001 (texto literal, não pixel), DEV-002 (bitmap fonts por glifo), DEV-003 (
 
 1. **≥10 partidas amostrais vs oráculo** (mesma fase + mesma sequência → mesmo resultado de energia/estrelas/desbloqueio), usando o APK/VM Unity 5.3 como oráculo. Depende de ter o oráculo rodando (COD-004).
 2. **Golden files** (`_reversa_sdd/screens/golden/manifest.yaml`, todos `pending`) — captura no APK e comparação visual dos 5 layouts (`grid_calibration.tres`) e da coreografia de fim de fase. Enquanto não capturados, os **runtime references** (prints IMG_3089–3108) valem como oráculo de composição/comportamento, não de cor exata (DEV-006).
-3. **Contract test formal das 10 telas** (PAR-09) — após a validação visual dos placeholders (sprites, bitmap fonts, calibração).
+3. **Contract test formal das 10 telas** (PAR-09) — a arte original já está integrada (Fase 3); falta a conferência lado a lado com os prints e o ajuste fino (`fine_offset`, posições, durações COD-001).
 
 ## Critério de bloqueio
 

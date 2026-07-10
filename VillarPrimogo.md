@@ -12,39 +12,43 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
 
 - ✅ **O jogo está funcionando por inteiro, por dentro.** Toda a lógica (as regras do
   puzzle, a energia, as estrelas, o desbloqueio de fases, os tutoriais, os menus, o som)
-  está pronta e **testada automaticamente** — são **133 testes**, todos passando.
+  está pronta e **testada automaticamente** — são **140 testes**, todos passando.
 - ✅ **As 122 fases originais** foram extraídas do jogo antigo e recriadas.
 - ✅ **Os sons** (14 efeitos e músicas) foram extraídos e ligados.
-- ✅ **O APK de teste foi gerado e assinado** — o jogo abre e roda no Android.
-- ⏳ **A parte visual ainda é provisória.** Hoje os blocos aparecem como retângulos
-  coloridos simples, porque as **imagens originais (sprites) ainda não foram trazidas**.
-  A mecânica está certa; falta "vestir" o jogo com a arte final.
+- ✅ **A arte original está DENTRO do jogo** (10/07/2026): as imagens que você trouxe
+  (pasta `ImagensPrimogo`) foram todas importadas — a chama do jogador, os blocos de
+  gelo, o dragão laranja, os números desenhados, os cenários de cada tamanho de
+  tabuleiro, o menu, a seleção de fases, o tutorial com a mãozinha. **Nada mais de
+  retângulos coloridos.**
+- ✅ **O APK de teste foi gerado e assinado com o visual novo** — o jogo abre e roda no
+  Android com a cara do jogo original.
+- ⏳ **Falta só o ajuste fino do visual**: comparar tela a tela com as capturas do jogo
+  antigo e corrigir pequenas posições/tamanhos (tudo já ficou parametrizado para isso).
 
-Em uma frase: **o motor do carro está pronto e rodando; falta a pintura e os acabamentos.**
+Em uma frase: **o carro está pronto, pintado e rodando; falta polir os detalhes da pintura.**
 
 ## O APK de teste (para o seu celular)
 
-Arquivo: **`exports/primogo-teste.apk`** (~33 MB). É uma versão de **teste** (não é a da
-loja). Para instalar no seu celular:
+Arquivo: **`exports/primogo-teste.apk`** (~44 MB, agora com a arte original). É uma
+versão de **teste** (não é a da loja). Para instalar no seu celular:
 
 1. Copie o `primogo-teste.apk` para o celular (cabo USB, Google Drive, ou mande no seu
    próprio WhatsApp e baixe).
 2. No celular, toque no arquivo. O Android vai avisar sobre "instalar de fontes
    desconhecidas" — **permita** para o app que você está usando (Arquivos ou navegador).
-3. Instale, abra e teste. Lembre: a arte ainda é provisória (retângulos coloridos).
+3. Instale, abra e teste — agora comparando com a sua memória do jogo original.
 
 > Esse APK serve só para você testar no seu aparelho. **Não pode ir para a loja assim** —
 > a loja exige uma versão "de release" assinada com a sua chave própria (ver adiante).
 
 ## Próximos passos (do teste até a loja)
 
-1. **Testar no celular (agora).** Instale o APK acima e jogue. O objetivo é sentir se a
-   jogabilidade está redonda. A arte provisória é esperada.
+1. **Testar no celular (agora).** Instale o APK acima e jogue. O objetivo é conferir se
+   o visual bate com o jogo antigo (as capturas de tela guardadas ajudam na comparação).
 
-2. **Trazer a arte final.** Importar os sprites originais (blocos, chama, gelo, dragão,
-   fontes dos números) e ajustar as posições do tabuleiro. É a etapa que transforma os
-   retângulos nos gráficos de verdade. Feito comparando com as capturas de tela do jogo
-   antigo (que já estão guardadas).
+2. **Ajuste fino da arte.** Onde algo parecer fora do lugar (um bloco desalinhado, a
+   mãozinha do tutorial em posição estranha, o dragão grande demais), é ajuste de
+   parâmetro — me diga o que viu que eu corrijo.
 
 3. **Conferência de paridade.** Jogar ~10 partidas comparando com o jogo antigo, para
    confirmar que energia, estrelas e desbloqueios batem exatamente. (Precisa do APK antigo
