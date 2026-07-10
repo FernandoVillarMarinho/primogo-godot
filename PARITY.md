@@ -9,7 +9,8 @@
 
 - `domain/tests/parity/test_parity.gd` — PAR-01..06, PAR-08 (domínio puro).
 - `domain/tests/parity/test_parity_shell.gd` — PAR-07 (autoloads scene_router/audio_bus/progression_store).
-- **140/140 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+- **141/141 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3, com a regressão `test_cell_px_matches_drawn_grid` da 1ª rodada de dispositivo); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+- `tools/ci/load_check.gd` — load headless das cenas/scripts da casca (parse + refs de assets), cobertura que a suíte de domínio não exercita.
 
 ## Integração visual (Fase 3, 2026-07-10 — arte-fonte original `ImagensPrimogo`)
 
@@ -24,6 +25,21 @@ elevado +0,25 un., conforme `BalloonController.SetPrimogoValue`/`ChangeNumber`),
 visual novo: **43,5 MB**, export limpo. Restam 🟡 de ajuste fino (owner Villar, contra os
 prints): `fine_offset` da calibração por grade, posições/escalas de HUD/balão/dragão/mão,
 durações canônicas (COD-001).
+
+## Rodadas de teste em dispositivo (2026-07-10)
+
+- **1ª rodada** (`testeprimogo/`, commit `3848805`): célula real da grade =
+  largura_textura/colunas (regressão automatizada), centralização de modais/menu
+  (CenterContainer + EXPAND_IGNORE_SIZE), splash com o pan da história do `Splash.anim`.
+- **2ª rodada** (`imagens2primogo/`, commit `7459e60`): dígitos **centrados** nos tiles
+  (bug raiz do `DigitRenderer.size`); **balão fiel aos prints do legado** (aba do valor
+  primordial + 8 slots sempre visíveis à esquerda + valor em uso flutuante — RES-023);
+  HUD XX/YY branco (IMG_3096); estrelas douradas **sobrepondo** as cinzas embutidas na
+  `box_1.png` e número da fase centrado; setas alinhadas às bases; menu sem PRIMOGO
+  duplicado; splash **re-coreografada** (a arte recuperada perdeu o quadrante superior
+  direito — RES-024); mago `mago_anim_01..07` na derrota + dragão no canto inferior
+  direito (IMG_3108) + `vocetem.png`; créditos legíveis (~4,4 s/painel); **celebração
+  didática de primo novo** (RES-025) e deslize contínuo do fogo (0,05 s/célula).
 
 ## Cobertura por fluxo
 

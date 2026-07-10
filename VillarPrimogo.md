@@ -1,6 +1,6 @@
 # Primogo — resumo para o Villar
 
-*Atualizado em 03/07/2026. Linguagem simples, sem jargão.*
+*Atualizado em 10/07/2026. Linguagem simples, sem jargão.*
 
 ## O que é isto
 
@@ -12,7 +12,7 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
 
 - ✅ **O jogo está funcionando por inteiro, por dentro.** Toda a lógica (as regras do
   puzzle, a energia, as estrelas, o desbloqueio de fases, os tutoriais, os menus, o som)
-  está pronta e **testada automaticamente** — são **140 testes**, todos passando.
+  está pronta e **testada automaticamente** — são **141 testes**, todos passando.
 - ✅ **As 122 fases originais** foram extraídas do jogo antigo e recriadas.
 - ✅ **Os sons** (14 efeitos e músicas) foram extraídos e ligados.
 - ✅ **A arte original está DENTRO do jogo** (10/07/2026): as imagens que você trouxe
@@ -22,10 +22,19 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
   retângulos coloridos.**
 - ✅ **O APK de teste foi gerado e assinado com o visual novo** — o jogo abre e roda no
   Android com a cara do jogo original.
-- ⏳ **Falta só o ajuste fino do visual**: comparar tela a tela com as capturas do jogo
-  antigo e corrigir pequenas posições/tamanhos (tudo já ficou parametrizado para isso).
+- ✅ **Duas rodadas de teste no seu celular já corrigidas** (10/07/2026). Na 1ª: tamanho
+  dos blocos igual ao quadriculado, telas centralizadas e a splash com a animação da
+  história. Na 2ª (12 itens): números centrados no fogo/gelo/caixas, balão igual ao do
+  jogo antigo (fileira à esquerda com o número da fase na aba), contador de jogadas em
+  branco legível, estrelas douradas encaixando sobre as cinzas, setas alinhadas, PRIMOGO
+  aparecendo uma vez só, abertura sem "buracos" na imagem, **mago animado quando perde**,
+  créditos com tempo de ler os nomes, **festinha quando você conquista um primo novo**
+  (o número cresce, solta faíscas e voa para o balão — ajuda a fixar a sequência dos
+  primos) e o **fogo deslizando fluido** como no 2048.
+- ⏳ **Falta o 3º teste no celular**: conferir as correções e apontar o que ainda estiver
+  alguns milímetros fora (tudo é parâmetro; ajuste rápido).
 
-Em uma frase: **o carro está pronto, pintado e rodando; falta polir os detalhes da pintura.**
+Em uma frase: **o carro está pronto, pintado e rodando; falta a última volta de inspeção.**
 
 ## O APK de teste (para o seu celular)
 
