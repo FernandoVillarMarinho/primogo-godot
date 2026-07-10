@@ -56,6 +56,18 @@ const VAPOR_FRAMES: Array = [
 	preload("res://assets/images/iceandfire/vapor02.png"),
 	preload("res://assets/images/iceandfire/vapor03.png"),
 ]
+const DRAGON_FRAMES: Array = [
+	preload("res://assets/images/primogo/dragao_anim01.png"),
+	preload("res://assets/images/primogo/dragao_anim02.png"),
+	preload("res://assets/images/primogo/dragao_anim03.png"),
+	preload("res://assets/images/primogo/dragao_anim04.png"),
+	preload("res://assets/images/primogo/dragao_anim05.png"),
+	preload("res://assets/images/primogo/dragao_anim06.png"),
+	preload("res://assets/images/primogo/dragao_anim07.png"),
+	preload("res://assets/images/primogo/dragao_anim08.png"),
+]
+const DRAGON_FPS := 8.0        # 🟡 COD-001
+const DRAGON_DELAY := 0.6      # entrada atrasada do dragão na coreografia S-08 (🟡 COD-001)
 
 var stage: int = 1
 var level: int = 1
@@ -471,9 +483,32 @@ func _show_endgame(won: bool, stars: int) -> void:
 		box.add_child(_reward_row(ProgressionStore.energy()))
 		box.add_child(_endgame_button(TEX_BT_NEXT, _on_next))
 		box.add_child(_endgame_button(TEX_BT_PLAYAGAIN, _on_retry))
+		_spawn_dragon()   # dragão original dragao_anim01..08 (fecha COD-008)
 	else:
 		box.add_child(_endgame_button(TEX_BT_TRYAGAIN, _on_retry))
 	box.add_child(_endgame_button(TEX_LEVELSELECT_BTN, _on_level_select))
+
+
+## Dragão animado da coreografia de entrada (S-08): aparece com atraso após o card
+## (target_screens.md — "delayed dragon"). Sprites originais primogo/dragao_anim01..08,
+## que respondem à AMB-202 (o set real é o LARANJA do runtime, não o verde de Icon/).
+func _spawn_dragon() -> void:
+	var frames := SpriteFrames.new()
+	frames.add_animation("fly")
+	frames.set_animation_speed("fly", DRAGON_FPS)
+	frames.set_animation_loop("fly", true)
+	for t in DRAGON_FRAMES:
+		frames.add_frame("fly", t)
+	var dragon := AnimatedSprite2D.new()
+	dragon.sprite_frames = frames
+	dragon.position = Vector2(360, 240)   # acima do card (🟡 ajuste fino na validação)
+	dragon.scale = Vector2(0.55, 0.55)
+	dragon.modulate.a = 0.0
+	_modal.add_child(dragon)
+	dragon.play("fly")
+	var tw := create_tween()
+	tw.tween_interval(DRAGON_DELAY)
+	tw.tween_property(dragon, "modulate:a", 1.0, 0.25)
 
 
 func _stars_row(stars: int) -> HBoxContainer:

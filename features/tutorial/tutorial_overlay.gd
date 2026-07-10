@@ -6,10 +6,19 @@ extends Node2D
 ## é clicável quando o passo corrente é BALLOON, e o clique avança o tutorial. Ao concluir,
 ## marca a flag persistida (BR-052) via ProgressionStore.
 ##
-## VISUAL/DURAÇÃO PLACEHOLDER: sprites da mão (up/right/down/left/click/pure) e os marcos
-## canônicos 50/65/80/120 do ciclo (COD-001) entram na validação visual.
+## ARTE ORIGINAL (T20/Fase 3): mão real tutorial/mao-tutorial-* por gesto (Hand prefab,
+## BR-047). Marcos canônicos 50/65/80/120 do ciclo continuam 🟡 (COD-001).
 
 signal tutorial_finished()
+
+const HAND_BY_DIRECTION: Dictionary = {
+	Match.Direction.UP: preload("res://assets/images/tutorial/mao-tutorial-cima.png"),
+	Match.Direction.DOWN: preload("res://assets/images/tutorial/mao-tutorial-baixo.png"),
+	Match.Direction.LEFT: preload("res://assets/images/tutorial/mao-tutorial-esquerda.png"),
+	Match.Direction.RIGHT: preload("res://assets/images/tutorial/mao-tutorial-direita.png"),
+}
+const HAND_CLICK := preload("res://assets/images/tutorial/mao-tutorial-clique.png")
+const HAND_NEUTRAL := preload("res://assets/images/tutorial/mao.png")
 
 var stage: int
 var level: int
@@ -18,7 +27,7 @@ var _seq: Array = []
 var _index: int = 0
 var _which: String = "t1"
 var _finished := false
-var _hand: Label
+var _hand: Sprite2D
 
 
 func setup(s: int, l: int, ad: MatchAdapter) -> void:
@@ -73,14 +82,20 @@ func _complete() -> void:
 
 
 func _build_hand() -> void:
-	_hand = Label.new()
-	_hand.text = "☝"
-	_hand.add_theme_font_size_override("font_size", 64)
+	_hand = Sprite2D.new()
+	_hand.texture = HAND_NEUTRAL
+	_hand.position = Vector2(360, 700)   # sobre o board (🟡 ajuste fino na validação)
 	add_child(_hand)
 
 
-## Ciclo da mão: deslizar → pausar → fade-out → teleportar → próximo gesto, em loop
-## (BR-047). Placeholder: pulsa a mão indicando o próximo gesto (durações = COD-001).
+## Ciclo da mão: mostra o gesto do passo corrente (sprite original por direção; clique no
+## passo do balão) e pulsa em loop (BR-047). Durações canônicas = 🟡 COD-001.
 func _demonstrate() -> void:
-	if _hand != null:
-		ScaleEffects.pulse(_hand)
+	if _hand == null:
+		return
+	var step: Variant = _seq[_index] if _index < _seq.size() else null
+	if step == TutorialSequence.BALLOON:
+		_hand.texture = HAND_CLICK
+	else:
+		_hand.texture = HAND_BY_DIRECTION.get(step, HAND_NEUTRAL)
+	ScaleEffects.pulse(_hand)
