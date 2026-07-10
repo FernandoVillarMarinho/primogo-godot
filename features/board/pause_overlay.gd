@@ -32,10 +32,10 @@ func _build_panel() -> void:
 	add_child(center)
 
 	var panel := Control.new()
-	panel.custom_minimum_size = Vector2(560, 500)
+	panel.custom_minimum_size = Vector2(600, 536)   # mesma proporção da arte (959×856)
 	center.add_child(panel)
 
-	var box := TextureRect.new()   # pause-box 959×856
+	var box := TextureRect.new()   # pause-box 959×856 — o título "PAUSE" vem EMBUTIDO na arte
 	box.texture = TEX_BOX
 	box.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	box.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -44,10 +44,12 @@ func _build_panel() -> void:
 
 	var col := VBoxContainer.new()
 	col.set_anchors_preset(Control.PRESET_FULL_RECT)
-	col.offset_top = 60.0
-	col.offset_bottom = -40.0
+	# o "PAUSE" embutido termina em y≈180 da arte nativa (≈113 no painel): o conteúdo
+	# começa abaixo dele — antes a linha MÚSICA ficava POR CIMA do título (3º teste)
+	col.offset_top = 130.0
+	col.offset_bottom = -50.0
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
-	col.add_theme_constant_override("separation", 18)
+	col.add_theme_constant_override("separation", 10)
 	panel.add_child(col)
 
 	col.add_child(_toggle_row(TEX_MUSIC, not AudioBus.is_music_muted(),

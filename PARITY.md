@@ -9,7 +9,7 @@
 
 - `domain/tests/parity/test_parity.gd` — PAR-01..06, PAR-08 (domínio puro).
 - `domain/tests/parity/test_parity_shell.gd` — PAR-07 (autoloads scene_router/audio_bus/progression_store).
-- **141/141 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3, com a regressão `test_cell_px_matches_drawn_grid` da 1ª rodada de dispositivo); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+- **143/143 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3, a regressão `test_cell_px_matches_drawn_grid` da 1ª rodada de dispositivo e os 2 testes da versão 2026/RES-026 — primo inicial na coleção e troca de volta ao inicial); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
 - `tools/ci/load_check.gd` — load headless das cenas/scripts da casca (parse + refs de assets), cobertura que a suíte de domínio não exercita.
 
 ## Integração visual (Fase 3, 2026-07-10 — arte-fonte original `ImagensPrimogo`)
@@ -40,6 +40,19 @@ durações canônicas (COD-001).
   direito — RES-024); mago `mago_anim_01..07` na derrota + dragão no canto inferior
   direito (IMG_3108) + `vocetem.png`; créditos legíveis (~4,4 s/painel); **celebração
   didática de primo novo** (RES-025) e deslize contínuo do fogo (0,05 s/célula).
+- **3ª rodada — "versão 2026"** (`imagens2primogo/rodada3/` + itens escritos do Villar):
+  **primos ACUMULAM** (inicial entra na `Collection` no `start`; troca livre entre todos,
+  1 energia cada — divergência intencional do legado, RES-026), balão em ordem
+  **crescente** com o **ativo destacado** (elevado/maior/dourado); vitória **espera** a
+  celebração do último primo (modal adiado até a fila + voo terminarem); transições
+  aceleradas (fade 0,15 s, personagem 0,25 s, pop-in do card); estrelas laterais da
+  seleção **rotacionadas ±18,5°** (medidas por varredura de pixels na `box_1.png`);
+  música da seleção = `ambiencia_passaros` (o `selecao_nivel.ogg` é efeito de 0,21 s —
+  em loop era o "zumbido"; virou SFX do clique); "PAUSE" embutido na arte sem
+  sobreposição (conteúdo começa abaixo do título); dígito da energia fora do círculo do
+  raio; créditos com painel **DJDE-UFRJ 2026**; splash com **música desde o 1º frame**
+  (intro 7,3 s emendada no loop do menu) e história completa (tela inteira do mago →
+  neve atingindo a cidade → dragão no verde). Smokes novos: `tools/ci/credits_check.gd`.
 
 ## Cobertura por fluxo
 
@@ -69,6 +82,12 @@ durações canônicas (COD-001).
 ## Exceções aprovadas (deviations — não são divergência)
 
 DEV-001 (texto literal, não pixel), DEV-002 (bitmap fonts por glifo), DEV-003 (ícone raio), DEV-004 (tempo real, ±10%), DEV-005 (grade `i*4+j` — o oráculo é a spec corrigida, **não** o legado bugado), DEV-006 (tokens), DEV-007 (modal variante A; a variante B **não** deve aparecer), DEV-008 (fundo clareia no fim de fase). Também: recarga 1★=+0 (L-01), recompensa pelo recorde (BR-027), estágios 11–12 inalcançáveis (L-04), cheat inerte em produção (L-11 — testado).
+
+**RES-026 (versão 2026, pedido explícito do Villar no 3º teste)**: o primo INICIAL entra
+na coleção no início da partida — o jogador acumula e troca livremente entre TODOS os
+primos da fase (o legado descartava o acesso ao valor corrente não coletado, L-09/RES-006).
+Nas ~10 partidas vs oráculo, esta é uma divergência **esperada**: o oráculo para PAR-03 é
+a spec 2026, não o APK legado.
 
 ## Pendências manuais (bloqueiam o gate de cutover, owner = Villar)
 

@@ -12,17 +12,17 @@ const TEX_SPLASH := preload("res://assets/images/splashscreen/splash_grande_reco
 
 ## Passeio da câmera contando a história (~16s, mesmo ritmo do Splash.anim legado),
 ## RE-COREOGRAFADO para a arte recuperada: splash_grande_recovered (3258×3386) perdeu o
-## quadrante superior DIREITO (retângulo em branco em x ≥ -136, y ≤ -200, coords
-## centradas) e os keyframes originais atravessavam o vazio (2º teste em dispositivo).
-## Regra: a janela visível (±360/zoom, ±640/zoom) nunca invade o branco — nos trechos
-## altos (y < -200) a borda direita fica ≤ -276. Trajeto: pessoas congeladas (baixo) →
-## dragão (baixo-direita) → subida da montanha pela esquerda → zoom no MAGO (topo-esq).
+## quadrante superior DIREITO (branco em x ≥ ~+50, y ≤ ~-195, coords centradas).
+## Regra: a janela visível (±360/zoom, ±640/zoom) nunca invade o branco.
+## História NA ORDEM (3º teste em dispositivo): a TELA INTEIRA do mago lançando o
+## feitiço (topo-esq) → aproximação no mago → a neve desce a encosta ATINGINDO a
+## cidade/os congelados (baixo-esq) → o dragão de fogo no campo ainda verde (baixo-dir).
 const KEYS: Array = [
-	{"t": 0.0, "pos": Vector2(0, 700), "zoom": 1.05},
-	{"t": 5.0, "pos": Vector2(300, 900), "zoom": 0.9},
-	{"t": 9.0, "pos": Vector2(-700, 700), "zoom": 0.85},
-	{"t": 12.5, "pos": Vector2(-900, -900), "zoom": 0.8},
-	{"t": 15.95, "pos": Vector2(-1072, -700), "zoom": 1.0},
+	{"t": 0.0, "pos": Vector2(-980, -560), "zoom": 0.8},    # cena completa do mago
+	{"t": 3.5, "pos": Vector2(-1030, -545), "zoom": 1.0},   # aproxima no feitiço
+	{"t": 8.0, "pos": Vector2(-600, 500), "zoom": 0.85},    # a neve desce a encosta
+	{"t": 11.5, "pos": Vector2(-300, 980), "zoom": 0.9},    # a cidade congelada embaixo
+	{"t": 15.95, "pos": Vector2(900, 750), "zoom": 0.85},   # o dragão no verde (esperança)
 ]
 
 var _done := false
@@ -30,6 +30,9 @@ var _cam: Camera2D
 
 
 func _ready() -> void:
+	# a música entra JUNTO com a imagem (3º teste em dispositivo): intro do menu sem
+	# loop e, ao terminar, emenda no loop do menu — que segue tocando na cena do menu
+	AudioBus.play_music_with_intro(AudioBus.MUSIC_MENU_INTRO, AudioBus.MUSIC_MENU)
 	var art := Sprite2D.new()   # imagem da história, centrada na origem
 	art.texture = TEX_SPLASH
 	add_child(art)

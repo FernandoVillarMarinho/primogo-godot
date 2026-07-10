@@ -12,7 +12,7 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
 
 - ✅ **O jogo está funcionando por inteiro, por dentro.** Toda a lógica (as regras do
   puzzle, a energia, as estrelas, o desbloqueio de fases, os tutoriais, os menus, o som)
-  está pronta e **testada automaticamente** — são **141 testes**, todos passando.
+  está pronta e **testada automaticamente** — são **143 testes**, todos passando.
 - ✅ **As 122 fases originais** foram extraídas do jogo antigo e recriadas.
 - ✅ **Os sons** (14 efeitos e músicas) foram extraídos e ligados.
 - ✅ **A arte original está DENTRO do jogo** (10/07/2026): as imagens que você trouxe
@@ -31,8 +31,28 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
   créditos com tempo de ler os nomes, **festinha quando você conquista um primo novo**
   (o número cresce, solta faíscas e voa para o balão — ajuda a fixar a sequência dos
   primos) e o **fogo deslizando fluido** como no 2048.
-- ⏳ **Falta o 3º teste no celular**: conferir as correções e apontar o que ainda estiver
-  alguns milímetros fora (tudo é parâmetro; ajuste rápido).
+- ✅ **Os ajustes da "versão 2026" (do seu 3º teste) estão feitos** (10/07/2026):
+  - **Os primos agora acumulam**: você começa com o primo da fase e, a cada composto
+    dividido, ganha mais um — e pode **trocar entre todos eles** clicando na lista
+    (cada troca gasta 1 de energia e muda o fogo na hora).
+  - **O primo em uso fica destacado**: sobe um pouco, cresce e a caixinha fica dourada;
+    os outros ficam guardados na lista, **sempre em ordem crescente** (2, 3, 5, 7...).
+  - **O último primo da fase também faz a festinha**: a tela de vitória agora espera a
+    celebração terminar antes de aparecer.
+  - **Vitória mais ágil**: o cartão de parabéns entra num pulo e as trocas de tela
+    ficaram 2× mais rápidas.
+  - **Estrelas encaixando**: as laterais agora giram ±18,5° (medido na própria arte)
+    para cobrir exatamente as cinzas.
+  - **O zumbido sumiu**: aquele som contínuo na seleção de fases era um efeito de 0,2s
+    tocando em loop por engano; agora toca a ambiência de pássaros do jogo original.
+  - **PAUSE arrumado**: o menu de pausa não fica mais por cima da palavra PAUSE, e o
+    número da energia saiu de trás do raio.
+  - **Créditos 2026**: entrou a logomarca do **DJDE** e a equipe do Projeto (você como
+    coordenador-geral + os 7 coordenadores dos núcleos), com tempo para ler.
+  - **Abertura com música**: a música começa junto com a imagem, e o passeio da câmera
+    agora mostra a tela inteira do mago e a neve atingindo a cidade (continuando a
+    desviar do pedaço da arte que se perdeu).
+- ⏳ **Falta o 4º teste no celular**: conferir esses ajustes no aparelho.
 
 Em uma frase: **o carro está pronto, pintado e rodando; falta a última volta de inspeção.**
 

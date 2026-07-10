@@ -52,7 +52,10 @@ func start(level: LevelData, p_budget: int) -> Array:
 	_tutorial_index = 0
 
 	var p: Dictionary = level.elements[0]
-	grid.set_cell(int(p["x"]), int(p["y"]), Cell.player(int(p["x"]), int(p["y"]), level.player_true_value()))
+	var initial := level.player_true_value()
+	grid.set_cell(int(p["x"]), int(p["y"]), Cell.player(int(p["x"]), int(p["y"]), initial))
+	collection.add(initial)   # versão 2026 (RES-026): o primo inicial fica na lista — o
+	# jogador pode voltar a usá-lo via troca (os primos ACUMULAM ao longo da fase)
 	for f in level.generate_frozen():
 		grid.set_cell(int(f["x"]), int(f["y"]), Cell.frozen(int(f["x"]), int(f["y"]), int(f["displayed_value"]), int(f["true_value"]), int(f["primo"])))
 	return [{"type": "match_started"}]
@@ -101,7 +104,9 @@ func move(direction: int) -> Array:
 
 
 ## Troca pelo balão (BR-012/013): só para valor coletado e diferente do atual;
-## custa 1 + penalidade de gelo; NÃO devolve o valor corrente (L-09).
+## custa 1 + penalidade de gelo; NÃO devolve o valor corrente (L-09). Na versão 2026
+## (RES-026) todos os primos usados já estão na coleção (inicial entra no start, os
+## demais no merge) — o jogador troca livremente entre eles enquanto tiver energia.
 func swap_value(value: int) -> Array:
 	if status != Status.PLAYING:
 		return [{"type": "swap_rejected", "reason": "NOT_PLAYING"}]

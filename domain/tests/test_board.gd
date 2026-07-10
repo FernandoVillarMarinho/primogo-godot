@@ -172,3 +172,24 @@ func test_collection_dedupe() -> void:
 	assert_true(c.add(5))
 	assert_false(c.add(5))
 	assert_eq(c.size(), 1)
+
+
+# ---------------------------------------------------------------- versão 2026 (RES-026)
+
+func test_start_adds_initial_prime_to_collection() -> void:
+	var lvl := _level(2, 3, false, [_elem(0, 0, 2), _elem(2, 1, 5)])
+	var m := Match.new()
+	m.start(lvl, 10)
+	assert_true(m.collection.has(2), "RES-026: o primo inicial entra na coleção no start")
+
+
+func test_swap_back_to_initial_prime() -> void:
+	var lvl := _level(2, 3, false, [_elem(0, 0, 2), _elem(2, 1, 5)])
+	var m := Match.new()
+	m.start(lvl, 10)
+	m.collection.add(3)
+	m.swap_value(3)
+	var ev := m.swap_value(2)   # volta ao primo inicial — os primos ACUMULAM (2026)
+	assert_eq(ev[0]["type"], "value_swapped", "RES-026: troca de volta ao inicial é válida")
+	assert_eq(m.player_value(), 2, "o fogo volta a usar o primo inicial")
+	assert_eq(m.budget, 8, "cada troca custou 1 energia")

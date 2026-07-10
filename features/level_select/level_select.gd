@@ -143,7 +143,11 @@ func _render_page() -> void:
 ## centro da área branca — correções do 2º teste em dispositivo.
 const BOX_HOLDER := Vector2(130, 160)
 const BOX_NATIVE := Vector2(205, 230)
-const GRAY_STAR_CENTERS: Array = [Vector2(39.5, 50.5), Vector2(102.5, 37.0), Vector2(164.5, 50.5)]
+# Centroides e ROTAÇÃO das estrelas cinzas embutidas, medidos por varredura de pixels na
+# box_1.png (cor 183,202,233): as laterais inclinam ±18,5° "abraçando" a central (3º teste
+# em dispositivo: sem a rotação as douradas não encaixavam nas pontas das cinzas).
+const GRAY_STAR_CENTERS: Array = [Vector2(41.8, 50.3), Vector2(102.1, 39.2), Vector2(162.2, 50.3)]
+const GRAY_STAR_ROTATIONS: Array = [-18.5, 0.0, 18.5]
 const NUMBER_CENTER := Vector2(102.5, 118.0)   # centro da área branca (entre estrelas e faixa)
 
 
@@ -193,6 +197,8 @@ func _make_box(stage: int, col: int, row: int) -> Control:
 			s.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			s.size = Vector2(32, 32)
 			s.position = _box_art_point(GRAY_STAR_CENTERS[i]) - Vector2(16, 16)
+			s.pivot_offset = Vector2(16, 16)   # gira em torno do centro (mantém o encaixe)
+			s.rotation_degrees = GRAY_STAR_ROTATIONS[i]
 			holder.add_child(s)
 
 	return holder
@@ -206,6 +212,7 @@ func _on_box_pressed(stage: int, lvl: int) -> void:
 	for e in events:
 		match str(e["type"]):
 			"entry_granted":
+				AudioBus.play_ui(AudioBus.SFX_PHASE_SELECT)   # som legado de seleção de fase
 				SceneRouter.change_scene(BOARD_SCENE, SceneRouter.Context.BOARD,
 					{"stage": stage, "level": lvl})
 			"entry_redirected":

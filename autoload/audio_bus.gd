@@ -30,6 +30,7 @@ const SFX_PRIME_SWAP := preload("res://assets/audio/movimentacao.ogg")      # tr
 const SFX_CLICK_OK := preload("res://assets/audio/click_ok.ogg")
 const SFX_CLICK_BACK := preload("res://assets/audio/click_back.ogg")
 const SFX_MENU_INTRO := preload("res://assets/audio/menu_intro_sfx.ogg")
+const SFX_PHASE_SELECT := preload("res://assets/audio/selecao_nivel.ogg")   # clique na caixa da fase (0,21s)
 # Stingers de resultado (unificam as entradas duplicadas do legado — BR-055).
 const STINGER_WIN := preload("res://assets/audio/stinger_vitoria.ogg")
 const STINGER_LOSE := preload("res://assets/audio/stinger_derrota.ogg")
@@ -37,7 +38,9 @@ const STINGER_LOSE := preload("res://assets/audio/stinger_derrota.ogg")
 const MUSIC_MENU := preload("res://assets/audio/menu_loop.ogg")
 const MUSIC_MENU_INTRO := preload("res://assets/audio/menu_intro.ogg")
 const MUSIC_GAMEPLAY := preload("res://assets/audio/gameplay.ogg")
-const MUSIC_LEVEL_SELECT := preload("res://assets/audio/selecao_nivel.ogg")
+# selecao_nivel.ogg é um EFEITO de 0,21s (manifesto FSB5) — em loop virava um zumbido
+# contínuo (3º teste em dispositivo). A tela de seleção usa a ambiência de pássaros.
+const MUSIC_LEVEL_SELECT := preload("res://assets/audio/ambiencia_passaros.ogg")
 const AMBIENCE_BIRDS := preload("res://assets/audio/ambiencia_passaros.ogg")
 
 # --- estado ------------------------------------------------------------------
@@ -50,6 +53,7 @@ var _effect_players: Array[AudioStreamPlayer] = []
 var _next_voice: int = 0
 var _music_muted: bool = false
 var _effects_muted: bool = false
+var _after_intro: AudioStream = null   # loop a emendar quando a intro (sem loop) terminar
 
 
 func _ready() -> void:
@@ -81,6 +85,7 @@ func _ensure_bus(bus_name: String) -> int:
 func _build_players() -> void:
 	_music_player = AudioStreamPlayer.new()
 	_music_player.bus = BUS_MUSIC
+	_music_player.finished.connect(_on_music_finished)   # emenda intro → loop
 	add_child(_music_player)
 	for i in EFFECT_VOICES:
 		var p := AudioStreamPlayer.new()
@@ -154,12 +159,37 @@ func is_effects_muted() -> bool:
 func play_music(stream: AudioStream, restart: bool = false) -> void:
 	if stream == null:
 		return
+	_after_intro = null   # troca explícita cancela uma emenda intro→loop pendente
 	if _music_player.stream == stream and _music_player.playing and not restart:
 		return
 	_set_loop(stream, true)
 	_music_player.stream = stream
 	_music_player.volume_db = SILENT_DB if _music_muted else 0.0
 	_music_player.play()
+
+
+## Intro única emendada no loop (abertura → menu, BR-054): a intro toca SEM loop e, ao
+## terminar naturalmente, o loop assume. Qualquer `play_music` no meio cancela a emenda.
+func play_music_with_intro(intro: AudioStream, loop_stream: AudioStream) -> void:
+	if intro == null or loop_stream == null:
+		return
+	_set_loop(intro, false)
+	_music_player.stream = intro
+	_music_player.volume_db = SILENT_DB if _music_muted else 0.0
+	_music_player.play()
+	_after_intro = loop_stream
+
+
+func _on_music_finished() -> void:
+	if _after_intro != null:
+		var next := _after_intro
+		play_music(next)
+
+
+## Faixa em reprodução no momento (null se silêncio) — deixa as cenas decidirem se
+## trocam a música ou preservam uma emenda intro→loop em andamento.
+func current_music() -> AudioStream:
+	return _music_player.stream if _music_player.playing else null
 
 
 ## Para a música. Parada sempre com fadeout, salvo pedido explícito (RN-46).

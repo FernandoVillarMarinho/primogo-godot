@@ -24,7 +24,7 @@ const BACK_MAP := {
 	Context.SPLASH: Context.MENU,
 }
 
-const FADE_TIME := 0.3
+const FADE_TIME := 0.15   # transição rápida (3º teste em dispositivo: 0,3+0,3 arrastava)
 const FADE_LAYER := 128  # acima de qualquer cena
 
 signal scene_changed(context: int)   # emitido ao fim da transição (fade-in concluído)

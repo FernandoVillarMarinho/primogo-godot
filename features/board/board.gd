@@ -9,10 +9,11 @@ extends Node2D
 ## SKIN ORIGINAL (T19/Fase 3): cenário por grade + tiles via `grid_calibration.tres`
 ## (transcrito do GameManager legado); player = chama animada (fogo1..3, prefab Number),
 ## congelado = gelo_numero, gelo puro = gelo (prefab Ice); efeitos one-shot: vapor no
-## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão = aba do valor
-## primordial + 8 slots à esquerda com o valor em uso FLUTUANDO elevado (tile-espelho,
-## COD-007/prints IMG_3092..3106); deslize contínuo do fogo + celebração de primo novo
-## e mago na derrota (2º teste em dispositivo); pausa real (S-07).
+## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão da versão 2026
+## (RES-026): aba do primordial + 8 slots com TODOS os primos acumulados em ordem
+## crescente e o ATIVO destacado no próprio slot (elevado/maior/dourado); deslize
+## contínuo do fogo + celebração de primo novo (a vitória ESPERA a celebração) e mago
+## na derrota (2º/3º testes em dispositivo); pausa real (S-07).
 ## Restam 🟡 para validação visual: fine_offset da calibração e durações (COD-001).
 
 const LEVELS_DIR := "res://resources/levels/"
@@ -24,15 +25,18 @@ const SLIDE_TIME_PER_CELL := 0.05  # deslize contínuo do fogo, fluido como 2048
 const EFFECT_FPS := 12.0  # anim_gelo/vapor one-shot (🟡 COD-001)
 const FLAME_FPS := 8.0    # chama do player (fogo1..3 em loop)
 
-# Balão no layout do legado (prints IMG_3092/3096/3104/3106): aba à esquerda com o valor
-# PRIMORDIAL da fase; fileira de 8 slots SEMPRE visível alinhada à esquerda; o valor
-# coletado EM USO flutua elevado acima do início da fileira (COD-007/AMB-201).
+# Balão (versão 2026, RES-026): aba à esquerda com o valor PRIMORDIAL da fase; fileira
+# de 8 slots SEMPRE visível com TODOS os primos acumulados em ordem CRESCENTE (reforço
+# didático da sequência); o primo ATIVO (em uso pelo fogo) fica destacado — elevado e
+# maior no próprio slot (eco do tile-espelho +0,25 un. do legado, COD-007/AMB-201).
 const SLOT_SIZE := 70.0
 const SLOT_GAP := 6.0
-const TAB_X := 8.0        # aba do valor primordial, colada à esquerda
-const ROW_X := 92.0       # início da fileira de 8 slots
-const TAB_RAISE := 24.0   # aba levemente acima da linha dos slots
-const FLOAT_RAISE := 74.0 # slot em uso flutua uma altura de slot acima da fileira
+const TAB_X := 8.0          # aba do valor primordial, colada à esquerda
+const ROW_X := 92.0         # início da fileira de 8 slots
+const TAB_RAISE := 24.0     # aba levemente acima da linha dos slots
+const ACTIVE_RAISE := 18.0  # o slot ATIVO sobe ~0,25 slot (destaque do primo em uso)
+const ACTIVE_SCALE := 1.18  # ... e cresce a partir do centro
+const ACTIVE_TINT := Color(1.0, 0.88, 0.55)  # caixa do slot ativo aquecida (dourado)
 
 const TEX_SCENERY := preload("res://assets/images/scenery_grid/background.png")
 const TEX_FROZEN := preload("res://assets/images/iceandfire/gelo_numero.png")
@@ -96,7 +100,7 @@ const STAR_FX_FRAMES: Array = [   # faíscas da conquista de primo novo (mageani
 ]
 const TEX_VOCETEM := preload("res://assets/images/endgame/vocetem.png")
 const DRAGON_FPS := 8.0        # 🟡 COD-001
-const DRAGON_DELAY := 0.6      # entrada atrasada do dragão/mago na coreografia S-08 (🟡 COD-001)
+const DRAGON_DELAY := 0.25     # entrada do dragão/mago logo após o card (3º teste: 0,6 arrastava)
 
 var stage: int = 1
 var level: int = 1
@@ -118,6 +122,8 @@ var _tiles: Dictionary = {}          # Vector2i → Node2D (raiz do tile na cél
 var _player_node: Node2D = null      # raiz do tile do player (alvo do deslize fluido)
 var _initial_value := 0              # valor primordial da fase (aba esquerda do balão)
 var _seen_values: Array[int] = []    # primos já celebrados (efeito de conquista dispara 1×)
+var _conquest_tween: Tween = null    # voo do primo conquistado (a vitória espera por ele)
+var _pending_endgame: Dictionary = {}  # fim de fase adiado até a animação terminar (item 3/2026)
 var _budget_label: Label
 var _balloon: Control
 var _balloon_y := 0.0
@@ -143,6 +149,7 @@ func _ready() -> void:
 	_build_pause()
 	adapter.start(level_data, budget_max)
 	_initial_value = _player_value()
+	_seen_values = adapter.match_game.collection.values()   # o primo inicial não é "novo"
 	_maybe_attach_tutorial()
 	_render_grid()
 	_refresh_balloon()
@@ -246,6 +253,14 @@ func _on_move_resolved(events: Array) -> void:
 		await get_tree().create_timer(STEP_TIME).timeout   # respiro p/ o efeito aparecer
 	_render_grid()  # sincroniza o visual com o estado final do domínio
 	_refresh_balloon()
+	if not _pending_endgame.is_empty():
+		# item 3 (2026): a vitória/derrota só aparece DEPOIS da celebração do primo
+		# conquistado terminar — o último primo entra no balão com o mesmo efeito dos demais
+		if _conquest_tween != null and _conquest_tween.is_running():
+			await _conquest_tween.finished
+		var pe := _pending_endgame
+		_pending_endgame = {}
+		_show_endgame(bool(pe["won"]), int(pe["stars"]))
 	_animating = false
 
 
@@ -325,7 +340,12 @@ func _conquest_effect(value: int, cell: Vector2i) -> void:
 	d.scale = Vector2(0.3, 0.3)
 	d.set_value(value)
 	add_child(d)
-	var target := Vector2(ROW_X + SLOT_SIZE / 2.0, _balloon_y) - Vector2(70, 70)
+	# voa até o slot que o primo vai OCUPAR na fileira ordenada (item 4/2026)
+	var sorted := adapter.match_game.collection.values()
+	sorted.sort()
+	var idx := maxi(sorted.find(value), 0)
+	var target := Vector2(ROW_X + idx * (SLOT_SIZE + SLOT_GAP) + SLOT_SIZE / 2.0, _balloon_y) \
+		- Vector2(70, 70)
 	var tw := create_tween()
 	tw.tween_property(d, "scale", Vector2(1.0, 1.0), 0.2) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -333,6 +353,7 @@ func _conquest_effect(value: int, cell: Vector2i) -> void:
 	tw.tween_property(d, "position", target, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tw.parallel().tween_property(d, "scale", Vector2(0.45, 0.45), 0.45)
 	tw.tween_callback(d.queue_free)
+	_conquest_tween = tw   # a tela de vitória espera este voo terminar (item 3/2026)
 
 
 ## AnimatedSprite2D one-shot na célula, no tamanho da célula; libera-se ao terminar.
@@ -444,12 +465,14 @@ func _build_hud() -> void:
 	badge.size = badge.custom_minimum_size
 	hud.add_child(badge)
 	_budget_label = Label.new()   # "XX/YY" BRANCO centrado na caixa do badge (IMG_3096 —
-	_budget_label.position = Vector2(82, 28)   # laranja sobre laranja era ilegível)
-	_budget_label.size = Vector2(118, 64)
+	# laranja sobre laranja era ilegível); começa DEPOIS do círculo do raio, que na arte
+	# vai até x≈102 do HUD — o 1º dígito ficava atrás dele (3º teste em dispositivo)
+	_budget_label.position = Vector2(106, 28)
+	_budget_label.size = Vector2(94, 64)
 	_budget_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_budget_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_budget_label.add_theme_font_override("font", FONT_TEXT)
-	_budget_label.add_theme_font_size_override("font_size", 34)
+	_budget_label.add_theme_font_size_override("font_size", 32)
 	_budget_label.add_theme_color_override("font_color", Color.WHITE)
 	_budget_label.add_theme_color_override("font_shadow_color", Color(0.55, 0.3, 0.05, 0.85))
 	_budget_label.add_theme_constant_override("shadow_offset_x", 2)
@@ -492,46 +515,48 @@ func _build_balloon() -> void:
 	_balloon_y = pos.y
 	_balloon = Control.new()   # faixa com posicionamento manual (layout do legado)
 	_balloon.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	_balloon.offset_top = pos.y - FLOAT_RAISE - SLOT_SIZE / 2.0
+	_balloon.offset_top = pos.y - ACTIVE_RAISE - SLOT_SIZE / 2.0 - 12.0  # folga p/ o slot ativo crescido
 	_balloon.offset_bottom = pos.y + SLOT_SIZE / 2.0
 	_balloon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	layer.add_child(_balloon)
 
 
-## Balão no layout do legado (BR-050 + prints IMG_3092/3096/3104/3106): aba à esquerda
-## com o valor PRIMORDIAL da fase (display, levemente elevada); fileira de 8 slots
-## sempre visível, alinhada à esquerda, com os valores coletados na ordem (clicáveis,
-## BR-012/013); quando o player usa um valor coletado, esse slot sai da fileira e
-## flutua elevado acima dela (tile-espelho — COD-007/AMB-201).
+## Balão da versão 2026 (RES-026): aba à esquerda com o valor PRIMORDIAL (display);
+## fileira de 8 slots sempre visível com TODOS os primos acumulados em ordem CRESCENTE
+## (item 4 — reforço didático da sequência dos primos); o primo ATIVO fica destacado no
+## próprio slot (elevado + maior + caixa dourada, itens 1/2); clicar em outro primo da
+## lista troca o valor do fogo imediatamente, custando 1 energia (BR-012/013).
 func _refresh_balloon() -> void:
 	if _balloon == null:
 		return
 	for child in _balloon.get_children():
 		child.queue_free()
-	var row_y := FLOAT_RAISE   # linha-base da fileira dentro da faixa
+	var row_y := ACTIVE_RAISE + 12.0   # linha-base da fileira dentro da faixa
 	var current := _player_value()
-	_balloon.add_child(_balloon_slot(_initial_value, Vector2(TAB_X, row_y - TAB_RAISE), false))
-	var in_use := current != _initial_value   # usando um valor coletado → slot flutuante
-	if in_use:
-		_balloon.add_child(_balloon_slot(current, Vector2(ROW_X, row_y - FLOAT_RAISE), false))
+	_balloon.add_child(_balloon_slot(_initial_value, Vector2(TAB_X, row_y - TAB_RAISE), false, false))
+	var values := adapter.match_game.collection.values()   # ≤ 8 slots, ≤ 2 dígitos (BR-050)
+	values.sort()
 	var col := 0
-	for value in adapter.match_game.collection.values():   # ≤ 8 slots, ≤ 2 dígitos (BR-050)
-		if in_use and int(value) == current:
-			continue   # o valor em uso flutua acima; não repete na fileira
-		_balloon.add_child(_balloon_slot(int(value),
-			Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y), true))
+	for value in values:
+		var active := int(value) == current
+		var pos := Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y - (ACTIVE_RAISE if active else 0.0))
+		_balloon.add_child(_balloon_slot(int(value), pos, not active, active))
 		col += 1
 	while col < 8:   # slots vazios sempre visíveis, como no legado
 		_balloon.add_child(_empty_slot(Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y)))
 		col += 1
 
 
-func _balloon_slot(value: int, pos: Vector2, clickable: bool) -> Control:
+func _balloon_slot(value: int, pos: Vector2, clickable: bool, active: bool) -> Control:
 	var holder := _empty_slot(pos)
 	var slot := holder.get_child(0) as TextureButton
 	slot.disabled = not clickable
 	if clickable:
 		slot.pressed.connect(_on_slot_pressed.bind(value))
+	if active:   # destaque do primo em uso pelo fogo (item 2/2026)
+		holder.pivot_offset = Vector2(SLOT_SIZE / 2.0, SLOT_SIZE / 2.0)
+		holder.scale = Vector2(ACTIVE_SCALE, ACTIVE_SCALE)
+		slot.modulate = ACTIVE_TINT
 	var d := DigitRenderer.new()
 	d.font = GameFonts.TILE   # balão usa OrangeFont (BalloonController.allSprites)
 	d.box_size = Vector2(SLOT_SIZE - 14, SLOT_SIZE - 14)
@@ -597,16 +622,18 @@ func _on_value_collected(_value: int) -> void:
 	_refresh_balloon()
 
 
+## Os sinais terminais chegam ANTES da fila de animação (`move_resolved`) — o modal é
+## ADIADO para depois do deslize + celebração do primo (item 3/2026); a escrita na
+## progressão continua imediata (única porta do save, AD-04).
 func _on_match_won() -> void:
-	# recompensa e desbloqueio via progressão (única porta do save, AD-04)
 	ProgressionStore.register_win(stage, level, adapter.match_game.budget, thresholds)
 	var stars := StarRating.stars_for(adapter.match_game.budget, thresholds)  # GetStars(true)
-	_show_endgame(true, stars)
+	_pending_endgame = {"won": true, "stars": stars}
 
 
 func _on_match_lost(_reason: String) -> void:
 	ProgressionStore.register_loss(stage, level)  # reset punitivo (BR-028)
-	_show_endgame(false, 0)
+	_pending_endgame = {"won": false, "stars": 0}
 
 
 # ------------------------------------------------------------------ fim de fase (S-08/S-09)
@@ -634,6 +661,12 @@ func _show_endgame(won: bool, stars: int) -> void:
 	var panel := Control.new()
 	panel.custom_minimum_size = Vector2(560, 640)
 	center.add_child(panel)
+	# pop-in rápido do card (item 5/2026: entrada dinâmica, não lenta nem estática)
+	panel.pivot_offset = panel.custom_minimum_size / 2.0
+	panel.scale = Vector2(0.6, 0.6)
+	var pop := create_tween()
+	pop.tween_property(panel, "scale", Vector2.ONE, 0.22) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	var card := TextureRect.new()    # a arte já traz o título ("PARABÉNS!" / "FIM DE JOGO")
 	card.texture = TEX_WIN_BOX if won else TEX_LOSE_BOX

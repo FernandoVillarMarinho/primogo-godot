@@ -28,7 +28,9 @@ var _logo: Control
 func _ready() -> void:
 	_social = SocialConfig.new()
 	_build_ui()
-	AudioBus.play_music(AudioBus.MUSIC_MENU)
+	# se a intro da abertura ainda está tocando, preserva a emenda intro→loop (BR-054)
+	if AudioBus.current_music() != AudioBus.MUSIC_MENU_INTRO:
+		AudioBus.play_music(AudioBus.MUSIC_MENU)
 
 
 func _build_ui() -> void:
