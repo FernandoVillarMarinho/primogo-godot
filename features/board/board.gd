@@ -23,14 +23,17 @@ const EFFECT_FPS := 12.0  # anim_gelo/vapor one-shot (🟡 COD-001)
 const FLAME_FPS := 8.0    # chama do player (fogo1..3 em loop)
 const SLOT_RAISE := 18.0  # slot selecionado do balão elevado (0.25 un. ≈ 18 px @ escala do balão)
 
+const TEX_SCENERY := preload("res://assets/images/scenery_grid/background.png")
 const TEX_FROZEN := preload("res://assets/images/iceandfire/gelo_numero.png")
 const TEX_ICE := preload("res://assets/images/iceandfire/gelo.png")
 const TEX_SLOT := preload("res://assets/images/gameplay/box-numbers.png")
+const TEX_BADGE := preload("res://assets/images/gameplay/energy-bar.png")   # mãozinha + caixa de movimentos (MovesBar)
 const TEX_PAUSE_BTN := preload("res://assets/images/gameplay/bt-pause.png")
 const TEX_PAUSE_BASE := preload("res://assets/images/gameplay/bt-pause-base.png")
 const TEX_RELOAD := preload("res://assets/images/gameplay/bt-reload.png")
 const TEX_WIN_BOX := preload("res://assets/images/endgame/box-endgame-parabens.png")
-const TEX_LOSE_BOX := preload("res://assets/images/endgame/endgame_lose.png")
+const TEX_LOSE_BOX := preload("res://assets/images/endgame/box-fimdejogo.png")
+const FONT_TEXT := preload("res://assets/fonts/katahdin_round.otf")   # fonte de texto do legado
 const TEX_BT_NEXT := preload("res://assets/images/endgame/bt-next.png")
 const TEX_BT_PLAYAGAIN := preload("res://assets/images/endgame/bt-playagain.png")
 const TEX_BT_TRYAGAIN := preload("res://assets/images/endgame/bt-tryagain.png")
@@ -146,7 +149,8 @@ func _load_level() -> void:
 	_calibration = ResourceLoader.load(CALIBRATION_PATH) as GridCalibration
 
 
-## Cenário da grade (Scenery_Grid do legado) posicionado/escalado pela calibração.
+## Cenário céu/floresta (prefab Scenery) + quadriculado da grade (Scenery_Grid),
+## posicionados/escalados pela calibração.
 func _build_background() -> void:
 	var rows := level_data.rows
 	var cols := level_data.cols
@@ -156,6 +160,12 @@ func _build_background() -> void:
 		_layout = {"cell_px": 96.0, "bg_scale": 1.0, "bg_center": Vector2(360, 760),
 			"texture": "", "tile_scale": 1.0, "fine_offset": Vector2.ZERO}
 	_spacing = GridCalibration.spacing_of(_layout)
+	var scenery := Sprite2D.new()   # fundo de tela inteira (céu/montanhas/gramado)
+	scenery.texture = TEX_SCENERY
+	var sc := 720.0 / float(TEX_SCENERY.get_width())
+	scenery.scale = Vector2(sc, sc)
+	scenery.position = Vector2(360, float(_layout.get("scenery_center_y", -38.4)))
+	add_child(scenery)
 	var tex_path := str(_layout.get("texture", ""))
 	if tex_path != "":
 		_bg = Sprite2D.new()
@@ -318,46 +328,64 @@ func _build_hud() -> void:
 	var hud := CanvasLayer.new()
 	add_child(hud)
 
-	var badge := TextureRect.new()   # caixa de movimentos (box-numbers, S-06)
-	badge.texture = TEX_SLOT
+	var badge := TextureRect.new()   # MovesBar do legado: mãozinha + caixa (energy-bar.png)
+	badge.texture = TEX_BADGE
+	badge.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	badge.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	badge.position = Vector2(24, 20)
-	badge.custom_minimum_size = Vector2(160, 72)
+	badge.position = Vector2(20, 16)
+	badge.custom_minimum_size = Vector2(190, 96)
+	badge.size = badge.custom_minimum_size
 	hud.add_child(badge)
-	_budget_label = Label.new()
-	_budget_label.position = Vector2(44, 32)
-	_budget_label.add_theme_font_override("font", GameFonts.NUMBERS)
-	_budget_label.add_theme_font_size_override("font_size", 36)
+	_budget_label = Label.new()   # "XX/YY" na caixa do badge (a caixa é a metade direita da arte)
+	_budget_label.position = Vector2(92, 40)
+	_budget_label.add_theme_font_override("font", FONT_TEXT)
+	_budget_label.add_theme_font_size_override("font_size", 34)
+	_budget_label.add_theme_color_override("font_color", Color("f39221"))
 	hud.add_child(_budget_label)
 	_update_budget(budget_max)
 
-	var pause_base := TextureRect.new()
-	pause_base.texture = TEX_PAUSE_BASE
-	pause_base.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	pause_base.position = Vector2(600, 12)
-	hud.add_child(pause_base)
-	var pause_btn := TextureButton.new()
-	pause_btn.texture_normal = TEX_PAUSE_BTN
-	pause_btn.position = Vector2(622, 30)
-	pause_btn.pressed.connect(_on_pause)
-	hud.add_child(pause_btn)
+	hud.add_child(_hud_button(TEX_RELOAD, TEX_RELOAD, Vector2(524, 20), Vector2(72, 76), _on_retry))
+	hud.add_child(_hud_button(TEX_PAUSE_BTN, TEX_PAUSE_BASE, Vector2(616, 20), Vector2(72, 76), _on_pause))
 
-	var reload_btn := TextureButton.new()
-	reload_btn.texture_normal = TEX_RELOAD
-	reload_btn.position = Vector2(520, 30)
-	reload_btn.pressed.connect(_on_retry)
-	hud.add_child(reload_btn)
+
+## Botão do HUD: arte sobre a base circular, com tamanho explícito (a arte é maior que o alvo).
+func _hud_button(tex: Texture2D, base: Texture2D, pos: Vector2, size: Vector2, cb: Callable) -> Control:
+	var holder := Control.new()
+	holder.position = pos
+	holder.custom_minimum_size = size
+	holder.size = size
+	if base != tex:
+		var base_rect := TextureRect.new()
+		base_rect.texture = base
+		base_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		base_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		base_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		holder.add_child(base_rect)
+	var b := TextureButton.new()
+	b.texture_normal = tex
+	b.ignore_texture_size = true
+	b.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	b.set_anchors_preset(Control.PRESET_FULL_RECT)
+	b.pressed.connect(cb)
+	holder.add_child(b)
+	return holder
 
 
 func _build_balloon() -> void:
 	var layer := CanvasLayer.new()
 	add_child(layer)
-	_balloon = HBoxContainer.new()
 	var pos: Vector2 = _calibration.balloon_for(level_data.rows, level_data.cols) \
 		if _calibration != null else GridCalibration.DEFAULT_BALLOON
-	_balloon.position = pos - Vector2(320, 40)  # HBox ancorada pelo canto; centro no ponto calibrado
+	var strip := Control.new()   # faixa de largura total; o HBox centra os slots nela
+	strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	strip.offset_top = pos.y - 48
+	strip.offset_bottom = pos.y + 48
+	layer.add_child(strip)
+	_balloon = HBoxContainer.new()
+	_balloon.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_balloon.alignment = BoxContainer.ALIGNMENT_CENTER
 	_balloon.add_theme_constant_override("separation", 6)
-	layer.add_child(_balloon)
+	strip.add_child(_balloon)
 
 
 ## Balão de 8 slots (BR-050): o 1º slot espelha o valor EM USO do player, elevado
@@ -465,28 +493,46 @@ func _show_endgame(won: bool, stars: int) -> void:
 	lighten.mouse_filter = Control.MOUSE_FILTER_STOP
 	_modal.add_child(lighten)
 
-	var card := TextureRect.new()    # a arte já traz o título ("PARABÉNS!" / derrota)
+	# CenterContainer garante o card no CENTRO da tela (PRESET_CENTER + min size cresce
+	# para a direita/baixo — era o bug do modal deslocado visto no teste em dispositivo)
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_modal.add_child(center)
+
+	var panel := Control.new()
+	panel.custom_minimum_size = Vector2(560, 640)
+	center.add_child(panel)
+
+	var card := TextureRect.new()    # a arte já traz o título ("PARABÉNS!" / "FIM DE JOGO")
 	card.texture = TEX_WIN_BOX if won else TEX_LOSE_BOX
+	card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	card.set_anchors_preset(Control.PRESET_CENTER)
-	card.custom_minimum_size = Vector2(600, 760)
-	_modal.add_child(card)
+	card.set_anchors_preset(Control.PRESET_FULL_RECT)
+	panel.add_child(card)
 
 	var box := VBoxContainer.new()
-	box.set_anchors_preset(Control.PRESET_CENTER)
+	box.set_anchors_preset(Control.PRESET_FULL_RECT)
+	box.offset_top = 150.0   # abaixo do título desenhado no card
+	box.offset_bottom = -60.0
 	box.add_theme_constant_override("separation", 14)
 	box.alignment = BoxContainer.ALIGNMENT_CENTER
-	_modal.add_child(box)
+	panel.add_child(box)
 
 	if won:
-		box.add_child(_stars_row(stars))
-		box.add_child(_reward_row(ProgressionStore.energy()))
-		box.add_child(_endgame_button(TEX_BT_NEXT, _on_next))
-		box.add_child(_endgame_button(TEX_BT_PLAYAGAIN, _on_retry))
+		box.add_child(_center_h(_stars_row(stars)))
+		box.add_child(_center_h(_reward_row(ProgressionStore.energy())))
+		box.add_child(_center_h(_endgame_button(TEX_BT_NEXT, _on_next)))
+		box.add_child(_center_h(_endgame_button(TEX_BT_PLAYAGAIN, _on_retry)))
 		_spawn_dragon()   # dragão original dragao_anim01..08 (fecha COD-008)
 	else:
-		box.add_child(_endgame_button(TEX_BT_TRYAGAIN, _on_retry))
-	box.add_child(_endgame_button(TEX_LEVELSELECT_BTN, _on_level_select))
+		box.add_child(_center_h(_endgame_button(TEX_BT_TRYAGAIN, _on_retry)))
+	box.add_child(_center_h(_endgame_button(TEX_LEVELSELECT_BTN, _on_level_select)))
+
+
+func _center_h(c: Control) -> Control:
+	c.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	return c
 
 
 ## Dragão animado da coreografia de entrada (S-08): aparece com atraso após o card
@@ -501,8 +547,8 @@ func _spawn_dragon() -> void:
 		frames.add_frame("fly", t)
 	var dragon := AnimatedSprite2D.new()
 	dragon.sprite_frames = frames
-	dragon.position = Vector2(360, 240)   # acima do card (🟡 ajuste fino na validação)
-	dragon.scale = Vector2(0.55, 0.55)
+	dragon.position = Vector2(360, 210)   # acima do card (🟡 ajuste fino na validação)
+	dragon.scale = Vector2(0.4, 0.4)      # arte nativa 733×609 → ~293×244 na tela
 	dragon.modulate.a = 0.0
 	_modal.add_child(dragon)
 	dragon.play("fly")
@@ -518,7 +564,9 @@ func _stars_row(stars: int) -> HBoxContainer:
 	for i in 3:
 		var star := TextureRect.new()
 		star.texture = TEX_STAR_ON if i < stars else TEX_STAR_OFF
+		star.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		star.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		star.custom_minimum_size = Vector2(96, 97)
 		row.add_child(star)
 	return row
 
@@ -530,7 +578,9 @@ func _reward_row(energy: int) -> HBoxContainer:
 	row.add_theme_constant_override("separation", 8)
 	var icon := TextureRect.new()
 	icon.texture = TEX_ENERGY
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.custom_minimum_size = Vector2(34, 50)
 	row.add_child(icon)
 	var l := Label.new()
 	l.text = str(energy)
@@ -540,9 +590,13 @@ func _reward_row(energy: int) -> HBoxContainer:
 	return row
 
 
+## Botão do fim de fase no tamanho de exibição (a arte é 596×117 — nativa estoura o card).
 func _endgame_button(tex: Texture2D, cb: Callable) -> TextureButton:
 	var b := TextureButton.new()
 	b.texture_normal = tex
+	b.ignore_texture_size = true
+	b.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	b.custom_minimum_size = Vector2(380, 75)
 	b.pressed.connect(cb)
 	return b
 

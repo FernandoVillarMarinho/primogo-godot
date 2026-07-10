@@ -56,16 +56,22 @@ func _build_ui() -> void:
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 
-	var back := TextureButton.new()
+	var back := TextureButton.new()   # bt_voltar 175×184 nativo → 88×92
 	back.texture_normal = TEX_BACK
+	back.ignore_texture_size = true
+	back.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	back.custom_minimum_size = Vector2(88, 92)
+	back.size = Vector2(88, 92)
 	back.position = Vector2(24, 24)
 	back.pressed.connect(_on_back)
 	add_child(back)
 
-	_banner = TextureRect.new()   # title-nivelNN.png: número embutido na arte (S-05)
+	_banner = TextureRect.new()   # title-nivelNN.png (487×172): número embutido na arte (S-05)
+	_banner.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_banner.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_banner.position = Vector2(200, 24)
-	_banner.custom_minimum_size = Vector2(320, 110)
+	_banner.custom_minimum_size = Vector2(360, 127)
+	_banner.size = Vector2(360, 127)
+	_banner.position = Vector2(180, 20)   # centrado no viewport 720
 	add_child(_banner)
 
 	_energy_box = HBoxContainer.new()   # contador de energia com ícone raio (DEV-003)
@@ -74,7 +80,9 @@ func _build_ui() -> void:
 	add_child(_energy_box)
 	var icon := TextureRect.new()
 	icon.texture = TEX_ENERGY
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.custom_minimum_size = Vector2(34, 50)
 	_energy_box.add_child(icon)
 	_energy_label = Label.new()
 	_energy_label.add_theme_font_override("font", GameFonts.NUMBERS)

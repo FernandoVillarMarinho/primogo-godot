@@ -24,6 +24,20 @@ func test_all_used_grids_have_layout_with_existing_texture() -> void:
 		assert_gt(GridCalibration.spacing_of(layout), 0.0, "espaçamento > 0")
 
 
+func test_cell_px_matches_drawn_grid() -> void:
+	# regressão do teste em dispositivo (2026-07-10): o quadriculado preenche a textura
+	# de borda a borda, então a célula REAL é largura/colunas — usar o tamanho nominal
+	# do nome do arquivo ("_100"/"_70"/"_61") deixava os tiles com metade da célula.
+	var cal := load(PATH) as GridCalibration
+	for g in GRIDS:
+		var layout: Dictionary = cal.layout_for(g[0], g[1])
+		var tex := load(str(layout["texture"])) as Texture2D
+		var cols: int = g[1]
+		var expected := float(tex.get_width()) / float(cols)
+		assert_almost_eq(float(layout["cell_px"]), expected, 1.0,
+			"célula da grade %dx%d = largura/colunas (%0.1f px)" % [g[0], g[1], expected])
+
+
 func test_balloon_positions_follow_legacy() -> void:
 	var cal := load(PATH) as GridCalibration
 	# BalloonController.UpdatePos: só 7x6 (y=1.6) e 7x8 (y=0.15) desviam do default 0.75

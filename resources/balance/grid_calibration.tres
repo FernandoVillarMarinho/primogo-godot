@@ -8,32 +8,36 @@ layouts = {
 "5x5": {
 "bg_center": Vector2(360, 921.6),
 "bg_scale": 0.64,
-"cell_px": 100.0,
+"cell_px": 212.4,
 "fine_offset": Vector2(0, 0),
+"scenery_center_y": 70.4,
 "texture": "res://assets/images/scenery_grid/5x5_100.png",
 "tile_scale": 1.0
 },
 "7x6": {
 "bg_center": Vector2(360, 870.4),
 "bg_scale": 0.768,
-"cell_px": 70.0,
+"cell_px": 148.2,
 "fine_offset": Vector2(0, 0),
+"scenery_center_y": -38.4,
 "texture": "res://assets/images/scenery_grid/6x7_70.png",
 "tile_scale": 0.84
 },
 "7x7": {
 "bg_center": Vector2(360, 928),
 "bg_scale": 0.653,
-"cell_px": 70.0,
+"cell_px": 147.3,
 "fine_offset": Vector2(0, 0),
+"scenery_center_y": 70.4,
 "texture": "res://assets/images/scenery_grid/7x7_70.png",
 "tile_scale": 0.7
 },
 "7x8": {
 "bg_center": Vector2(360, 960),
 "bg_scale": 0.653,
-"cell_px": 61.0,
+"cell_px": 128.6,
 "fine_offset": Vector2(0, 0),
+"scenery_center_y": 153.6,
 "texture": "res://assets/images/scenery_grid/7x8_61.png",
 "tile_scale": 0.6
 }

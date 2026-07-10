@@ -41,17 +41,20 @@ func _build_ui() -> void:
 	add_child(sky)
 
 	_logo = VBoxContainer.new()   # logo.png + nome.png com pulsação (BR-045)
-	_logo.position = Vector2(160, 140)
+	_logo.position = Vector2(80, 120)   # 560px de largura, centrado no viewport 720
+	_logo.add_theme_constant_override("separation", 8)
 	add_child(_logo)
-	for tex: Texture2D in [TEX_LOGO, TEX_NAME]:
+	for pair: Array in [[TEX_LOGO, Vector2(560, 181)], [TEX_NAME, Vector2(560, 182)]]:
 		var tr := TextureRect.new()
-		tr.texture = tex
+		tr.texture = pair[0]
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE   # arte nativa (969/1291px) estoura a tela
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.custom_minimum_size = pair[1]
 		_logo.add_child(tr)
 	ScaleEffects.pulse(_logo)   # osc amortecida exata (logo_osc_value) 🟡 COD-001
 
 	_buttons = VBoxContainer.new()
-	_buttons.position = Vector2(200, 640)
+	_buttons.position = Vector2(170, 680)   # 380px de largura, centrado
 	_buttons.add_theme_constant_override("separation", 24)
 	add_child(_buttons)
 
@@ -61,12 +64,13 @@ func _build_ui() -> void:
 		_buttons.add_child(_menu_button(TEX_BT_FACEBOOK, TEX_BT_FACEBOOK_BASE, _on_facebook))
 
 
-## Botão do menu: arte do rótulo sobre a base (bt-base-*.png do legado).
+## Botão do menu: arte do rótulo sobre a base (bt-base-*.png, 779×260 nativo → 380×127).
 func _menu_button(tex: Texture2D, base: Texture2D, cb: Callable) -> Control:
 	var holder := Control.new()
-	holder.custom_minimum_size = Vector2(320, 110)
+	holder.custom_minimum_size = Vector2(380, 127)
 	var base_rect := TextureRect.new()
 	base_rect.texture = base
+	base_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	base_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	base_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	holder.add_child(base_rect)

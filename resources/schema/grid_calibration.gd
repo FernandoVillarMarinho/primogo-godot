@@ -4,15 +4,21 @@ extends Resource
 ## Legado: blocos hardcoded do `GameManager.Start`/`CreateTile` + `BalloonController.UpdatePos`
 ## (BR-015/051). Transcrito em 2026-07-10 com a arte original (T19, Fase 3):
 ##
-##   grade (RxC) | cenário          | célula px | pos matrix (Unity) | escala | tile | balão y
-##   5x5         | 5x5_100.png      | 100       | (0,-2.20)  | 0.5 (prefab) | 1.0  | 0.75 (default)
-##   7x6         | 6x7_70.png       | 70        | (0,-1.8)   | 0.6          | 0.84 | 1.6
-##   7x7         | 7x7_70.png       | 70        | (0,-2.25)  | 0.51         | 0.7  | 0.75
-##   7x8         | 7x8_61.png       | 61        | (0,-2.5)   | 0.51         | 0.6  | 0.15
+##   grade (RxC) | cenário          | célula px | pos matrix (Unity) | escala | tile | balão y | cenário-fundo y
+##   5x5         | 5x5_100.png      | 212.4     | (0,-2.20)  | 0.5 (prefab) | 1.0  | 0.75 (default) | 4.45
+##   7x6         | 6x7_70.png       | 148.2     | (0,-1.8)   | 0.6          | 0.84 | 1.6            | 5.3
+##   7x7         | 7x7_70.png       | 147.3     | (0,-2.25)  | 0.51         | 0.7  | 0.75           | 4.45
+##   7x8         | 7x8_61.png       | 128.6     | (0,-2.5)   | 0.51         | 0.6  | 0.15           | 3.8
+##
+## `cell_px` = célula REAL desenhada na textura = largura_da_textura / colunas (o quadriculado
+## preenche a textura de borda a borda). O "_NN" do nome do arquivo é o tamanho NOMINAL da
+## célula no design Unity — as texturas foram exportadas a ~2,12× (212,4/100). Usar o nominal
+## deixava tiles com metade do tamanho da célula (bug visto no teste em dispositivo 2026-07-10).
 ##
 ## Conversão p/ viewport 720x1280: 1 unidade Unity = 128 px (câmera orto 10 un. de altura);
-## Unity y+ para cima → Godot y+ para baixo. `fine_offset` existe para o ajuste visual
-## contra os prints (🟡 validação do Villar) — começa em zero.
+## Unity y+ para cima → Godot y+ para baixo. `scenery_center_y` = centro do Background.png
+## (cenário céu/floresta do prefab Scenery) em px de viewport (640 − u·128). `fine_offset`
+## existe para o ajuste visual contra os prints (🟡 validação do Villar) — começa em zero.
 ##
 ## Consumido pela casca `features/board`, injetado (D-006) — o domínio não conhece calibração.
 
