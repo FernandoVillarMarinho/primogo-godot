@@ -11,7 +11,6 @@ const TUTORIAL_SCENE := "res://features/board/game_board.tscn"  # board detecta 
 
 const TEX_SKY := preload("res://assets/images/menu/cenario_ceu.png")
 const TEX_LOGO := preload("res://assets/images/menu/logo.png")
-const TEX_NAME := preload("res://assets/images/menu/nome.png")
 const TEX_BT_PLAY := preload("res://assets/images/menu/bt-jogar.png")
 const TEX_BT_PLAY_BASE := preload("res://assets/images/menu/bt-base-jogar.png")
 const TEX_BT_OPTIONS := preload("res://assets/images/menu/bt-opcoes.png")
@@ -40,17 +39,17 @@ func _build_ui() -> void:
 	sky.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(sky)
 
-	_logo = VBoxContainer.new()   # logo.png + nome.png com pulsação (BR-045)
-	_logo.position = Vector2(80, 120)   # 560px de largura, centrado no viewport 720
-	_logo.add_theme_constant_override("separation", 8)
-	add_child(_logo)
-	for pair: Array in [[TEX_LOGO, Vector2(560, 181)], [TEX_NAME, Vector2(560, 182)]]:
-		var tr := TextureRect.new()
-		tr.texture = pair[0]
-		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE   # arte nativa (969/1291px) estoura a tela
-		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.custom_minimum_size = pair[1]
-		_logo.add_child(tr)
+	# só o logo.png (PRIMOGO sobre o fundo laranja) — nome.png duplicava a palavra
+	# na tela (achado do 2º teste em dispositivo); a arte nativa (969px) estoura a tela
+	var tr := TextureRect.new()
+	tr.texture = TEX_LOGO
+	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	tr.position = Vector2(80, 170)   # 560px de largura, centrado no viewport 720
+	tr.size = Vector2(560, 181)
+	tr.pivot_offset = Vector2(280, 90)   # pulsa a partir do centro
+	add_child(tr)
+	_logo = tr
 	ScaleEffects.pulse(_logo)   # osc amortecida exata (logo_osc_value) 🟡 COD-001
 
 	_buttons = VBoxContainer.new()

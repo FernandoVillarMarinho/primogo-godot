@@ -100,12 +100,16 @@ func _build_ui() -> void:
 	add_child(_grid_box)
 
 
+## Seta de navegação sobre a base laranja: os dois PNGs têm o MESMO canvas nativo
+## (131×138), então precisam do mesmo retângulo de desenho — sem holder.size e sem
+## EXPAND_IGNORE_SIZE a base saía do lugar (2º teste em dispositivo).
 func _nav_button(tex: Texture2D, base: Texture2D, pos: Vector2, cb: Callable) -> Control:
 	var holder := Control.new()
 	holder.position = pos
-	holder.custom_minimum_size = Vector2(96, 96)
+	holder.size = Vector2(96, 96)
 	var base_rect := TextureRect.new()
 	base_rect.texture = base
+	base_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	base_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	base_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	holder.add_child(base_rect)
@@ -133,6 +137,22 @@ func _render_page() -> void:
 			_grid_box.add_child(_make_box(stage, col, row))
 
 
+## Geometria da caixa da fase: box_1.png (205×230) desenhada KEEP_ASPECT_CENTERED num
+## holder de 130×160. As 3 estrelas CINZAS são embutidas na arte (centros medidos no
+## PNG); as douradas conquistadas se SOBREPÕEM exatamente a elas, o número vai no
+## centro da área branca — correções do 2º teste em dispositivo.
+const BOX_HOLDER := Vector2(130, 160)
+const BOX_NATIVE := Vector2(205, 230)
+const GRAY_STAR_CENTERS: Array = [Vector2(39.5, 50.5), Vector2(102.5, 37.0), Vector2(164.5, 50.5)]
+const NUMBER_CENTER := Vector2(102.5, 118.0)   # centro da área branca (entre estrelas e faixa)
+
+
+## Converte um ponto da arte nativa da caixa para coordenadas do holder.
+func _box_art_point(p: Vector2) -> Vector2:
+	var s := minf(BOX_HOLDER.x / BOX_NATIVE.x, BOX_HOLDER.y / BOX_NATIVE.y)
+	return (BOX_HOLDER - BOX_NATIVE * s) / 2.0 + p * s
+
+
 ## Caixa da fase no padrão btn_Box do legado: box_1.png + dígito (font_Select) +
 ## até 3 estrelas (star_1.png); bloqueada = mesma arte esmaecida (btn_BoxLocked).
 func _make_box(stage: int, col: int, row: int) -> Control:
@@ -142,7 +162,7 @@ func _make_box(stage: int, col: int, row: int) -> Control:
 	var state := LevelGrid.box_state(unlock, is_first)
 
 	var holder := Control.new()
-	holder.custom_minimum_size = Vector2(130, 160)
+	holder.custom_minimum_size = BOX_HOLDER
 
 	var b := TextureButton.new()
 	b.texture_normal = TEX_BOX
@@ -159,22 +179,21 @@ func _make_box(stage: int, col: int, row: int) -> Control:
 	var d := DigitRenderer.new()   # número da fase na fonte da seleção (font_Select)
 	d.font = GameFonts.SELECT
 	d.box_size = Vector2(80, 80)
-	d.position = Vector2(25, 20)
+	d.position = _box_art_point(NUMBER_CENTER) - Vector2(40, 40)
 	d.set_value(lvl)
 	holder.add_child(d)
 
 	if state == PlayerProgress.UnlockState.WON:
 		var th := _thresholds_res.for_level(stage, lvl) if _thresholds_res != null else {}
 		var stars: int = ProgressionStore.stars_of(stage, lvl, th)
-		var star_row := HBoxContainer.new()
-		star_row.position = Vector2(20, 110)
-		star_row.add_theme_constant_override("separation", 4)
-		for i in stars:
-			var s := TextureRect.new()
+		for i in mini(stars, GRAY_STAR_CENTERS.size()):
+			var s := TextureRect.new()   # dourada POR CIMA da cinza correspondente
 			s.texture = TEX_STAR
+			s.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			s.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			star_row.add_child(s)
-		holder.add_child(star_row)
+			s.size = Vector2(32, 32)
+			s.position = _box_art_point(GRAY_STAR_CENTERS[i]) - Vector2(16, 16)
+			holder.add_child(s)
 
 	return holder
 

@@ -20,6 +20,10 @@ var _label: Label
 
 
 func _ready() -> void:
+	# o Control precisa OCUPAR a caixa: sem isto o Label full-rect colapsa em 0×0 e o
+	# dígito sai do canto superior esquerdo (bug do 2º teste em dispositivo, 2026-07-10)
+	size = box_size
+	mouse_filter = Control.MOUSE_FILTER_IGNORE   # é só display: não pode roubar o clique dos slots
 	_build_label()
 	_refresh()
 

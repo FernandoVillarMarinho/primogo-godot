@@ -9,19 +9,30 @@ extends Node2D
 ## SKIN ORIGINAL (T19/Fase 3): cenário por grade + tiles via `grid_calibration.tres`
 ## (transcrito do GameManager legado); player = chama animada (fogo1..3, prefab Number),
 ## congelado = gelo_numero, gelo puro = gelo (prefab Ice); efeitos one-shot: vapor no
-## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão = slots
-## box-numbers com o slot do valor em uso ELEVADO (tile-espelho, COD-007 →
-## BalloonController.SetPrimogoValue/ChangeNumber: ±0.25 un.); pausa real (S-07).
+## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão = aba do valor
+## primordial + 8 slots à esquerda com o valor em uso FLUTUANDO elevado (tile-espelho,
+## COD-007/prints IMG_3092..3106); deslize contínuo do fogo + celebração de primo novo
+## e mago na derrota (2º teste em dispositivo); pausa real (S-07).
 ## Restam 🟡 para validação visual: fine_offset da calibração e durações (COD-001).
 
 const LEVELS_DIR := "res://resources/levels/"
 const THRESHOLDS_PATH := "res://resources/balance/thresholds.tres"
 const CALIBRATION_PATH := "res://resources/balance/grid_calibration.tres"
 
-const STEP_TIME := 0.12   # ritmo do passo a passo (placeholder; duração canônica = COD-001)
+const STEP_TIME := 0.12          # pausa entre efeitos pós-deslize (🟡 COD-001)
+const SLIDE_TIME_PER_CELL := 0.05  # deslize contínuo do fogo, fluido como 2048 (2º teste em dispositivo)
 const EFFECT_FPS := 12.0  # anim_gelo/vapor one-shot (🟡 COD-001)
 const FLAME_FPS := 8.0    # chama do player (fogo1..3 em loop)
-const SLOT_RAISE := 18.0  # slot selecionado do balão elevado (0.25 un. ≈ 18 px @ escala do balão)
+
+# Balão no layout do legado (prints IMG_3092/3096/3104/3106): aba à esquerda com o valor
+# PRIMORDIAL da fase; fileira de 8 slots SEMPRE visível alinhada à esquerda; o valor
+# coletado EM USO flutua elevado acima do início da fileira (COD-007/AMB-201).
+const SLOT_SIZE := 70.0
+const SLOT_GAP := 6.0
+const TAB_X := 8.0        # aba do valor primordial, colada à esquerda
+const ROW_X := 92.0       # início da fileira de 8 slots
+const TAB_RAISE := 24.0   # aba levemente acima da linha dos slots
+const FLOAT_RAISE := 74.0 # slot em uso flutua uma altura de slot acima da fileira
 
 const TEX_SCENERY := preload("res://assets/images/scenery_grid/background.png")
 const TEX_FROZEN := preload("res://assets/images/iceandfire/gelo_numero.png")
@@ -69,8 +80,23 @@ const DRAGON_FRAMES: Array = [
 	preload("res://assets/images/primogo/dragao_anim07.png"),
 	preload("res://assets/images/primogo/dragao_anim08.png"),
 ]
+const MAGE_FRAMES: Array = [
+	preload("res://assets/images/mageanimation/mago_anim_01.png"),
+	preload("res://assets/images/mageanimation/mago_anim_02.png"),
+	preload("res://assets/images/mageanimation/mago_anim_03.png"),
+	preload("res://assets/images/mageanimation/mago_anim_04.png"),
+	preload("res://assets/images/mageanimation/mago_anim_05.png"),
+	preload("res://assets/images/mageanimation/mago_anim_06.png"),
+	preload("res://assets/images/mageanimation/mago_anim_07.png"),
+]
+const STAR_FX_FRAMES: Array = [   # faíscas da conquista de primo novo (mageanimation/estrela_*)
+	preload("res://assets/images/mageanimation/estrela_01.png"),
+	preload("res://assets/images/mageanimation/estrela_02.png"),
+	preload("res://assets/images/mageanimation/estrela_03.png"),
+]
+const TEX_VOCETEM := preload("res://assets/images/endgame/vocetem.png")
 const DRAGON_FPS := 8.0        # 🟡 COD-001
-const DRAGON_DELAY := 0.6      # entrada atrasada do dragão na coreografia S-08 (🟡 COD-001)
+const DRAGON_DELAY := 0.6      # entrada atrasada do dragão/mago na coreografia S-08 (🟡 COD-001)
 
 var stage: int = 1
 var level: int = 1
@@ -89,8 +115,12 @@ var _spacing := 96.0
 var _board_root: Node2D
 var _bg: Sprite2D
 var _tiles: Dictionary = {}          # Vector2i → Node2D (raiz do tile na célula)
+var _player_node: Node2D = null      # raiz do tile do player (alvo do deslize fluido)
+var _initial_value := 0              # valor primordial da fase (aba esquerda do balão)
+var _seen_values: Array[int] = []    # primos já celebrados (efeito de conquista dispara 1×)
 var _budget_label: Label
-var _balloon: HBoxContainer
+var _balloon: Control
+var _balloon_y := 0.0
 var _modal: CanvasLayer
 var _pause: PauseOverlay
 var _tutorial: TutorialOverlay = null
@@ -112,6 +142,7 @@ func _ready() -> void:
 	_build_balloon()
 	_build_pause()
 	adapter.start(level_data, budget_max)
+	_initial_value = _player_value()
 	_maybe_attach_tutorial()
 	_render_grid()
 	_refresh_balloon()
@@ -205,57 +236,131 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_move_resolved(events: Array) -> void:
 	_animating = true
+	await _slide_player(events)   # deslize contínuo primeiro (fluido, como 2048)
+	var had_effect := false
 	for e in events:
-		_cue_for_event(e)
-		await get_tree().create_timer(STEP_TIME).timeout
+		if _cue_for_event(e):
+			had_effect = true
+			await get_tree().create_timer(STEP_TIME).timeout
+	if had_effect:
+		await get_tree().create_timer(STEP_TIME).timeout   # respiro p/ o efeito aparecer
 	_render_grid()  # sincroniza o visual com o estado final do domínio
 	_refresh_balloon()
 	_animating = false
 
 
+## Desliza o sprite do player pelas células "moved" (+ a célula do merge) num tween
+## ÚNICO e linear — antes o grid só era redesenhado no fim, com timers de 0.12s entre
+## eventos, e o fogo parecia travado (achado do 2º teste em dispositivo).
+func _slide_player(events: Array) -> void:
+	var path: Array[Vector2i] = []
+	for e in events:
+		match str(e["type"]):
+			"moved":
+				path.append(Vector2i(e["to"]))
+			"merged":
+				path.append(Vector2i(e["at"]))   # o merge avança o player para o alvo
+	if path.is_empty() or _player_node == null or not is_instance_valid(_player_node):
+		return
+	var tw := create_tween()
+	tw.set_trans(Tween.TRANS_LINEAR)
+	for c in path:
+		tw.tween_property(_player_node, "position", _cell_center(c.x, c.y), SLIDE_TIME_PER_CELL)
+	await tw.finished
+
+
 ## Cada evento dispara seu som do vocabulário (BR-055) e o efeito visual one-shot
-## ancorado na célula do evento. O redesenho do grid vem no fim.
-func _cue_for_event(e: Dictionary) -> void:
+## ancorado na célula do evento; retorna true quando houve efeito visível (para o
+## pequeno respiro entre eles). O redesenho do grid vem no fim.
+func _cue_for_event(e: Dictionary) -> bool:
 	match str(e["type"]):
 		"blocked":
 			AudioBus.play_effect(AudioBus.SFX_COLLISION)          # colisão não divisível
+			return false
 		"merged":
 			AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)         # troca de primo
 			if e.has("at"):
 				_spawn_effect(VAPOR_FRAMES, e["at"], false)       # vapor do merge
+			var v := int(e.get("collected", 0))
+			if v > 0 and not _seen_values.has(v):                 # primo NOVO → celebração
+				_seen_values.append(v)                            # (objetivo didático: fixar a sequência)
+				_conquest_effect(v, Vector2i(e["at"]))
+			return true
 		"value_swapped":
 			AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)
+			return false
 		"ice_spawned":
 			AudioBus.play_effect(AudioBus.SFX_ICE_APPEAR)         # gelo surgindo
 			for c in e.get("cells", []):
 				_spawn_effect(ICE_ANIM_FRAMES, c, false)
+			return true
 		"snow_break":
 			AudioBus.play_effect(AudioBus.SFX_ICE_MELT)           # gelo derretendo
 			for c in e.get("melted", []):
 				_spawn_effect(ICE_ANIM_FRAMES, c, true)           # derreter = reverso
+			return true
+	return false
 
 
-## AnimatedSprite2D one-shot na célula; libera-se ao terminar.
+## Celebração da conquista de um primo NOVO: o número pulsa grande na célula do merge,
+## faíscas (estrela_01..03) irradiam e o número voa até o balão — reforço didático da
+## sequência dos primos (pedido do 2º teste em dispositivo; antes só o gelo derretia).
+func _conquest_effect(value: int, cell: Vector2i) -> void:
+	var pos := _cell_center(cell.x, cell.y)
+	AudioBus.play_effect(AudioBus.SFX_CLICK_OK)
+	for i in 6:   # faíscas irradiando da célula
+		var dir := Vector2.RIGHT.rotated(TAU * i / 6.0)
+		var spark := _one_shot_sprite(STAR_FX_FRAMES, pos, 10.0)
+		spark.animation_finished.disconnect(spark.queue_free)   # o tween é o dono da vida
+		spark.scale = Vector2(2.0, 2.0)
+		var stw := create_tween()
+		stw.tween_property(spark, "position", pos + dir * 90.0, 0.45)
+		stw.parallel().tween_property(spark, "modulate:a", 0.0, 0.45)
+		stw.tween_callback(spark.queue_free)
+	var d := DigitRenderer.new()   # o primo conquistado, grande, na fonte laranja
+	d.font = GameFonts.TILE
+	d.box_size = Vector2(140, 140)
+	d.position = pos - Vector2(70, 70)
+	d.pivot_offset = Vector2(70, 70)
+	d.scale = Vector2(0.3, 0.3)
+	d.set_value(value)
+	add_child(d)
+	var target := Vector2(ROW_X + SLOT_SIZE / 2.0, _balloon_y) - Vector2(70, 70)
+	var tw := create_tween()
+	tw.tween_property(d, "scale", Vector2(1.0, 1.0), 0.2) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(0.4)
+	tw.tween_property(d, "position", target, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.parallel().tween_property(d, "scale", Vector2(0.45, 0.45), 0.45)
+	tw.tween_callback(d.queue_free)
+
+
+## AnimatedSprite2D one-shot na célula, no tamanho da célula; libera-se ao terminar.
 func _spawn_effect(frame_textures: Array, cell: Variant, reverse: bool) -> void:
-	var pos := _cell_center(int(cell.x), int(cell.y))
-	var frames := SpriteFrames.new()
-	frames.add_animation("fx")
-	frames.set_animation_speed("fx", EFFECT_FPS)
-	frames.set_animation_loop("fx", false)
 	var ordered := frame_textures.duplicate()
 	if reverse:
 		ordered.reverse()
-	for t in ordered:
+	var sprite := _one_shot_sprite(ordered, _cell_center(int(cell.x), int(cell.y)), EFFECT_FPS)
+	var tex: Texture2D = ordered[0]
+	var s := _spacing / maxf(float(tex.get_width()), float(tex.get_height()))
+	sprite.scale = Vector2(s, s)
+
+
+## AnimatedSprite2D one-shot já adicionado à cena (escala padrão 1; o chamador ajusta).
+func _one_shot_sprite(frame_textures: Array, pos: Vector2, fps: float) -> AnimatedSprite2D:
+	var frames := SpriteFrames.new()
+	frames.add_animation("fx")
+	frames.set_animation_speed("fx", fps)
+	frames.set_animation_loop("fx", false)
+	for t in frame_textures:
 		frames.add_frame("fx", t)
 	var sprite := AnimatedSprite2D.new()
 	sprite.sprite_frames = frames
 	sprite.position = pos
-	var tex: Texture2D = ordered[0]
-	var s := _spacing / maxf(float(tex.get_width()), float(tex.get_height()))
-	sprite.scale = Vector2(s, s)
 	add_child(sprite)
 	sprite.animation_finished.connect(sprite.queue_free)
 	sprite.play("fx")
+	return sprite
 
 
 # ------------------------------------------------------------------ render (skin original)
@@ -267,6 +372,7 @@ func _render_grid() -> void:
 	for child in _board_root.get_children():
 		child.queue_free()
 	_tiles.clear()
+	_player_node = null
 	var grid: Grid = adapter.match_game.grid
 	for y in grid.rows:
 		for x in grid.cols:
@@ -280,6 +386,7 @@ func _render_grid() -> void:
 				Cell.Kind.PLAYER:
 					root.add_child(_flame_sprite())
 					root.add_child(_digits(cell.value, GameFonts.PLAYER))
+					_player_node = root
 				Cell.Kind.FROZEN:
 					root.add_child(_tile_sprite(TEX_FROZEN))
 					root.add_child(_digits(cell.value, GameFonts.TILE))
@@ -336,11 +443,17 @@ func _build_hud() -> void:
 	badge.custom_minimum_size = Vector2(190, 96)
 	badge.size = badge.custom_minimum_size
 	hud.add_child(badge)
-	_budget_label = Label.new()   # "XX/YY" na caixa do badge (a caixa é a metade direita da arte)
-	_budget_label.position = Vector2(92, 40)
+	_budget_label = Label.new()   # "XX/YY" BRANCO centrado na caixa do badge (IMG_3096 —
+	_budget_label.position = Vector2(82, 28)   # laranja sobre laranja era ilegível)
+	_budget_label.size = Vector2(118, 64)
+	_budget_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_budget_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_budget_label.add_theme_font_override("font", FONT_TEXT)
 	_budget_label.add_theme_font_size_override("font_size", 34)
-	_budget_label.add_theme_color_override("font_color", Color("f39221"))
+	_budget_label.add_theme_color_override("font_color", Color.WHITE)
+	_budget_label.add_theme_color_override("font_shadow_color", Color(0.55, 0.3, 0.05, 0.85))
+	_budget_label.add_theme_constant_override("shadow_offset_x", 2)
+	_budget_label.add_theme_constant_override("shadow_offset_y", 2)
 	hud.add_child(_budget_label)
 	_update_budget(budget_max)
 
@@ -376,52 +489,70 @@ func _build_balloon() -> void:
 	add_child(layer)
 	var pos: Vector2 = _calibration.balloon_for(level_data.rows, level_data.cols) \
 		if _calibration != null else GridCalibration.DEFAULT_BALLOON
-	var strip := Control.new()   # faixa de largura total; o HBox centra os slots nela
-	strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	strip.offset_top = pos.y - 48
-	strip.offset_bottom = pos.y + 48
-	layer.add_child(strip)
-	_balloon = HBoxContainer.new()
-	_balloon.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_balloon.alignment = BoxContainer.ALIGNMENT_CENTER
-	_balloon.add_theme_constant_override("separation", 6)
-	strip.add_child(_balloon)
+	_balloon_y = pos.y
+	_balloon = Control.new()   # faixa com posicionamento manual (layout do legado)
+	_balloon.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	_balloon.offset_top = pos.y - FLOAT_RAISE - SLOT_SIZE / 2.0
+	_balloon.offset_bottom = pos.y + SLOT_SIZE / 2.0
+	_balloon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(_balloon)
 
 
-## Balão de 8 slots (BR-050): o 1º slot espelha o valor EM USO do player, elevado
-## (tile-espelho — COD-007/AMB-201 resolvida: BalloonController.SetPrimogoValue eleva o
-## slot selecionado +0.25 un. e ChangeNumber troca a elevação junto com a troca de valor).
-## Os demais slots são os valores coletados, clicáveis para a troca (BR-012/013).
+## Balão no layout do legado (BR-050 + prints IMG_3092/3096/3104/3106): aba à esquerda
+## com o valor PRIMORDIAL da fase (display, levemente elevada); fileira de 8 slots
+## sempre visível, alinhada à esquerda, com os valores coletados na ordem (clicáveis,
+## BR-012/013); quando o player usa um valor coletado, esse slot sai da fileira e
+## flutua elevado acima dela (tile-espelho — COD-007/AMB-201).
 func _refresh_balloon() -> void:
 	if _balloon == null:
 		return
 	for child in _balloon.get_children():
 		child.queue_free()
+	var row_y := FLOAT_RAISE   # linha-base da fileira dentro da faixa
 	var current := _player_value()
-	_balloon.add_child(_balloon_slot(current, true, false))
+	_balloon.add_child(_balloon_slot(_initial_value, Vector2(TAB_X, row_y - TAB_RAISE), false))
+	var in_use := current != _initial_value   # usando um valor coletado → slot flutuante
+	if in_use:
+		_balloon.add_child(_balloon_slot(current, Vector2(ROW_X, row_y - FLOAT_RAISE), false))
+	var col := 0
 	for value in adapter.match_game.collection.values():   # ≤ 8 slots, ≤ 2 dígitos (BR-050)
-		_balloon.add_child(_balloon_slot(int(value), false, true))
+		if in_use and int(value) == current:
+			continue   # o valor em uso flutua acima; não repete na fileira
+		_balloon.add_child(_balloon_slot(int(value),
+			Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y), true))
+		col += 1
+	while col < 8:   # slots vazios sempre visíveis, como no legado
+		_balloon.add_child(_empty_slot(Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y)))
+		col += 1
 
 
-func _balloon_slot(value: int, raised: bool, clickable: bool) -> Control:
+func _balloon_slot(value: int, pos: Vector2, clickable: bool) -> Control:
+	var holder := _empty_slot(pos)
+	var slot := holder.get_child(0) as TextureButton
+	slot.disabled = not clickable
+	if clickable:
+		slot.pressed.connect(_on_slot_pressed.bind(value))
+	var d := DigitRenderer.new()
+	d.font = GameFonts.TILE   # balão usa OrangeFont (BalloonController.allSprites)
+	d.box_size = Vector2(SLOT_SIZE - 14, SLOT_SIZE - 14)
+	d.position = Vector2(7, 7)
+	d.set_value(value)
+	holder.add_child(d)
+	return holder
+
+
+func _empty_slot(pos: Vector2) -> Control:
 	var holder := Control.new()
-	holder.custom_minimum_size = Vector2(76, 76 + SLOT_RAISE)
+	holder.position = pos
+	holder.size = Vector2(SLOT_SIZE, SLOT_SIZE)
+	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var slot := TextureButton.new()
 	slot.texture_normal = TEX_SLOT
 	slot.ignore_texture_size = true
 	slot.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	slot.size = Vector2(76, 76)
-	slot.position = Vector2(0, 0 if raised else SLOT_RAISE)
-	slot.disabled = not clickable
-	if clickable:
-		slot.pressed.connect(_on_slot_pressed.bind(value))
+	slot.size = Vector2(SLOT_SIZE, SLOT_SIZE)
+	slot.disabled = true
 	holder.add_child(slot)
-	var d := DigitRenderer.new()
-	d.font = GameFonts.TILE   # balão usa OrangeFont (BalloonController.allSprites)
-	d.box_size = Vector2(60, 60)
-	d.position = Vector2(8, (0 if raised else SLOT_RAISE) + 8)
-	d.set_value(value)
-	holder.add_child(d)
 	return holder
 
 
@@ -524,9 +655,10 @@ func _show_endgame(won: bool, stars: int) -> void:
 		box.add_child(_center_h(_reward_row(ProgressionStore.energy())))
 		box.add_child(_center_h(_endgame_button(TEX_BT_NEXT, _on_next)))
 		box.add_child(_center_h(_endgame_button(TEX_BT_PLAYAGAIN, _on_retry)))
-		_spawn_dragon()   # dragão original dragao_anim01..08 (fecha COD-008)
+		_spawn_character(DRAGON_FRAMES, DRAGON_FPS, Vector2(515, 1075), 0.5)   # dragão (COD-008)
 	else:
 		box.add_child(_center_h(_endgame_button(TEX_BT_TRYAGAIN, _on_retry)))
+		_spawn_character(MAGE_FRAMES, DRAGON_FPS, Vector2(360, 1070), 0.3)   # mago da derrota
 	box.add_child(_center_h(_endgame_button(TEX_LEVELSELECT_BTN, _on_level_select)))
 
 
@@ -535,26 +667,27 @@ func _center_h(c: Control) -> Control:
 	return c
 
 
-## Dragão animado da coreografia de entrada (S-08): aparece com atraso após o card
-## (target_screens.md — "delayed dragon"). Sprites originais primogo/dragao_anim01..08,
-## que respondem à AMB-202 (o set real é o LARANJA do runtime, não o verde de Icon/).
-func _spawn_dragon() -> void:
+## Personagem animado da coreografia de fim de fase, com entrada atrasada após o card
+## (target_screens.md S-08 — "delayed dragon"). Vitória = dragão laranja no canto
+## inferior direito (IMG_3108, AMB-202); derrota = MAGO (mago_anim_01..07, prefab
+## Canvas do legado) embaixo do card — pedido do 2º teste em dispositivo.
+func _spawn_character(char_frames: Array, fps: float, pos: Vector2, char_scale: float) -> void:
 	var frames := SpriteFrames.new()
-	frames.add_animation("fly")
-	frames.set_animation_speed("fly", DRAGON_FPS)
-	frames.set_animation_loop("fly", true)
-	for t in DRAGON_FRAMES:
-		frames.add_frame("fly", t)
-	var dragon := AnimatedSprite2D.new()
-	dragon.sprite_frames = frames
-	dragon.position = Vector2(360, 210)   # acima do card (🟡 ajuste fino na validação)
-	dragon.scale = Vector2(0.4, 0.4)      # arte nativa 733×609 → ~293×244 na tela
-	dragon.modulate.a = 0.0
-	_modal.add_child(dragon)
-	dragon.play("fly")
+	frames.add_animation("idle")
+	frames.set_animation_speed("idle", fps)
+	frames.set_animation_loop("idle", true)
+	for t in char_frames:
+		frames.add_frame("idle", t)
+	var who := AnimatedSprite2D.new()
+	who.sprite_frames = frames
+	who.position = pos
+	who.scale = Vector2(char_scale, char_scale)
+	who.modulate.a = 0.0
+	_modal.add_child(who)
+	who.play("idle")
 	var tw := create_tween()
 	tw.tween_interval(DRAGON_DELAY)
-	tw.tween_property(dragon, "modulate:a", 1.0, 0.25)
+	tw.tween_property(who, "modulate:a", 1.0, 0.25)
 
 
 func _stars_row(stars: int) -> HBoxContainer:
@@ -571,11 +704,18 @@ func _stars_row(stars: int) -> HBoxContainer:
 	return row
 
 
-## "⚡ {{reward}}" da variante A (DEV-007): ícone de energia original + dígitos.
+## "VOCÊ TEM: ⚡ {{reward}}" da variante A (DEV-007/IMG_3108): arte vocetem.png +
+## ícone de energia original + dígitos.
 func _reward_row(energy: int) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
 	row.add_theme_constant_override("separation", 8)
+	var caption := TextureRect.new()   # "VOCÊ TEM:" (431×96 nativo)
+	caption.texture = TEX_VOCETEM
+	caption.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	caption.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	caption.custom_minimum_size = Vector2(225, 50)
+	row.add_child(caption)
 	var icon := TextureRect.new()
 	icon.texture = TEX_ENERGY
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

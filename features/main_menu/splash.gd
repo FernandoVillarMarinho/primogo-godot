@@ -10,16 +10,19 @@ const WAIT := 16.5
 const MENU_SCENE := "res://features/main_menu/main_menu.tscn"
 const TEX_SPLASH := preload("res://assets/images/splashscreen/splash_grande_recovered.png")
 
-## Keyframes do Splash.anim convertidos para movimento RELATIVO câmera↔imagem (imagem
-## centrada na origem; 1 unidade Unity = 100 px da arte; y invertido; zoom = 6.4/ortho).
-## Trajeto: parte do meio-baixo da cena, sobe contando a história e percorre o topo.
+## Passeio da câmera contando a história (~16s, mesmo ritmo do Splash.anim legado),
+## RE-COREOGRAFADO para a arte recuperada: splash_grande_recovered (3258×3386) perdeu o
+## quadrante superior DIREITO (retângulo em branco em x ≥ -136, y ≤ -200, coords
+## centradas) e os keyframes originais atravessavam o vazio (2º teste em dispositivo).
+## Regra: a janela visível (±360/zoom, ±640/zoom) nunca invade o branco — nos trechos
+## altos (y < -200) a borda direita fica ≤ -276. Trajeto: pessoas congeladas (baixo) →
+## dragão (baixo-direita) → subida da montanha pela esquerda → zoom no MAGO (topo-esq).
 const KEYS: Array = [
-	{"t": 0.0, "pos": Vector2(0, 212), "zoom": 1.049},
-	{"t": 5.017, "pos": Vector2(0, -147), "zoom": 0.8},
-	{"t": 10.033, "pos": Vector2(20, -1619), "zoom": 0.876},
-	{"t": 12.5, "pos": Vector2(-720, -1559), "zoom": 0.8},
-	{"t": 14.0, "pos": Vector2(-1130, -1639), "zoom": 0.8},
-	{"t": 15.95, "pos": Vector2(-2080, -1617), "zoom": 0.8},
+	{"t": 0.0, "pos": Vector2(0, 700), "zoom": 1.05},
+	{"t": 5.0, "pos": Vector2(300, 900), "zoom": 0.9},
+	{"t": 9.0, "pos": Vector2(-700, 700), "zoom": 0.85},
+	{"t": 12.5, "pos": Vector2(-900, -900), "zoom": 0.8},
+	{"t": 15.95, "pos": Vector2(-1072, -700), "zoom": 1.0},
 ]
 
 var _done := false
