@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://dfdylw0u1881y"
+path="res://.godot/imported/orangefont.fnt-dd881ea233f4edac48a880c3a66e2e5f.fontdata"
+
+[deps]
+
+source_file="res://assets/images/fonts2/orangefont.fnt"
+dest_files=["res://.godot/imported/orangefont.fnt-dd881ea233f4edac48a880c3a66e2e5f.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

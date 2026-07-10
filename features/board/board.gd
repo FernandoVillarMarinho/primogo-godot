@@ -151,6 +151,8 @@ func _render_grid() -> void:
 			_board_root.add_child(rect)
 			if cell.kind == Cell.Kind.PLAYER or cell.kind == Cell.Kind.FROZEN:
 				var d := DigitRenderer.new()
+				# bitmap fonts originais (DEV-002): player = Fonts2/font, congelados = OrangeFont
+				d.font = GameFonts.PLAYER if cell.kind == Cell.Kind.PLAYER else GameFonts.TILE
 				d.box_size = Vector2(TILE, TILE)
 				rect.add_child(d)
 				d.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -200,6 +202,7 @@ func _refresh_balloon() -> void:
 		var slot := Button.new()
 		slot.custom_minimum_size = Vector2(72, 72)
 		slot.text = str(value)
+		slot.add_theme_font_override("font", GameFonts.TILE)  # balão usa OrangeFont (legado)
 		slot.pressed.connect(_on_slot_pressed.bind(value))
 		_balloon.add_child(slot)
 

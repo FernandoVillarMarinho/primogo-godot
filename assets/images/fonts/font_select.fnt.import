@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://gs8ym7mk7a6s"
+path="res://.godot/imported/font_select.fnt-1c51a10a9a0a75cd18e6857c64b5aa34.fontdata"
+
+[deps]
+
+source_file="res://assets/images/fonts/font_select.fnt"
+dest_files=["res://.godot/imported/font_select.fnt-1c51a10a9a0a75cd18e6857c64b5aa34.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2
