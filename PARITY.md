@@ -9,8 +9,9 @@
 
 - `domain/tests/parity/test_parity.gd` — PAR-01..06, PAR-08 (domínio puro).
 - `domain/tests/parity/test_parity_shell.gd` — PAR-07 (autoloads scene_router/audio_bus/progression_store).
-- **143/143 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3, a regressão `test_cell_px_matches_drawn_grid` da 1ª rodada de dispositivo e os 2 testes da versão 2026/RES-026 — primo inicial na coleção e troca de volta ao inicial); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
+- **148/148 testes GUT verdes** na suíte total (inclui `test_game_fonts` e `test_grid_calibration` da Fase 3, a regressão `test_cell_px_matches_drawn_grid` da 1ª rodada de dispositivo, os 2 testes da versão 2026/RES-026 — primo inicial na coleção e troca de volta ao inicial — e os 5 da 4ª rodada: truncamento float32 do exibido corrigido (142→143, 19→20), coreografia T2 nova, instruções por passo e o walkthrough completo da 02-01); toda a paridade de **regra econômica e de gameplay** (o núcleo do critério `@critico`) é verde.
 - `tools/ci/load_check.gd` — load headless das cenas/scripts da casca (parse + refs de assets), cobertura que a suíte de domínio não exercita.
+- `tools/ci/levels_check.gd` — auditoria das fases (4ª rodada): as 866 células congeladas exibem números divisíveis por um primo obtenível (fixpoint que inclui a "mecânica do 1" dos estágios altos).
 
 ## Integração visual (Fase 3, 2026-07-10 — arte-fonte original `ImagensPrimogo`)
 
@@ -53,6 +54,23 @@ durações canônicas (COD-001).
   raio; créditos com painel **DJDE-UFRJ 2026**; splash com **música desde o 1º frame**
   (intro 7,3 s emendada no loop do menu) e história completa (tela inteira do mago →
   neve atingindo a cidade → dragão no verde). Smokes novos: `tools/ci/credits_check.gd`.
+- **4ª rodada** (`imagens2primogo/` raiz + itens escritos do Villar, 2026-07-12):
+  **tela cheia** no desktop (fallback: janela 486×864 centrada, `stretch aspect=keep`);
+  **142→143** na fase 1-6 via correção do **truncamento float32** do valor exibido no
+  domínio (`LevelData._displayed_for`: produto a <0,01 de um inteiro arredonda — o bug
+  corrompia **63 células em 24 fases**, de 142→143 até 0→1 na 9-9; RES-027); balão em
+  **fileira única** de 8 slots na mesma linha-base, sem a aba do primordial (era a
+  duplicata "13 | 13" e o quadradinho deslocado), ativo destacado **só por cor+pulso**
+  (RES-028); conquista de primo **expressiva** (número em chamas + faíscas + voo em arco
+  + pulso de encaixe no slot; primo repetido = reforço no slot existente, sem duplicata);
+  **tutorial 2-1 consertado** (a T2 legada nunca alcançava o 6: agora DIREITA→BAIXO→
+  balão→ESQUERDA, com o 4 realocado para (0,3), instruções por passo na tela e o slot
+  do primo 2 pulsando no passo do balão — RES-029); grade de fases em **leitura
+  horizontal** (1,2,3 na 1ª linha — RES-030); créditos com **botão Pular** sempre
+  visível, painéis todos em texto vivo com o MESMO tratamento (títulos laranja + nomes
+  brancos com sombra), logo DJDE ancorada **embaixo sobre o jardim** e a view se esconde
+  ao terminar (root cause do "Jogar desativado": o TextureRect de tela cheia seguia
+  interceptando cliques). Smokes novos: `tools/ci/levels_check.gd`.
 
 ## Cobertura por fluxo
 
@@ -63,7 +81,7 @@ durações canônicas (COD-001).
 | 03 | Troca pelo balão | ✅ troca válida (custo, novo valor), descarte do valor corrente (L-09), troca inválida inerte; gate T2 em `test_tutorial` | — |
 | 04 | Economia fim de fase | ✅ recorde+estrelas, recorde não regride, recompensa deriva do recorde (replay 3★=+4), 1★=+0 (L-01), saturação em 50, reset punitivo do estágio, `@idempotencia` (register_win) | — |
 | 05 | Gate de entrada | ✅ redirect tutorial 2, 3★ grátis, pago debita 2, válvula fase 01, recusa; débito só na entrada | — |
-| 06 | Desbloqueio/seleção | ✅ máquina LOCKED→UNLOCKED→WON, estágio completo no 12º, índice `i*4+j` (DEV-005), paginação trava na 10 (L-04) | estados visuais das caixas (goldens) |
+| 06 | Desbloqueio/seleção | ✅ máquina LOCKED→UNLOCKED→WON, estágio completo no 12º, índice horizontal `row*3+col` (RES-030 substitui o `i*4+j` do DEV-005), paginação trava na 10 (L-04) | estados visuais das caixas (goldens) |
 | 07 | Navegação/áudio | ✅ navegação serializada (1 troca por vez), Voltar por contexto, gate central de efeitos (`@idempotencia`), mute reativo imediato, toggle persiste | — |
 | 08 | Onboarding/tutoriais | ✅ sequências T1/T2, passo do balão só no 3º, filtro do gate de movimento, gesto fora da sequência sem custo | ciclo da mão em tempo real (validação visual) |
 | 09 | Contrato de telas | ⚠️ **parcial** — estrutura das cenas compila e os literais/ordem do modal (DEV-007) estão no código; validação visual formal = **manual/goldens** | contract test formal das 10 telas + goldens (todos `pending`) |
@@ -88,6 +106,21 @@ na coleção no início da partida — o jogador acumula e troca livremente entr
 primos da fase (o legado descartava o acesso ao valor corrente não coletado, L-09/RES-006).
 Nas ~10 partidas vs oráculo, esta é uma divergência **esperada**: o oráculo para PAR-03 é
 a spec 2026, não o APK legado.
+
+**RES-027..030 (4ª rodada, pedidos escritos do Villar em 2026-07-12)** — divergências
+intencionais adicionais; o oráculo passa a ser a spec da 4ª rodada, não o APK legado:
+- **RES-027 · números exibidos**: o truncamento `(int)(true × r)` do legado herdava o
+  erro do float32 (55×2.6 = 142.99999 → "142", indivisível — fase insolúvel). O domínio
+  agora arredonda produtos a <0,01 de um inteiro (63 células corrigidas; auditadas as
+  866 pela `levels_check.gd`). Partidas vs oráculo nas 24 fases afetadas mostrarão
+  números diferentes do APK legado — o correto é o Godot.
+- **RES-028 · balão**: sem a aba do valor primordial (o primo inicial já está na fileira
+  via RES-026); destaque do ativo por cor+pulso, sem deslocamento vertical.
+- **RES-029 · tutorial 2 (02-01)**: sequência DIREITA→BAIXO→balão→ESQUERDA e o 4 em
+  (0,3) — a T2 legada (DIREITA→ESQUERDA→balão→ESQUERDA) não descongelava o 6; instruções
+  textuais por passo (não existiam no legado).
+- **RES-030 · seleção de fases**: leitura horizontal `row*3+col` (o DEV-005 `i*4+j`
+  lia por colunas).
 
 ## Pendências manuais (bloqueiam o gate de cutover, owner = Villar)
 

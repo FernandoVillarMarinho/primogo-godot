@@ -17,7 +17,7 @@ primo = 2
 
 [sub_resource type="Resource" id="Resource_8p4du"]
 script = ExtResource("1_fxtrb")
-y = 1
+y = 3
 primo = 2
 
 [resource]

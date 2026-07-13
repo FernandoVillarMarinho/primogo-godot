@@ -46,6 +46,25 @@ func test_displayed_truncates_like_c_sharp_cast() -> void:
 	assert_eq(lvl.generate_frozen()[0]["displayed_value"], 14, "int(21*0.6667)")
 
 
+func test_displayed_rounds_float32_error_level_01_06() -> void:
+	# A fase 1-6 real: 11×5=55 com r=2.6 — em float32, 2.6 vira 2.5999999 e o produto
+	# 142.99999 truncava para 142, número indivisível pelos primos da fase (4º teste
+	# em dispositivo). O valor desenhado é 143 = 11×13 (143 ÷ 13 = 11).
+	var els := [_elem(2, 2, 13), _elem(0, 4, 5), _elem(4, 0, 11)]
+	var lvl := LevelData.new(1, 6, 5, 5, false, PackedFloat32Array([1, 2.6, 1]), els)
+	var frozen := lvl.generate_frozen()
+	assert_eq(frozen[1]["true_value"], 55, "11*5")
+	assert_eq(frozen[1]["displayed_value"], 143, "55×2.6 = 143, não 142 (erro de float32)")
+
+
+func test_displayed_rounds_float32_error_below_integer() -> void:
+	# Fase 2-2 real: 65 com r=4/13 (0.307692...) — 19.99998 truncava para 19 (primo!),
+	# quando o desenhado é 20. A correção arredonda produtos a <0,01 de um inteiro.
+	var els := [_elem(0, 0, 13), _elem(1, 1, 5)]
+	var lvl := LevelData.new(2, 2, 5, 5, false, PackedFloat32Array([0.307692]), els)
+	assert_eq(lvl.generate_frozen()[0]["displayed_value"], 20, "65×(4/13) = 20, não 19")
+
+
 func test_valid_level_passes() -> void:
 	assert_true(_level().is_valid(), "erros=%s" % str(_level().validate()))
 

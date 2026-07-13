@@ -10,10 +10,10 @@ extends Node2D
 ## (transcrito do GameManager legado); player = chama animada (fogo1..3, prefab Number),
 ## congelado = gelo_numero, gelo puro = gelo (prefab Ice); efeitos one-shot: vapor no
 ## merge, anim_gelo01..05 no gelo surgindo (reverso ao derreter); balão da versão 2026
-## (RES-026): aba do primordial + 8 slots com TODOS os primos acumulados em ordem
-## crescente e o ATIVO destacado no próprio slot (elevado/maior/dourado); deslize
-## contínuo do fogo + celebração de primo novo (a vitória ESPERA a celebração) e mago
-## na derrota (2º/3º testes em dispositivo); pausa real (S-07).
+## (RES-026 + 4º teste): fileira ÚNICA de 8 slots na mesma linha-base com os primos
+## acumulados em ordem crescente, SEM duplicatas, e o ATIVO destacado só por cor+pulso;
+## conquista de primo novo = número em chamas + faíscas + voo em arco + encaixe com
+## pulso (a vitória ESPERA a celebração); mago na derrota; pausa real (S-07).
 ## Restam 🟡 para validação visual: fine_offset da calibração e durações (COD-001).
 
 const LEVELS_DIR := "res://resources/levels/"
@@ -25,18 +25,16 @@ const SLIDE_TIME_PER_CELL := 0.05  # deslize contínuo do fogo, fluido como 2048
 const EFFECT_FPS := 12.0  # anim_gelo/vapor one-shot (🟡 COD-001)
 const FLAME_FPS := 8.0    # chama do player (fogo1..3 em loop)
 
-# Balão (versão 2026, RES-026): aba à esquerda com o valor PRIMORDIAL da fase; fileira
-# de 8 slots SEMPRE visível com TODOS os primos acumulados em ordem CRESCENTE (reforço
-# didático da sequência); o primo ATIVO (em uso pelo fogo) fica destacado — elevado e
-# maior no próprio slot (eco do tile-espelho +0,25 un. do legado, COD-007/AMB-201).
+# Balão (versão 2026, RES-026 + 4º teste): fileira ÚNICA de 8 slots, todos na MESMA
+# linha-base, com os primos acumulados em ordem CRESCENTE e SEM duplicatas (a antiga
+# aba do primordial repetia o primo inicial e ficava elevada — era a duplicata e o
+# quadradinho desalinhado do 4º teste). O primo ATIVO é indicado só por destaque
+# visual (caixa dourada + pulsação leve), nunca por deslocamento vertical.
 const SLOT_SIZE := 70.0
 const SLOT_GAP := 6.0
-const TAB_X := 8.0          # aba do valor primordial, colada à esquerda
-const ROW_X := 92.0         # início da fileira de 8 slots
-const TAB_RAISE := 24.0     # aba levemente acima da linha dos slots
-const ACTIVE_RAISE := 18.0  # o slot ATIVO sobe ~0,25 slot (destaque do primo em uso)
-const ACTIVE_SCALE := 1.18  # ... e cresce a partir do centro
+const ROW_X := 59.0         # fileira centrada: (720 − (8×70 + 7×6)) / 2
 const ACTIVE_TINT := Color(1.0, 0.88, 0.55)  # caixa do slot ativo aquecida (dourado)
+const ACTIVE_PULSE := 1.07  # leve pulsação do slot ativo (em torno do próprio centro)
 
 const TEX_SCENERY := preload("res://assets/images/scenery_grid/background.png")
 const TEX_FROZEN := preload("res://assets/images/iceandfire/gelo_numero.png")
@@ -120,10 +118,11 @@ var _board_root: Node2D
 var _bg: Sprite2D
 var _tiles: Dictionary = {}          # Vector2i → Node2D (raiz do tile na célula)
 var _player_node: Node2D = null      # raiz do tile do player (alvo do deslize fluido)
-var _initial_value := 0              # valor primordial da fase (aba esquerda do balão)
 var _seen_values: Array[int] = []    # primos já celebrados (efeito de conquista dispara 1×)
 var _conquest_tween: Tween = null    # voo do primo conquistado (a vitória espera por ele)
 var _pending_endgame: Dictionary = {}  # fim de fase adiado até a animação terminar (item 3/2026)
+var _slot_nodes: Dictionary = {}     # valor → Control do slot (pulso de encaixe/reforço)
+var _reinforce_value := 0            # primo já conquistado recoletado → reforço no slot
 var _budget_label: Label
 var _balloon: Control
 var _balloon_y := 0.0
@@ -148,7 +147,6 @@ func _ready() -> void:
 	_build_balloon()
 	_build_pause()
 	adapter.start(level_data, budget_max)
-	_initial_value = _player_value()
 	_seen_values = adapter.match_game.collection.values()   # o primo inicial não é "novo"
 	_maybe_attach_tutorial()
 	_render_grid()
@@ -253,6 +251,9 @@ func _on_move_resolved(events: Array) -> void:
 		await get_tree().create_timer(STEP_TIME).timeout   # respiro p/ o efeito aparecer
 	_render_grid()  # sincroniza o visual com o estado final do domínio
 	_refresh_balloon()
+	if _reinforce_value > 0:   # primo repetido: reforço sobre o item existente (item 6.1)
+		_pulse_slot(_reinforce_value)
+		_reinforce_value = 0
 	if not _pending_endgame.is_empty():
 		# item 3 (2026): a vitória/derrota só aparece DEPOIS da celebração do primo
 		# conquistado terminar — o último primo entra no balão com o mesmo efeito dos demais
@@ -300,6 +301,8 @@ func _cue_for_event(e: Dictionary) -> bool:
 			if v > 0 and not _seen_values.has(v):                 # primo NOVO → celebração
 				_seen_values.append(v)                            # (objetivo didático: fixar a sequência)
 				_conquest_effect(v, Vector2i(e["at"]))
+			elif v > 0:   # primo já conquistado: sem duplicata — reforço no slot (item 6.1)
+				_reinforce_value = v
 			return true
 		"value_swapped":
 			AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)
@@ -317,9 +320,11 @@ func _cue_for_event(e: Dictionary) -> bool:
 	return false
 
 
-## Celebração da conquista de um primo NOVO: o número pulsa grande na célula do merge,
-## faíscas (estrela_01..03) irradiam e o número voa até o balão — reforço didático da
-## sequência dos primos (pedido do 2º teste em dispositivo; antes só o gelo derretia).
+## Celebração da conquista de um primo NOVO (item 6/4º teste): o número surge em
+## destaque na célula do merge com um "pulo" (TRANS_BACK), ENVOLTO EM CHAMAS (fogo1..3
+## atrás dos dígitos), faíscas (estrela_01..03) irradiam, e ele voa num ARCO animado
+## até o slot que vai ocupar na fileira ordenada; ao encaixar, o slot de destino pulsa
+## em confirmação. A tela de vitória espera esta sequência inteira (item 6.1).
 func _conquest_effect(value: int, cell: Vector2i) -> void:
 	var pos := _cell_center(cell.x, cell.y)
 	AudioBus.play_effect(AudioBus.SFX_CLICK_OK)
@@ -332,28 +337,73 @@ func _conquest_effect(value: int, cell: Vector2i) -> void:
 		stw.tween_property(spark, "position", pos + dir * 90.0, 0.45)
 		stw.parallel().tween_property(spark, "modulate:a", 0.0, 0.45)
 		stw.tween_callback(spark.queue_free)
+	var holder := Control.new()   # chama + número viajam juntos
+	holder.position = pos - Vector2(70, 70)
+	holder.size = Vector2(140, 140)
+	holder.pivot_offset = Vector2(70, 70)
+	holder.scale = Vector2(0.3, 0.3)
+	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var flame := AnimatedSprite2D.new()   # "número em chamas": fogo do player atrás dos dígitos
+	flame.sprite_frames = _looping_frames(FLAME_FRAMES, FLAME_FPS)
+	flame.position = Vector2(70, 70)
+	var ftex: Texture2D = FLAME_FRAMES[0]
+	var fs := 165.0 / maxf(float(ftex.get_width()), float(ftex.get_height()))
+	flame.scale = Vector2(fs, fs)
+	flame.play("burn")
+	holder.add_child(flame)
 	var d := DigitRenderer.new()   # o primo conquistado, grande, na fonte laranja
 	d.font = GameFonts.TILE
 	d.box_size = Vector2(140, 140)
-	d.position = pos - Vector2(70, 70)
-	d.pivot_offset = Vector2(70, 70)
-	d.scale = Vector2(0.3, 0.3)
 	d.set_value(value)
-	add_child(d)
-	# voa até o slot que o primo vai OCUPAR na fileira ordenada (item 4/2026)
+	holder.add_child(d)
+	add_child(holder)
+	# voa até o slot que o primo vai OCUPAR na fileira ordenada (ordem crescente)
 	var sorted := adapter.match_game.collection.values()
 	sorted.sort()
 	var idx := maxi(sorted.find(value), 0)
+	var start := holder.position
 	var target := Vector2(ROW_X + idx * (SLOT_SIZE + SLOT_GAP) + SLOT_SIZE / 2.0, _balloon_y) \
 		- Vector2(70, 70)
+	var apex := Vector2((start.x + target.x) / 2.0,
+		minf(start.y, target.y) - 160.0)   # ponto de controle do arco, acima da rota
 	var tw := create_tween()
-	tw.tween_property(d, "scale", Vector2(1.0, 1.0), 0.2) \
+	tw.tween_property(holder, "scale", Vector2(1.0, 1.0), 0.22) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)   # o número "pula" em destaque
+	tw.tween_interval(0.35)
+	tw.tween_method(func(t: float) -> void:   # arco de Bézier quadrático até o slot
+		holder.position = start.lerp(apex, t).lerp(apex.lerp(target, t), t),
+		0.0, 1.0, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.parallel().tween_property(holder, "scale", Vector2(0.45, 0.45), 0.5)
+	tw.tween_callback(func() -> void:   # encaixe: o slot de destino confirma com um pulso
+		holder.queue_free()
+		AudioBus.play_effect(AudioBus.SFX_PRIME_SWAP)
+		_pulse_slot(value))
+	tw.tween_interval(0.28)   # respiro do pulso de encaixe antes de qualquer modal
+	_conquest_tween = tw   # a tela de vitória espera este voo terminar (itens 3/6.1)
+
+
+## Pulso de confirmação sobre o slot de um primo (encaixe da conquista ou reforço de
+## primo repetido). O slot é recriado a cada _refresh_balloon; busca pelo valor.
+func _pulse_slot(value: int) -> void:
+	var slot: Control = _slot_nodes.get(value)
+	if slot == null or not is_instance_valid(slot):
+		return
+	var tw := slot.create_tween()
+	tw.tween_property(slot, "scale", Vector2(1.25, 1.25), 0.12) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(slot, "scale", Vector2.ONE, 0.14) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tw.tween_interval(0.4)
-	tw.tween_property(d, "position", target, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tw.parallel().tween_property(d, "scale", Vector2(0.45, 0.45), 0.45)
-	tw.tween_callback(d.queue_free)
-	_conquest_tween = tw   # a tela de vitória espera este voo terminar (item 3/2026)
+
+
+## SpriteFrames em loop a partir de uma lista de texturas (chama, personagens).
+func _looping_frames(frame_textures: Array, fps: float) -> SpriteFrames:
+	var frames := SpriteFrames.new()
+	frames.add_animation("burn")
+	frames.set_animation_speed("burn", fps)
+	frames.set_animation_loop("burn", true)
+	for t in frame_textures:
+		frames.add_frame("burn", t)
+	return frames
 
 
 ## AnimatedSprite2D one-shot na célula, no tamanho da célula; libera-se ao terminar.
@@ -515,48 +565,49 @@ func _build_balloon() -> void:
 	_balloon_y = pos.y
 	_balloon = Control.new()   # faixa com posicionamento manual (layout do legado)
 	_balloon.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	_balloon.offset_top = pos.y - ACTIVE_RAISE - SLOT_SIZE / 2.0 - 12.0  # folga p/ o slot ativo crescido
-	_balloon.offset_bottom = pos.y + SLOT_SIZE / 2.0
+	_balloon.offset_top = pos.y - SLOT_SIZE / 2.0 - 10.0   # folga p/ o pulso do slot ativo
+	_balloon.offset_bottom = pos.y + SLOT_SIZE / 2.0 + 10.0
 	_balloon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	layer.add_child(_balloon)
 
 
-## Balão da versão 2026 (RES-026): aba à esquerda com o valor PRIMORDIAL (display);
-## fileira de 8 slots sempre visível com TODOS os primos acumulados em ordem CRESCENTE
-## (item 4 — reforço didático da sequência dos primos); o primo ATIVO fica destacado no
-## próprio slot (elevado + maior + caixa dourada, itens 1/2); clicar em outro primo da
-## lista troca o valor do fogo imediatamente, custando 1 energia (BR-012/013).
+## Balão da versão 2026 (RES-026 + 4º teste): fileira única de 8 slots, todos na MESMA
+## linha-base, com os primos acumulados em ordem CRESCENTE e sem duplicatas (a coleção
+## do domínio já deduplica — BR-011); o primo ATIVO é indicado apenas por destaque
+## visual (caixa dourada + pulsação leve em torno do centro), sem deslocamento; clicar
+## em outro primo troca o valor do fogo imediatamente, custando 1 energia (BR-012/013).
 func _refresh_balloon() -> void:
 	if _balloon == null:
 		return
 	for child in _balloon.get_children():
 		child.queue_free()
-	var row_y := ACTIVE_RAISE + 12.0   # linha-base da fileira dentro da faixa
+	_slot_nodes.clear()
+	var row_y := 10.0   # linha-base única da fileira dentro da faixa
 	var current := _player_value()
-	_balloon.add_child(_balloon_slot(_initial_value, Vector2(TAB_X, row_y - TAB_RAISE), false, false))
 	var values := adapter.match_game.collection.values()   # ≤ 8 slots, ≤ 2 dígitos (BR-050)
 	values.sort()
 	var col := 0
 	for value in values:
-		var active := int(value) == current
-		var pos := Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y - (ACTIVE_RAISE if active else 0.0))
-		_balloon.add_child(_balloon_slot(int(value), pos, not active, active))
+		var pos := Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y)
+		var slot := _balloon_slot(int(value), pos, int(value) == current)
+		_balloon.add_child(slot)
+		_slot_nodes[int(value)] = slot
 		col += 1
 	while col < 8:   # slots vazios sempre visíveis, como no legado
 		_balloon.add_child(_empty_slot(Vector2(ROW_X + col * (SLOT_SIZE + SLOT_GAP), row_y)))
 		col += 1
+	_apply_tutorial_balloon_hint()
 
 
-func _balloon_slot(value: int, pos: Vector2, clickable: bool, active: bool) -> Control:
+func _balloon_slot(value: int, pos: Vector2, active: bool) -> Control:
 	var holder := _empty_slot(pos)
 	var slot := holder.get_child(0) as TextureButton
-	slot.disabled = not clickable
-	if clickable:
+	slot.disabled = active   # só o primo ATIVO não é clicável (trocar p/ ele mesmo é inócuo)
+	if not active:
 		slot.pressed.connect(_on_slot_pressed.bind(value))
-	if active:   # destaque do primo em uso pelo fogo (item 2/2026)
-		holder.pivot_offset = Vector2(SLOT_SIZE / 2.0, SLOT_SIZE / 2.0)
-		holder.scale = Vector2(ACTIVE_SCALE, ACTIVE_SCALE)
+	if active:   # destaque do primo em uso: só cor + pulsação, sem sair da linha (item 5.2)
 		slot.modulate = ACTIVE_TINT
+		ScaleEffects.pulse(holder, ACTIVE_PULSE, 0.55)
 	var d := DigitRenderer.new()
 	d.font = GameFonts.TILE   # balão usa OrangeFont (BalloonController.allSprites)
 	d.box_size = Vector2(SLOT_SIZE - 14, SLOT_SIZE - 14)
@@ -570,6 +621,7 @@ func _empty_slot(pos: Vector2) -> Control:
 	var holder := Control.new()
 	holder.position = pos
 	holder.size = Vector2(SLOT_SIZE, SLOT_SIZE)
+	holder.pivot_offset = Vector2(SLOT_SIZE / 2.0, SLOT_SIZE / 2.0)   # pulsos em torno do centro
 	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var slot := TextureButton.new()
 	slot.texture_normal = TEX_SLOT
@@ -579,6 +631,22 @@ func _empty_slot(pos: Vector2) -> Control:
 	slot.disabled = true
 	holder.add_child(slot)
 	return holder
+
+
+## No passo do balão do tutorial (BR-049), pulsa o(s) slot(s) clicável(is) e aponta a
+## mão para o primeiro deles — "Clique no primo 2 para selecioná-lo" (item 7/4º teste).
+func _apply_tutorial_balloon_hint() -> void:
+	if _tutorial == null or not _tutorial.balloon_clickable():
+		return
+	var current := _player_value()
+	var values := adapter.match_game.collection.values()
+	values.sort()
+	for i in values.size():
+		if int(values[i]) != current and _slot_nodes.has(int(values[i])):
+			ScaleEffects.pulse(_slot_nodes[int(values[i])], 1.14, 0.4)
+			_tutorial.point_to(Vector2(ROW_X + i * (SLOT_SIZE + SLOT_GAP) + SLOT_SIZE / 2.0,
+				_balloon_y + 95.0))
+			return
 
 
 func _player_value() -> int:

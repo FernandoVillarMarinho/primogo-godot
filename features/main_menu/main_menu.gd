@@ -114,10 +114,15 @@ func _on_credits() -> void:
 		_credits = CreditsView.new()
 		_credits.set_anchors_preset(Control.PRESET_FULL_RECT)
 		add_child(_credits)
+		# ao terminar OU pular, a CreditsView se esconde sozinha (deixa de interceptar
+		# cliques — era o bug do Jogar "desativado") e o menu volta a funcionar
 		_credits.credits_finished.connect(func() -> void: _buttons.visible = true)
 	_credits.play()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
+		if _credits != null and _credits.visible:
+			_credits.skip()   # voltar durante os créditos = pular (item 2.1)
+			return
 		SceneRouter.go_back()   # Menu → sair do app (BR-040)

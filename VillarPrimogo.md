@@ -1,6 +1,6 @@
 # Primogo — resumo para o Villar
 
-*Atualizado em 10/07/2026. Linguagem simples, sem jargão.*
+*Atualizado em 12/07/2026. Linguagem simples, sem jargão.*
 
 ## O que é isto
 
@@ -12,7 +12,7 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
 
 - ✅ **O jogo está funcionando por inteiro, por dentro.** Toda a lógica (as regras do
   puzzle, a energia, as estrelas, o desbloqueio de fases, os tutoriais, os menus, o som)
-  está pronta e **testada automaticamente** — são **143 testes**, todos passando.
+  está pronta e **testada automaticamente** — são **148 testes**, todos passando.
 - ✅ **As 122 fases originais** foram extraídas do jogo antigo e recriadas.
 - ✅ **Os sons** (14 efeitos e músicas) foram extraídos e ligados.
 - ✅ **A arte original está DENTRO do jogo** (10/07/2026): as imagens que você trouxe
@@ -52,7 +52,38 @@ Android. A reconstrução partiu das especificações que o Reversa extraiu do j
   - **Abertura com música**: a música começa junto com a imagem, e o passeio da câmera
     agora mostra a tela inteira do mago e a neve atingindo a cidade (continuando a
     desviar do pedaço da arte que se perdeu).
-- ⏳ **Falta o 4º teste no celular**: conferir esses ajustes no aparelho.
+- ✅ **Os ajustes do seu 4º pedido estão feitos** (12/07/2026):
+  - **Tela cheia no computador**: o jogo abre direto em tela cheia (e, se sair dela,
+    vira uma janela grande e centralizada — nunca mais o "quadradinho").
+  - **O 142 virou 143** — e não era só ele: o jogo antigo calculava os números com um
+    arredondamento errado do computador, e isso corrompia **63 números em 24 fases**
+    (tinha até fase mostrando **0**!). Consertei a conta na raiz, conferi as 122 fases
+    uma a uma (866 números) e criei um teste automático que garante que **todo número
+    exibido é divisível por algum primo da fase**. O 143 ÷ 13 = 11 funciona.
+  - **A lista de primos não repete mais**: aquele "13 | 13" era a aba antiga do balão
+    duplicando o primo inicial — a aba saiu, ficou uma fileira só, com **todos os
+    quadradinhos alinhados na mesma linha**. O primo em uso é indicado **só pela
+    caixinha dourada pulsando de leve** (nada de subir/descer).
+  - **Festinha de conquista caprichada**: o primo conquistado aparece **em chamas**,
+    dá um pulo, solta faíscas, **voa num arco** até o lugar certo na lista (em ordem
+    crescente) e o quadradinho **pisca confirmando o encaixe**. Se você reconquistar
+    um primo que já tinha, o quadradinho dele pisca (sem duplicar). E a tela de
+    vitória **espera tudo isso terminar**.
+  - **O tutorial da fase 2-1 funciona**: o roteiro antigo mandava o fogo para um lugar
+    onde o 6 nem estava — por isso não descongelava. Agora é: **direita** (leva o 3),
+    **baixo** (o 3 descongela o 6 e você ganha o primo 2), **clique no primo 2** (que
+    fica pulsando com a mãozinha apontando) e **esquerda** (divide o 4). Cada passo tem
+    uma **instrução escrita na tela** que avança conforme você acerta.
+  - **Fases em ordem de leitura**: 1, 2, 3 na primeira linha; 4, 5, 6 na segunda —
+    da esquerda para a direita, de cima para baixo (era em colunas). Cada botão abre
+    a fase certa.
+  - **Créditos com "Voltar"**: dá para **pular os créditos** a qualquer momento pelo
+    botão no canto (ou o botão voltar do celular) — e o **Jogar não trava mais** depois
+    dos créditos (a tela invisível dos créditos ficava "roubando" os cliques).
+  - **Créditos bonitos e uniformes**: a logo do **DJDE desceu para o jardim verde**
+    (sem cobrir o PRIMOGO), e TODOS os nomes — inclusive os da "Idealização do
+    Projeto" — agora têm a mesma sombra, o mesmo tamanho e a mesma centralização.
+- ⏳ **Falta o 5º teste no celular**: conferir esses ajustes no aparelho.
 
 Em uma frase: **o carro está pronto, pintado e rodando; falta a última volta de inspeção.**
 

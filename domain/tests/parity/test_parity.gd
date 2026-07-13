@@ -203,16 +203,21 @@ func test_par06_stage_completed_on_twelfth() -> void:
 
 
 func test_par06_grid_corrected_and_pagination_locked() -> void:
-	assert_eq(LevelGrid.level_index(1, 0), 4, "índice i*4+j (DEV-005), não i*3+j")
+	# 4º teste em dispositivo (divergência intencional do legado): a grade lê POR LINHAS
+	# (1,2,3 na 1ª linha), não por colunas como o i*4+j do DEV-005.
+	assert_eq(LevelGrid.level_index(1, 0), 1, "leitura horizontal: (col 1, linha 0) = fase 2")
+	assert_eq(LevelGrid.level_index(0, 1), 3, "leitura horizontal: (col 0, linha 1) = fase 4")
 	assert_false(LevelGrid.can_navigate_to(11), "paginação trava na 10 (L-04)")
 
 
 # ================================================================ PAR-08 · tutoriais
 
 func test_par08_t2_sequence_and_balloon_step() -> void:
+	# 4º teste em dispositivo (divergência intencional): a T2 legada (RIGHT, LEFT, balão,
+	# LEFT) nunca descongelava o 6 em (4,3); coreografia corrigida com BAIXO no 2º passo.
 	assert_eq(TutorialSequence.T2,
-		[Match.Direction.RIGHT, Match.Direction.LEFT, TutorialSequence.BALLOON, Match.Direction.LEFT],
-		"T2 = RIGHT, LEFT, [balão], LEFT")
+		[Match.Direction.RIGHT, Match.Direction.DOWN, TutorialSequence.BALLOON, Match.Direction.LEFT],
+		"T2 = RIGHT, DOWN, [balão], LEFT")
 	assert_true(TutorialSequence.is_balloon_step(TutorialSequence.T2, 2), "clique no balão só no 3º passo")
 	assert_eq(TutorialSequence.move_sequence(TutorialSequence.T2).size(), 3, "só direções vão ao gate (BR-009)")
 

@@ -2,14 +2,17 @@ extends GutTest
 ## Tarefa 12 — features/level_select: índice corrigido (BR-036), paginação (BR-037) e
 ## estado das caixas. Lógica pura em LevelGrid; a cena só é checada quanto à compilação.
 
-# ---------------------------------------------------------------- índice i*4+j (BR-036)
+# --------------------------------------------------- índice horizontal row*3+col (4º teste)
 
-func test_level_index_is_col_times_four_plus_row() -> void:
+func test_level_index_reads_left_to_right_top_to_bottom() -> void:
 	assert_eq(LevelGrid.level_index(0, 0), 0, "canto sup-esq = 0")
-	assert_eq(LevelGrid.level_index(0, 3), 3, "col 0, linha 3 = 3")
-	assert_eq(LevelGrid.level_index(1, 0), 4, "col 1, linha 0 = 4 (i*4+j, não i*3+j)")
+	assert_eq(LevelGrid.level_index(1, 0), 1, "1ª linha: 1, 2, 3")
+	assert_eq(LevelGrid.level_index(2, 0), 2, "1ª linha: 1, 2, 3")
+	assert_eq(LevelGrid.level_index(0, 1), 3, "2ª linha começa na fase 4")
 	assert_eq(LevelGrid.level_index(2, 3), 11, "última caixa = 11")
 	assert_eq(LevelGrid.level_number(0, 0), 1, "1ª caixa mostra fase 1")
+	assert_eq(LevelGrid.level_number(2, 0), 3, "fim da 1ª linha mostra fase 3")
+	assert_eq(LevelGrid.level_number(0, 1), 4, "início da 2ª linha mostra fase 4")
 
 
 func test_all_twelve_indices_are_unique() -> void:
@@ -17,7 +20,7 @@ func test_all_twelve_indices_are_unique() -> void:
 	for col in LevelGrid.COLS:
 		for row in LevelGrid.ROWS:
 			seen[LevelGrid.level_index(col, row)] = true
-	assert_eq(seen.size(), 12, "as 12 caixas cobrem 0..11 sem colisão (corrige o bug i*3+j)")
+	assert_eq(seen.size(), 12, "as 12 caixas cobrem 0..11 sem colisão (cada botão abre a fase certa)")
 
 
 # ---------------------------------------------------------------- paginação trava na 10 (BR-037)

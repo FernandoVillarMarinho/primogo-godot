@@ -61,7 +61,7 @@ func generate_frozen() -> Array:
 		var factor: int = int(elements[0]["primo"]) if only_one_number else int(elements[i - 1]["primo"])
 		var true_value: int = int(e["primo"]) * factor
 		var rp: float = r[i - 1] if (i - 1) < r.size() else 1.0
-		var displayed_value: int = int(true_value * rp)  # trunca, como o (int) do C#
+		var displayed_value := _displayed_for(true_value, rp)
 		out.append({
 			"x": int(e["x"]),
 			"y": int(e["y"]),
@@ -70,6 +70,20 @@ func generate_frozen() -> Array:
 			"primo": int(e["primo"]),  # fallback do merge quando true % jogador != 0 (BR-001)
 		})
 	return out
+
+
+## Valor exibido (BR-007): truncamento como o (int) do C#, MAS com correção do erro de
+## float32: `r` é sempre uma razão desenhada para dar produto INTEIRO (ex.: 2.6 = 13/5),
+## só que 2.6 não existe em float32 (vira 2.5999999...) e 55 × 2.5999999 = 142.99999 → o
+## truncamento puro exibia 142 num tabuleiro em que só 143 (11×13) é divisível pelos
+## primos da fase — a fase ficava insolúvel (achado do 4º teste: 63 células em 24 fases,
+## de 142→143 na 1-6 até 0→1 na 9-9). Produto a menos de 0,01 de um inteiro arredonda;
+## fora disso o truncamento legado permanece.
+static func _displayed_for(true_value: int, rp: float) -> int:
+	var product := true_value * rp
+	if absf(product - roundf(product)) < 0.01:
+		return roundi(product)
+	return int(product)
 
 
 func validate() -> PackedStringArray:

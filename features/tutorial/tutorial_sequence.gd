@@ -8,7 +8,27 @@ extends RefCounted
 const BALLOON := 100   # passo "clique no balão" (distinto das direções do Match)
 
 const T1 := [Match.Direction.UP, Match.Direction.RIGHT, Match.Direction.DOWN, Match.Direction.LEFT]
-const T2 := [Match.Direction.RIGHT, Match.Direction.LEFT, BALLOON, Match.Direction.LEFT]
+## T2 corrigida no 4º teste em dispositivo: a sequência legada (RIGHT, LEFT, balão, LEFT)
+## nunca alcançava o 6 em (4,3) — a ESQUERDA deslizava pela linha 2 e o descongelamento
+## não acontecia. Coreografia pedagógica correta na 02-01: DIREITA (leva o 3 para o lado),
+## BAIXO (o 3 descongela o 6 e conquista o primo 2), balão (seleciona o 2), ESQUERDA
+## (divide o 4). O 4 foi realocado de (0,1) para (0,3) no level_02_01.tres.
+const T2 := [Match.Direction.RIGHT, Match.Direction.DOWN, BALLOON, Match.Direction.LEFT]
+
+## Instruções curtas exibidas na tela, uma por passo (4º teste: o jogador precisava de
+## orientação explícita — "Descongele o 6", "Clique no primo 2", "Divida o 4").
+const T1_CAPTIONS := [
+	"Deslize para CIMA para mover o fogo",
+	"Agora deslize para a DIREITA",
+	"Deslize para BAIXO",
+	"E para a ESQUERDA para completar o passeio",
+]
+const T2_CAPTIONS := [
+	"Deslize para a DIREITA para levar o número 3 para o lado",
+	"Descongele o número 6: deslize para BAIXO (6 ÷ 3 = 2)",
+	"Você conquistou o primo 2! Clique nele na lista para selecioná-lo",
+	"Agora divida o número 4: deslize para a ESQUERDA (4 ÷ 2 = 2)",
+]
 
 
 ## Nível-tutorial por identidade: (1,0) = tutorial 1 (1ª execução); (2,1) = tutorial 2
@@ -25,6 +45,12 @@ static func sequence_for(stage: int, level: int) -> Array:
 
 static func which(stage: int, level: int) -> String:
 	return "t2" if (stage == 2 and level == 1) else "t1"
+
+
+static func captions_for(stage: int, level: int) -> Array:
+	if stage == 2 and level == 1:
+		return T2_CAPTIONS.duplicate()
+	return T1_CAPTIONS.duplicate()
 
 
 ## Só as direções (sem o passo BALLOON) vão para o gate de movimento do domínio (BR-009).
